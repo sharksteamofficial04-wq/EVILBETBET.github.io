@@ -59,7 +59,17 @@
             padding-top: 60px;
         }
 
-        /* HEADER - улучшенный в стиле CS Positive */
+        /* Адаптация под Telegram Web App */
+        body.TelegramWebApp {
+            --bg-primary: var(--tg-theme-bg-color, #121212);
+            --bg-secondary: var(--tg-theme-secondary-bg-color, #1a1a1a);
+            --text-primary: var(--tg-theme-text-color, #fff);
+            --text-secondary: var(--tg-theme-hint-color, #aaa);
+            --primary-color: var(--tg-theme-button-color, #ff3333);
+            --primary-hover: var(--tg-theme-button-text-color, #cc0000);
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+        }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -98,6 +108,7 @@
             list-style: none;
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         nav ul li a {
@@ -351,6 +362,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            justify-content: center; /* Чтобы плашки не улетали */
         }
 
         .sport-item {
@@ -368,6 +380,7 @@
             gap: 8px;
             position: relative;
             overflow: hidden;
+            min-width: 100px; /* Чтобы не сжимались */
         }
 
         .sport-item::before {
@@ -813,6 +826,25 @@
             font-weight: bold;
             text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
             z-index: 2;
+        }
+
+        /* **НОВАЯ ФИШКА: ПРЕДИКШЕНЫ** */
+        .match-predictions {
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .match-card:hover .match-predictions {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* **ИСПРАВЛЕННЫЕ КОЭФФИЦИЕНТЫ - ТЕПЕРЬ КЛИКАЕМЫЕ** */
@@ -2012,6 +2044,7 @@
                 TelegramWebApp.ready();
                 TelegramWebApp.expand();
                 applyTheme();
+                document.body.classList.add('TelegramWebApp');
             }
 
             updateAuthUI();
@@ -2026,7 +2059,13 @@
 
         function applyTheme() {
             if (TelegramWebApp?.themeParams) {
-                document.body.style.background = `linear-gradient(135deg, ${TelegramWebApp.themeParams.bg_color || '#121212'}, ${TelegramWebApp.themeParams.secondary_bg_color || '#1a1a1a'})`;
+                document.documentElement.style.setProperty('--bg-primary', TelegramWebApp.themeParams.bg_color || '#121212');
+                document.documentElement.style.setProperty('--bg-secondary', TelegramWebApp.themeParams.secondary_bg_color || '#1a1a1a');
+                document.documentElement.style.setProperty('--text-primary', TelegramWebApp.themeParams.text_color || '#fff');
+                document.documentElement.style.setProperty('--text-secondary', TelegramWebApp.themeParams.hint_color || '#aaa');
+                document.documentElement.style.setProperty('--primary-color', TelegramWebApp.themeParams.button_color || '#ff3333');
+                document.documentElement.style.setProperty('--primary-hover', TelegramWebApp.themeParams.button_text_color || '#cc0000');
+                document.body.style.background = `linear-gradient(135deg, var(--bg-primary), var(--bg-secondary))`;
             }
         }
 
@@ -2100,10 +2139,10 @@
         return false;
     }
     
-    // **ПРОВЕРКА ЛИМИТА 2 СТАВКИ НА СОБЫТИЕ**
+    // **ПРОВЕРКА ЛИМИТА 1 СТАВКА НА СОБЫТИЕ**
     const eventBets = couponItems.filter(item => item.event === eventName);
-    if (eventBets.length >= 2) {
-        showQuickBetToast('⚠️ Максимум 2 ставки на событие!', 'error');
+    if (eventBets.length >= 1) {
+        showQuickBetToast('⚠️ Максимум одна ставка на событие!', 'error');
         TelegramWebApp?.HapticFeedback.notificationOccurred('error');
         
         // ВИЗУАЛЬНАЯ ОБРАТНАЯ СВЯЗЬ - КРАТКОВРЕМЕННОЕ ПОДЧЕРКИВАНИЕ
@@ -2130,6 +2169,12 @@
     createRipple(clickedItem);
     showQuickBetToast(`✓ ${bet} добавлено!`);
     TelegramWebApp?.HapticFeedback.impactOccurred('success');
+    
+    // **ОТКРЫВАЕМ КУПОН ЕСЛИ НЕ ОТКРЫТ**
+    const betCoupon = document.getElementById('betCoupon');
+    if (!betCoupon.classList.contains('visible')) {
+        betCoupon.classList.add('visible');
+    }
     
     return true;
 }
@@ -2370,7 +2415,8 @@
                         date: new Date(baseDate.setHours(18, 45, 0, 0)).toISOString(),
                         venue: 'Old Trafford',
                         weather: '☀️ 18°C',
-                        referee: 'Michael Oliver'
+                        referee: 'Michael Oliver',
+                        predictions: 'П1 с вероятностью 40%'
                     },
                     { 
                         id: 'match_002',
@@ -2401,7 +2447,8 @@
                         date: new Date(baseDate.setHours(20, 15, 0, 0)).toISOString(),
                         venue: 'Santiago Bernabeu',
                         weather: '🌤️ 22°C',
-                        referee: 'Mateu Lahoz'
+                        referee: 'Mateu Lahoz',
+                        predictions: 'Обе забьют - 70%'
                     },
                     { 
                         id: 'match_003',
@@ -2431,7 +2478,8 @@
                         date: new Date(baseDate.setHours(16, 30, 0, 0)).toISOString(),
                         venue: 'Allianz Arena',
                         weather: '🌧️ 15°C',
-                        referee: 'Felix Zwayer'
+                        referee: 'Felix Zwayer',
+                        predictions: 'П1 с вероятностью 65%'
                     }
                 ],
                 basketball: [
@@ -2459,7 +2507,8 @@
                             over220: 1.90, under220: 1.90
                         },
                         date: new Date(baseDate.setHours(19, 0, 0, 0)).toISOString(),
-                        venue: 'Crypto.com Arena'
+                        venue: 'Crypto.com Arena',
+                        predictions: 'П2 с вероятностью 55%'
                     }
                 ],
                 tennis: [
@@ -2487,7 +2536,8 @@
                         },
                         date: new Date(baseDate.setHours(14, 0, 0, 0)).toISOString(),
                         venue: 'US Open',
-                        surface: 'Hard'
+                        surface: 'Hard',
+                        predictions: 'П1 с вероятностью 80%'
                     }
                 ],
                 esports: [
@@ -2517,7 +2567,8 @@
                         },
                         date: new Date(baseDate.setHours(21, 0, 0, 0)).toISOString(),
                         venue: 'Online',
-                        tournament: 'Major Copenhagen 2025'
+                        tournament: 'Major Copenhagen 2025',
+                        predictions: 'П1 с вероятностью 50%'
                     }
                 ]
             };
@@ -2638,6 +2689,7 @@ document.addEventListener('click', (e) => {
                         <div class="h2h">${h2hDisplay}</div>
                         <div class="team-form">${awayForm}</div>
                     </div>
+                    <div class="match-predictions">Прогноз: ${match.predictions}</div>
                     <div class="match-odds">
                         <div class="odds-item" data-event="${match.home.name} vs ${match.away.name}" data-bet="П1" data-odds="${match.odds.p1}" data-match-id="${match.id}">
                             <div class="odds-type">П1</div>
