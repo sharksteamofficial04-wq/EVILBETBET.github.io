@@ -519,7 +519,7 @@
         }
 
         .main-banner .telegram-btn:hover {
-            background: #fff;
+            background:#fff;
             transform: scale(1.05) translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
@@ -3020,10 +3020,6 @@
         <div class="main-container">
             <!-- **MAIN BANNER** -->
             <section class="main-banner fade-in-up">
-                <div class="banner-players">
-                    <img src="/IMG/IRVING.svg" alt="Player Left" class="banner-player" onerror="this.src='https://via.placeholder.com/120x120/00ff88/121212?text=Player'">
-                    <img src="/IMG/YAMAL.svg" alt="Player Right" class="banner-player" onerror="this.src='https://via.placeholder.com/120x120/00ff88/121212?text=Player'">
-                </div>
                 <div class="banner-content">
                     <h1 class="banner-title">EVILBET</h1>
                     <p class="banner-subtitle">Платформа для ставок на спорт №1</p>
@@ -3031,9 +3027,6 @@
                         <i class="fab fa-telegram-plane"></i>
                         Начать ставки
                     </button>
-                </div>
-                <div class="banner-players">
-                    <img src="/IMG/BATRAKOV.png" alt="Player 3" class="banner-player" onerror="this.src='https://via.placeholder.com/120x120/00ff88/121212?text=Player'">
                 </div>
             </section>
 
@@ -3254,32 +3247,18 @@
                     </div>
                     
                     <div class="deposit-methods">
-                        <div class="deposit-method active" data-method="card">
-                            <svg class="deposit-method-icon" viewBox="0 0 24 24">
-                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-2-1h-6v-2h6v2zM6 10h2v2H6v-2z"/>
-                            </svg>
-                            <div class="deposit-method-label">Visa/MasterCard</div>
-                            <div style="font-size: 0.7rem; color: var(--text-secondary);">Мгновенно</div>
-                        </div>
-                        <div class="deposit-method" data-method="crypto">
+                        <div class="deposit-method active" data-method="crypto">
                             <svg class="deposit-method-icon" viewBox="0 0 24 24">
                                                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
                             </svg>
-                            <div class="deposit-method-label">Bitcoin/Ethereum</div>
+                            <div class="deposit-method-label">Крипто</div>
                             <div style="font-size: 0.7rem; color: var(--text-secondary);">QR-код</div>
                         </div>
-                        <div class="deposit-method" data-method="qiwi">
+                        <div class="deposit-method" data-method="tg-gifts">
                             <svg class="deposit-method-icon" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 15h-7c-.28 0-.5-.22-.5-.5v-5c0-.28.22-.5.5-.5h7c.28 0 .5.22.5.5v5c0 .28-.22.5-.5.5zm0-7h-7V7h7v3z"/>
                             </svg>
-                            <div class="deposit-method-label">Qiwi Кошелёк</div>
-                            <div style="font-size: 0.7rem; color: var(--text-secondary);">1 минута</div>
-                        </div>
-                        <div class="deposit-method" data-method="paypal">
-                            <svg class="deposit-method-icon" viewBox="0 0 24 24">
-                                <path d="M7 4c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1H8c-.55 0-1 .45-1 1v2zm14 5h-3c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2V11c0-1.1-.9-2-2-2zm-1 11h-1v-9h1v9zm-1-11c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1h-1z"/>
-                            </svg>
-                            <div class="deposit-method-label">PayPal</div>
+                            <div class="deposit-method-label">TG Подарки</div>
                             <div style="font-size: 0.7rem; color: var(--text-secondary);">Мгновенно</div>
                         </div>
                     </div>
@@ -3368,7 +3347,7 @@
                     status: 'live',
                     currentScore: '1:0',
                     currentMinute: 23,
-                    odds: [1.65, 3.20, 2.10], 
+                    odds: [1.65, 3.20, 2.80], 
                     sportIcon: 'fas fa-gamepad',
                     homeForm: ['W', 'W', 'L', 'D', 'W'],
                     awayForm: ['L', 'W', 'W', 'D', 'L'],
@@ -3922,7 +3901,7 @@
             highlightSelectedOdds();
             updateCoupon();
             
-            showNotification(`✓ ${bet} (${odds}) добавлено!`, 'success');
+            showNotification(`✓ ${bet} (${odds.toFixed(2)}) добавлено!`, 'success');
             TelegramWebApp?.HapticFeedback.impactOccurred('success');
             
             if (TelegramWebApp) {
@@ -4717,297 +4696,6 @@
         // **ПРОМО КАРУСЕЛЬ**
         function initPromoCarousel() {
             const banners = document.querySelectorAll('.promo-banner');
-            let currentBanner = 0;
-            
-            if (banners.length === 0) return;
-            
-            const rotateBanners = () => {
-                banners.forEach((banner, index) => {
-                    const delay = Math.abs(index - currentBanner) * 3000;
-                    setTimeout(() => {
-                        banner.style.transform = 'translateY(-8px) scale(1.02)';
-                        banner.style.zIndex = '10';
-                        banner.style.boxShadow = '0 20px 60px rgba(255, 51, 51, 0.3)';
-                    }, delay);
-                    
-                    setTimeout(() => {
-                        banner.style.transform = 'translateY(0) scale(1)';
-                        banner.style.zIndex = '';
-                        banner.style.boxShadow = '';
-                    }, delay + 2000);
-                });
-                
-                currentBanner = (currentBanner + 1) % banners.length;
-            };
-            
-            // Запускаем каждые 8 секунд
-            setInterval(rotateBanners, 8000);
-            rotateBanners(); // Первая итерация
-        }
-
-        // **БАННЕР АНИМАЦИИ**
-        function startBannerAnimations() {
-            const banner = document.querySelector('.main-banner');
-            const title = document.querySelector('.banner-title');
-            const subtitle = document.querySelector('.banner-subtitle');
-            const btn = document.querySelector('.main-banner .telegram-btn');
-            const players = document.querySelectorAll('.banner-player');
-            
-            // Анимация заголовка
-            setTimeout(() => {
-                title.style.animation = 'titleGlow 2s ease-in-out infinite alternate';
-            }, 500);
-            
-            // Анимация подзаголовка
-            setTimeout(() => {
-                subtitle.style.animation = 'subtitleFloat 3s ease-in-out infinite';
-            }, 800);
-            
-            // Анимация кнопки
-            setTimeout(() => {
-                btn.style.animation = 'buttonPulse 2s infinite';
-            }, 1200);
-            
-            // Анимация игроков
-            players.forEach((player, index) => {
-                setTimeout(() => {
-                    player.style.animation = `playerFloat ${4 + index}s ease-in-out infinite`;
-                }, 1000 + index * 300);
-            });
-        }
-
-        function showWelcomeModal() {
-            const modal = document.createElement('div');
-            modal.className = 'modal show';
-            modal.id = 'welcomeModal';
-            modal.innerHTML = `
-                <div class="modal-content" style="max-width: 400px; text-align: center;">
-                    <span class="close" onclick="document.getElementById('welcomeModal').remove()" style="position: absolute; top: 12px; right: 16px; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary);">&times;</span>
-                    <h2 class="modal-header" style="margin-bottom: 20px;">🎉 Добро пожаловать в EVILBET!</h2>
-                    <div style="margin-bottom: 24px; color: var(--text-secondary); font-size: 1.1rem; letter-spacing: 0.5px; line-height: 1.4;">
-                        <p>Вы получили <strong style="color: var(--success-color);">100$ бонусных средств</strong> для первых ставок!</p>
-                        <p style="margin-top: 12px;">Авторизуйтесь через Telegram и начните выигрывать!</p>
-                    </div>
-                    <button class="modal-button telegram-auth-btn" onclick="connectTelegram(); document.getElementById('welcomeModal').remove();" style="margin-bottom: 12px;">
-                        <i class="fab fa-telegram-plane"></i> Начать с бонусом
-                    </button>
-                    <button class="modal-close" onclick="document.getElementById('welcomeModal').remove()" style="background: rgba(51,51,51,0.8);">
-                        Позже
-                    </button>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            TelegramWebApp?.HapticFeedback.notificationOccurred('success');
-        }
-
-        function showWelcomeBonus() {
-            if (isLoggedIn && !localStorage.getItem('bonusClaimed')) {
-                const bonusAmount = 100;
-                balance += bonusAmount;
-                localStorage.setItem('balance', balance);
-                localStorage.setItem('bonusClaimed', 'true');
-                
-                updateBalance();
-                showNotification(`🎁 Бонус ${bonusAmount}$ начислен на счёт!`, 'success');
-                
-                TelegramWebApp?.HapticFeedback.notificationOccurred('success');
-            }
-        }
-
-        function setDepositAmount(amount) {
-            document.getElementById('depositAmount').value = amount;
-            updateBonusProgress(amount);
-            
-            // Анимация кнопки
-            const btn = event.target;
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => btn.style.transform = '', 150);
-            
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
-        }
-
-        function updateBonusProgress(amount) {
-            const amountNum = parseFloat(amount) || 0;
-            const bonusProgressFill = document.getElementById('bonusProgressFill');
-            const bonusInfo = document.getElementById('bonusInfo');
-            const depositConfirmBtn = document.getElementById('depositConfirmBtn');
-            
-            if (amountNum >= 10 && amountNum <= 1000) {
-                const bonusPercent = Math.min(amountNum / 1000 * 100, 100);
-                const bonusAmount = Math.min(amountNum * 0.1, 100); // 10% до 100$
-                
-                bonusProgressFill.style.width = `${bonusPercent}%`;
-                bonusInfo.textContent = `Бонус: ${bonusAmount.toFixed(0)}$ (+${(bonusPercent).toFixed(0)}%)`;
-                
-                depositConfirmBtn.disabled = false;
-                depositConfirmBtn.innerHTML = `
-                    <i class="fas fa-credit-card"></i> Пополнить ${amountNum}$ + ${bonusAmount.toFixed(0)}$ бонус
-                `;
-            } else {
-                bonusProgressFill.style.width = '0%';
-                bonusInfo.textContent = 'Бонус: 0$ (+0%)';
-                depositConfirmBtn.disabled = true;
-                depositConfirmBtn.innerHTML = '<i class="fas fa-credit-card"></i> Пополнить счёт';
-            }
-        }
-
-        // **ОБРАБОТЧИКИ СОБЫТИЙ**
-        function setupEventListeners() {
-            // Клик вне модалки
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('modal')) {
-                    const modalId = e.target.id.replace('Modal', '');
-                    hideModal(modalId);
-                }
-                
-                // Клик вне купона
-                const coupon = document.getElementById('betCoupon');
-                if (coupon.classList.contains('visible') && 
-                    !coupon.contains(e.target) && 
-                    !e.target.closest('.odds-item') && 
-                    !e.target.closest('.match-favorite')) {
-                    closeCoupon();
-                }
-                
-                // Клик по методам депозита
-                if (e.target.closest('.deposit-method')) {
-                    document.querySelectorAll('.deposit-method').forEach(m => m.classList.remove('active'));
-                    e.target.closest('.deposit-method').classList.add('active');
-                }
-                
-                // Клик по быстрым суммам
-                if (e.target.closest('.quick-amount-btn')) {
-                    const btn = e.target.closest('.quick-amount-btn');
-                    document.querySelectorAll('.quick-amount-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                }
-            });
-
-            // ESC клавиша
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    const visibleModal = document.querySelector('.modal.show');
-                    if (visibleModal) {
-                        const modalId = visibleModal.id.replace('Modal', '');
-                        hideModal(modalId);
-                    } else if (document.getElementById('betCoupon').classList.contains('visible')) {
-                        closeCoupon();
-                    }
-                }
-                
-                // Enter в поле ставки
-                if (e.key === 'Enter' && e.target.id === 'stakeInput' && !e.shiftKey) {
-                    e.preventDefault();
-                    if (!document.getElementById('placeBetBtn').disabled) {
-                        placeBet();
-                    }
-                }
-                
-                // Enter в чате поддержки
-                if (e.key === 'Enter' && e.target.id === 'chatInput' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendSupportMessage();
-                }
-            });
-
-            // Поиск автокомплит
-            setupSearchAutocomplete();
-
-            // Обработчик ввода в поле депозита
-            const depositInput = document.getElementById('depositAmount');
-            if (depositInput) {
-                depositInput.addEventListener('input', (e) => {
-                    const value = e.target.value;
-                    // Ограничиваем максимум 1000$
-                    if (parseFloat(value) > 1000) {
-                        e.target.value = 1000;
-                    }
-                    updateBonusProgress(value);
-                });
-            }
-
-            // Чат поддержки
-            const chatInput = document.getElementById('chatInput');
-            if (chatInput) {
-                chatInput.addEventListener('input', (e) => {
-                    document.getElementById('sendSupportBtn').disabled = e.target.value.trim() === '';
-                });
-            }
-
-            // Уведомления
-            document.querySelector('.notifications-btn').onclick = showNotifications;
-        }
-
-        function setupSearchAutocomplete() {
-            const input = document.getElementById('searchInput');
-            const suggestions = document.getElementById('searchSuggestions');
-            
-            if (!input || !suggestions) return;
-
-            const leagues = [
-                { name: 'CS2 Major', icon: 'fas fa-gamepad', category: 'Киберспорт' },
-                { name: 'Premier League', icon: 'fas fa-futbol', category: 'Футбол' },
-                { name: 'NBA', icon: 'fas fa-basketball-ball', category: 'Баскетбол' },
-                { name: 'UFC', icon: 'fas fa-fist-raised', category: 'Бокс/MMA' },
-                { name: 'ATP Tennis', icon: 'fas fa-table-tennis', category: 'Теннис' },
-                { name: 'La Liga', icon: 'fas fa-futbol', category: 'Футбол' },
-                { name: 'Bundesliga', icon: 'fas fa-futbol', category: 'Футбол' },
-                { name: 'Serie A', icon: 'fas fa-futbol', category: 'Футбол' }
-            ];
-
-            input.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase().trim();
-                
-                if (query.length === 0) {
-                    suggestions.classList.remove('show');
-                    return;
-                }
-
-                const filteredLeagues = leagues.filter(league => 
-                    league.name.toLowerCase().includes(query) ||
-                    league.category.toLowerCase().includes(query)
-                ).slice(0, 6);
-
-                suggestions.innerHTML = filteredLeagues.map(league => `
-                    <div class="suggestion-item" onclick="selectSearchSuggestion('${league.name}')" style="animation-delay: ${leagues.indexOf(league) * 0.1}s;">
-                        <i class="${league.icon} suggestion-icon"></i>
-                        <div style="flex: 1;">
-                            <div style="font-weight: bold; letter-spacing: 0.5px;">${league.name}</div>
-                            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 2px;">${league.category}</div>
-                        </div>
-                        <i class="fas fa-chevron-right" style="color: var(--text-secondary); font-size: 0.8rem;"></i>
-                    </div>
-                `).join('');
-
-                suggestions.classList.add('show');
-            });
-
-            input.addEventListener('focus', () => {
-                if (input.value.trim().length > 0) {
-                    suggestions.classList.add('show');
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!input.contains(e.target) && !suggestions.contains(e.target)) {
-                    suggestions.classList.remove('show');
-                }
-            });
-        }
-
-        function selectSearchSuggestion(league) {
-            document.getElementById('searchInput').value = league;
-            searchQuery = league.toLowerCase();
-            document.getElementById('searchSuggestions').classList.remove('show');
-            renderEnhancedMatches(currentDateId);
-            TelegramWebApp?.HapticFeedback.selectionChanged();
-            showNotification(`Фильтр: ${league}`, 'success');
-        }
-
-        // **ПРОМО КАРУСЕЛЬ**
-        function initPromoCarousel() {
-            const banners = document.querySelectorAll('.promo-banner');
             if (banners.length === 0) return;
 
             let currentIndex = 0;
@@ -5055,9 +4743,9 @@
             const banner = document.querySelector('.main-banner');
             const title = document.querySelector('.banner-title');
             const subtitle = document.querySelector('.banner-subtitle');
-            const mainBtn = document.querySelector('.main-banner .telegram-btn');
+            const btn = document.querySelector('.main-banner .telegram-btn');
             const players = document.querySelectorAll('.banner-player');
-
+            
             // Анимация заголовка
             setTimeout(() => {
                 title.style.animation = 'titleGlow 2s ease-in-out infinite alternate';
@@ -5070,7 +4758,7 @@
 
             // Анимация кнопки
             setTimeout(() => {
-                mainBtn.style.animation = 'buttonPulse 2s infinite';
+                btn.style.animation = 'buttonPulse 2s infinite';
             }, 900);
 
             // Анимация игроков
@@ -5127,31 +4815,21 @@
                     closeCoupon();
                 }
                 
-                // Методы депозита
+                // Клик по методам депозита
                 if (e.target.closest('.deposit-method')) {
                     document.querySelectorAll('.deposit-method').forEach(m => m.classList.remove('active'));
                     e.target.closest('.deposit-method').classList.add('active');
-                    TelegramWebApp?.HapticFeedback.selectionChanged();
                 }
                 
-                // Быстрые суммы
+                // Клик по быстрым суммам
                 if (e.target.closest('.quick-amount-btn')) {
                     const btn = e.target.closest('.quick-amount-btn');
                     document.querySelectorAll('.quick-amount-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    TelegramWebApp?.HapticFeedback.impactOccurred('light');
-                }
-                
-                // Клик по промо-баннерам
-                if (e.target.closest('.promo-banner')) {
-                    const banner = e.target.closest('.promo-banner');
-                    banner.style.transform = 'scale(0.98)';
-                    setTimeout(() => banner.style.transform = '', 150);
-                    TelegramWebApp?.HapticFeedback.impactOccurred('medium');
                 }
             });
 
-            // Клавиатурные события
+            // ESC клавиша
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     const visibleModal = document.querySelector('.modal.show');
@@ -5171,7 +4849,7 @@
                     }
                 }
                 
-                // Enter в чате
+                // Enter в чате поддержки
                 if (e.key === 'Enter' && e.target.id === 'chatInput' && !e.shiftKey) {
                     e.preventDefault();
                     sendSupportMessage();
@@ -5484,7 +5162,7 @@
         // **ЧАТ ПОДДЕРЖКИ**
         function openSupportModal() {
             showModal('support');
-            updateSupportChat();
+            loadSupportMessages();
             document.getElementById('chatInput').focus();
             TelegramWebApp?.HapticFeedback.impactOccurred('medium');
         }
@@ -5626,7 +5304,7 @@
             
             // Обновляем данные профиля
             document.getElementById('profileName').textContent = currentUser.username;
-            document.getElementById('profileBalance').textContent = `${balance.toFixed(2)}$`;
+            document.getElementById('profileBalance').textContent = `$ ${balance.toFixed(2)}`;
             
             // Показываем уровень игрока
             const totalBets = betHistory.length;
@@ -5663,86 +5341,6 @@
             
             if (betHistory.length === 0) {
                 historyList.innerHTML = `
-                    <div class="coupon-empty" style="text-align: center;">
-                        <i class="fas fa-history" style="font-size: 3rem; color: rgba(255,255,255,0.1); margin-bottom: 16px;"></i>
-                        <div style="font-size: 1.2rem; margin-bottom: 8px;">История пуста</div>
-                        <div style="font-size: 0.9rem; opacity: 0.7;">Сделайте первую ставку!</div>
-                    </div>
-                `;
-                return;
-            }
-
-            // Группируем по датам
-            const betsByDate = {};
-            betHistory.forEach(bet => {
-                const date = new Date(bet.date).toLocaleDateString('ru-RU');
-                if (!betsByDate[date]) betsByDate[date] = [];
-                betsByDate[date].push(bet);
-            });
-
-            Object.entries(betsByDate).slice(0, 7).forEach(([date, bets]) => {
-                // Дата заголовок
-                const dateHeader = document.createElement('div');
-                dateHeader.style.cssText = `
-                    background: linear-gradient(145deg, rgba(40,40,40,0.8), rgba(60,60,60,0.7));
-                    padding: 12px 16px; margin-bottom: 12px; border-radius: 10px;
-                    border-left: 4px solid var(--primary-color); font-size: 1.1rem;
-                    font-weight: bold; color: var(--primary-color); text-transform: uppercase;
-                    letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-                `;
-                dateHeader.textContent = date;
-                historyList.appendChild(dateHeader);
-
-                // Ставки за дату
-                bets.slice(0, 3).forEach((bet, betIndex) => {
-                    const item = document.createElement('div');
-                    item.className = 'coupon-item';
-                    item.style.marginBottom = betIndex === bets.length - 1 ? '0' : '12px';
-                    
-                    const statusColor = bet.status === 'won' ? '#4caf50' : bet.status === 'lost' ? '#ff4444' : '#aaa';
-                    const statusIcon = bet.status === 'won' ? '✅' : bet.status === 'lost' ? '❌' : '⏳';
-                    const statusText = bet.status === 'pending' ? 'Ожидание' : bet.status === 'won' ? 'Выигрыш!' : 'Проигрыш';
-
-                    item.innerHTML = `
-                        <div class="coupon-event">${bet.events[0] || bet.event}</div>
-                        ${bet.events.length > 1 ? `<div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">+${bet.events.length - 1} событие</div>` : ''}
-                        <div class="coupon-bet">
-                            <span style="font-size: 0.85rem;">${bet.stake}$ × ${bet.odds}</span>
-                        </div>
-                        <div class="coupon-odds" style="justify-content: space-between; gap: 12px; padding-top: 8px; border-top: 1px solid rgba(255,51,51,0.2);">
-                            <div style="color: ${statusColor}; font-size: 1.1rem; font-weight: bold;">${statusIcon}</div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 0.9rem; color: ${statusColor}; font-weight: bold;">${statusText}</div>
-                                <div style="font-size: 1.1rem; color: var(--primary-color); font-weight: bold;">${bet.potentialWin}$</div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    historyList.appendChild(item);
-                });
-            });
-
-            // Кнопка "Показать больше"
-            if (Object.keys(betsByDate).length > 7) {
-                const showMoreBtn = document.createElement('button');
-                showMoreBtn.className = 'load-more-btn';
-                showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Показать все ставки';
-                showMoreBtn.onclick = () => {
-                    showMoreBtn.remove();
-                    updateHistoryUI(true); // Показать все
-                };
-                historyList.appendChild(showMoreBtn);
-            }
-        }
-
-        function updateHistoryUI(showAll = false) {
-            const historyList = document.getElementById('betHistoryList');
-            const limit = showAll ? Infinity : 20;
-            
-            historyList.innerHTML = '';
-            
-            if (betHistory.length === 0) {
-                historyList.innerHTML = `
                     <div class="coupon-empty" style="text-align: center; padding: 40px 20px;">
                         <i class="fas fa-history" style="font-size: 4rem; color: rgba(255,255,255,0.1); margin-bottom: 20px;"></i>
                         <div style="font-size: 1.3rem; margin-bottom: 8px; letter-spacing: 1px;">Нет ставок</div>
@@ -5754,7 +5352,7 @@
 
             // Группировка по дням
             const betsByDay = {};
-            betHistory.slice(0, limit).forEach(bet => {
+            betHistory.slice(0, 20).forEach(bet => {
                 const day = new Date(bet.date).toLocaleDateString('ru-RU', { 
                     weekday: 'short', 
                     day: 'numeric', 
