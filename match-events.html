@@ -59,6 +59,7 @@
 
         .tg-ready {
             padding-top: 60px;
+            padding-bottom: 60px; /* Добавили для совместимости с bottom header, если нужно */
         }
 
         /* **HEADER - В СТИЛЕ CS POSITIVE** */
@@ -688,7 +689,7 @@
 
         @keyframes swordShake {
             0%, 100% { transform: translateX(-50%) rotate(0deg); }
-            25% { transform: translateX(-50%) rotate(5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
             75% { transform: translateX(-50%) rotate(-5deg); }
         }
 
@@ -949,7 +950,7 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(51, 51, 51, 0.8);
+            background: #333;
             color: var(--text-primary);
             border: none;
             border-radius: 50%;
@@ -1119,7 +1120,7 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 51, 51, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
@@ -1133,7 +1134,7 @@
             width: 4px;
             background: var(--gradient-primary);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
         .coupon-item:hover::before {
@@ -1141,7 +1142,7 @@
         }
 
         .coupon-item:hover {
-            background: linear-gradient(145deg, rgba(0,255,136,0.1), rgba(76,175,80,0.05));
+            background: linear-gradient(145deg, rgba(0, 255, 136, 0.1), rgba(76,175,80,0.05));
             border-color: var(--success-color);
             transform: translateX(8px);
             box-shadow: 0 6px 25px rgba(76, 175, 80, 0.2);
@@ -1936,10 +1937,10 @@
         }
 
         #liveStats > div:last-child > div {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 68, 68, 0.2);
+            border: 1px solid rgba(255,68,68,0.2);
         }
 
         #liveStats > div:last-child > div > div:first-child {
@@ -2393,7 +2394,7 @@
                     <button class="clear-coupon" onclick="clearCoupon()">Очистить</button>
                 </div>
                 <div class="coupon-items" id="couponItems">
-                    <div class="coupon-empty">Выберите события для ставки</div>
+                    <div class="coupon-empty">👆 Нажмите на коэффициент, чтобы добавить в купон</div>
                 </div>
                 <div class="coupon-history" id="couponHistory" style="display: none;">
                     <div class="coupon-empty">Нет ставок</div>
@@ -2553,7 +2554,7 @@
                         </button>
                     </div>
                 </div>
-                <button class="modal-close" onclick="closeSupportModal()">Закрыть чат</button>
+                <button class="modal-close" onclick="closeSupportModal()">Закрыть</button>
             </div>
         </div>
 
@@ -2641,7 +2642,7 @@
             updateMatchStatus(matchData);
 
             // **ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ**
-            addMatchInfo(matchData);
+            addMatchInfo(matchData.matchInfo || {});
 
             // **ГЕНЕРАЦИЯ СОБЫТИЙ**
             generateEnhancedEvents(matchData);
@@ -2717,14 +2718,14 @@
             }
         }
 
-        function addMatchInfo(matchData) {
+        function addMatchInfo(matchInfo) {
             const matchHeader = document.querySelector('.match-header');
             const oldMatchInfo = document.getElementById('matchInfo');
             oldMatchInfo?.remove();
 
-            const matchInfo = document.createElement('div');
-            matchInfo.id = 'matchInfo';
-            matchInfo.style.cssText = `
+            const infoContainer = document.createElement('div');
+            infoContainer.id = 'matchInfo';
+            infoContainer.style.cssText = `
                 background: linear-gradient(145deg, rgba(40,40,40,0.8), rgba(60,60,60,0.7));
                 border-radius: 12px; padding: 15px; margin: 15px 0;
                 font-size: 0.9rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -2732,21 +2733,21 @@
                 backdrop-filter: blur(10px); position: relative; z-index: 2;
             `;
 
-            const infoItems = [
-                { icon: 'fas fa-map-marker-alt', text: matchData.matchInfo?.venue || 'Неизвестно', color: '#4caf50' },
-                { icon: 'fas fa-cloud-sun', text: matchData.matchInfo?.weather || '☀️ 20°C', color: '#ffa500' },
-                { icon: 'fas fa-user-tie', text: matchData.matchInfo?.referee || 'Судья', color: '#2196f3' },
-                { icon: 'fas fa-tv', text: matchData.matchInfo?.tvBroadcast || 'Прямая трансляция', color: '#9c27b0' }
+            const items = [
+                { icon: 'fas fa-map-marker-alt', text: matchInfo.venue || 'Неизвестно', color: '#4caf50' },
+                { icon: 'fas fa-cloud-sun', text: matchInfo.weather || '☀️ 20°C', color: '#ffa500' },
+                { icon: 'fas fa-user-tie', text: matchInfo.referee || 'Судья', color: '#2196f3' },
+                { icon: 'fas fa-tv', text: matchInfo.tvBroadcast || 'Прямая трансляция', color: '#9c27b0' }
             ];
 
-            matchInfo.innerHTML = infoItems.map(item => `
+            infoContainer.innerHTML = items.map(item => `
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-secondary);">
                     <i class="${item.icon}" style="font-size: 1.2rem; color: ${item.color}; text-shadow: 0 0 8px ${item.color}20;"></i>
                     <span style="font-size: 0.8rem; letter-spacing: 0.5px;">${item.text}</span>
                 </div>
             `).join('');
 
-            matchHeader.parentNode.insertBefore(matchInfo, matchHeader.nextSibling);
+            matchHeader.appendChild(infoContainer);
         }
 
         // **НОВЫЕ КРУТЫЕ ФИШКИ ДЛЯ СТАТИСТИКИ**
@@ -2868,6 +2869,36 @@
                 statsContainer.appendChild(recItem);
             }
 
+            // **6. НОВАЯ ФИШКА: СЕЗОННАЯ СТАТИСТИКА**
+            const seasonItem = createStatItem('Сезонная статистика', `
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; text-align: center;">
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">${matchData.teamHome || 'Команда 1'}</div>
+                        <div class="season-stats" style="display: flex; flex-direction: column; gap: 8px;">
+                            <span>Матчи: ${matchData.homeTeamStats?.seasonStats?.played || 5}</span>
+                            <span>Победы: ${matchData.homeTeamStats?.seasonStats?.wins || 3}</span>
+                            <span>Ничьи: ${matchData.homeTeamStats?.seasonStats?.draws || 1}</span>
+                            <span>Поражения: ${matchData.homeTeamStats?.seasonStats?.losses || 1}</span>
+                            <span>Голы: ${matchData.homeTeamStats?.seasonStats?.goalsFor || 12} - ${matchData.homeTeamStats?.seasonStats?.goalsAgainst || 8}</span>
+                            <span>Очки: ${matchData.homeTeamStats?.seasonStats?.points || 10}</span>
+                        </div>
+                    </div>
+                    <div style="font-size: 2rem; color: var(--primary-color); font-weight: bold; text-shadow: 0 0 15px rgba(255,51,51,0.5);">VS</div>
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">${matchData.teamAway || 'Команда 2'}</div>
+                        <div class="season-stats" style="display: flex; flex-direction: column; gap: 8px;">
+                            <span>Матчи: ${matchData.awayTeamStats?.seasonStats?.played || 5}</span>
+                            <span>Победы: ${matchData.awayTeamStats?.seasonStats?.wins || 3}</span>
+                            <span>Ничьи: ${matchData.awayTeamStats?.seasonStats?.draws || 1}</span>
+                            <span>Поражения: ${matchData.awayTeamStats?.seasonStats?.losses || 1}</span>
+                            <span>Голы: ${matchData.awayTeamStats?.seasonStats?.goalsFor || 15} - ${matchData.awayTeamStats?.seasonStats?.goalsAgainst || 5}</span>
+                            <span>Очки: ${matchData.awayTeamStats?.seasonStats?.points || 10}</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+            statsContainer.appendChild(seasonItem);
+
             // АНИМАЦИЯ ПРОГРЕСС-БАРОВ
             setTimeout(() => {
                 document.querySelectorAll('.progress-bar').forEach(bar => {
@@ -2958,39 +2989,16 @@
             // ДОПОЛНИТЕЛЬНЫЕ СОБЫТИЯ
             const additionalEvents = [
                 // Точный счёт
-                ...(matchData.additionalMarkets?.correctScore ? 
-                    Object.entries(matchData.additionalMarkets.correctScore)
-                        .slice(0, 6)
-                        .map(([score, odds]) => ({
-                            name: eventName, 
-                            bet: `Точный счёт ${score}`, 
-                            odds: odds, 
-                            matchId, 
-                            category: 'additional'
-                        })) : [
-                            { name: eventName, bet: 'Точный счёт 1:0', odds: 6.50, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Точный счёт 2:1', odds: 8.00, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Точный счёт 1:1', odds: 6.00, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Точный счёт 0:1', odds: 7.50, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Точный счёт 2:0', odds: 9.00, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Точный счёт 0:2', odds: 10.00, matchId, category: 'additional' }
-                        ]
-                ),
+                { name: eventName, bet: 'Точный счёт 1:0', odds: 6.50, matchId, category: 'additional' },
+                { name: eventName, bet: 'Точный счёт 2:1', odds: 8.00, matchId, category: 'additional' },
+                { name: eventName, bet: 'Точный счёт 1:1', odds: 6.00, matchId, category: 'additional' },
+                { name: eventName, bet: 'Точный счёт 0:1', odds: 7.50, matchId, category: 'additional' },
+                { name: eventName, bet: 'Точный счёт 2:0', odds: 9.00, matchId, category: 'additional' },
+                { name: eventName, bet: 'Точный счёт 0:2', odds: 10.00, matchId, category: 'additional' },
                 // Полувремя/Основное время
-                ...(matchData.additionalMarkets?.halftimeResult ? 
-                    Object.entries(matchData.additionalMarkets.halftimeResult)
-                        .map(([result, odds]) => ({
-                            name: eventName, 
-                            bet: `Полувремя/Время: ${result === 'home' ? 'П1/П1' : result === 'draw' ? 'X/X' : 'П2/П2'}`, 
-                            odds: odds * 1.5, 
-                            matchId, 
-                            category: 'additional'
-                        })) : [
-                            { name: eventName, bet: 'Полувремя/Время: П1/П1', odds: 4.50, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Полувремя/Время: X/X', odds: 3.20, matchId, category: 'additional' },
-                            { name: eventName, bet: 'Полувремя/Время: П2/П2', odds: 5.80, matchId, category: 'additional' }
-                        ]
-                ),
+                { name: eventName, bet: 'Полувремя/Время: П1/П1', odds: 4.50, matchId, category: 'additional' },
+                { name: eventName, bet: 'Полувремя/Время: X/X', odds: 3.20, matchId, category: 'additional' },
+                { name: eventName, bet: 'Полувремя/Время: П2/П2', odds: 5.80, matchId, category: 'additional' },
                 // Дополнительные рынки
                 { name: eventName, bet: 'Кто забьет первым: Хозяева', odds: 1.65, matchId, category: 'additional' },
                 { name: eventName, bet: 'Кто забьет первым: Гости', odds: 2.15, matchId, category: 'additional' },
@@ -2999,71 +3007,13 @@
             ];
 
             // Заполняем секции
-            fillEvents('mainEvents', mainEvents.slice(0, 4));
-            fillEvents('totalEvents', totalEvents.slice(0, 6));
-            fillEvents('handicapEvents', handicapEvents.slice(0, 6));
-            fillEvents('additionalEvents', additionalEvents.slice(0, 8));
+            fillEvents('mainEvents', mainEvents.slice(0, 7));
+            fillEvents('totalEvents', totalEvents.slice(0, 8));
+            fillEvents('handicapEvents', handicapEvents.slice(0, 8));
+            fillEvents('additionalEvents', additionalEvents.slice(0, 12));
 
             // Обновляем выделение уже выбранных ставок
             setTimeout(() => highlightSelectedEvents(), 100);
-        }
-
-        // **ОБНОВЛЁННАЯ ФУНКЦИЯ ЗАПОЛНЕНИЯ СОБЫТИЙ**
-        function fillEvents(containerId, events) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            container.innerHTML = '';
-
-            events.forEach((event, index) => {
-                const eventElement = document.createElement('div');
-                eventElement.className = `event-item ${event.category}`;
-                eventElement.dataset.event = event.name;
-                eventElement.dataset.bet = event.bet;
-                eventElement.dataset.odds = event.odds;
-                eventElement.dataset.matchId = event.matchId;
-                eventElement.dataset.index = index;
-
-                // Проверяем, выбрано ли событие
-                const isSelected = couponItems.some(item => 
-                    item.event === event.name && 
-                    item.bet === event.bet && 
-                    item.matchId === event.matchId
-                );
-
-                if (isSelected) {
-                    eventElement.classList.add('selected');
-                }
-
-                // Специальный стиль для статистики
-                if (event.isStat) {
-                    eventElement.classList.add('stat-item');
-                    eventElement.style.cursor = 'default';
-                }
-
-                eventElement.innerHTML = `
-                    <div class="event-name">${event.bet}</div>
-                    ${!event.isStat ? `<div class="event-odds">${event.odds.toFixed(2)}</div>` : ''}
-                `;
-
-                // Обработчик клика
-                if (!event.isStat) {
-                    eventElement.addEventListener('click', (e) => handleEventClick(e, event));
-                    eventElement.addEventListener('touchend', (e) => handleEventClick(e, event));
-                }
-
-                container.appendChild(eventElement);
-            });
-
-            // Анимация появления
-            setTimeout(() => {
-                container.querySelectorAll('.event-item').forEach((item, index) => {
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }, 100);
         }
 
         // **ОБРАБОТЧИК КЛИКА ПО СОБЫТИЮ**
