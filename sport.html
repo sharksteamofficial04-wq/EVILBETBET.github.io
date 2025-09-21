@@ -56,7 +56,8 @@
         }
 
         .tg-ready {
-            padding-top: 60px;
+            padding-top: 0; /* Убрали padding-top, так как шапка теперь снизу */
+            padding-bottom: 60px; /* Добавили отступ снизу для bottom bar */
         }
 
         /* Адаптация под Telegram Web App */
@@ -79,14 +80,14 @@
             position: fixed;
             width: 100vw;
             left: 0;
-            top: 0;
+            bottom: 0; /* Шапка теперь fixed bottom */
             z-index: 100;
             height: 60px;
-            border-bottom: 2px solid transparent;
+            border-top: 2px solid transparent; /* Изменили border-bottom на top */
             background-image: linear-gradient(rgba(18,18,18,0.98), rgba(18,18,18,0.98)),
                               linear-gradient(90deg, var(--primary-color), transparent);
             background-size: 100% 100%, 100% 2px;
-            background-position: 0 0, 0 100%;
+            background-position: 0 0, 0 0; /* Адаптировали для bottom */
             background-repeat: no-repeat;
             backdrop-filter: blur(10px);
         }
@@ -975,7 +976,7 @@
             border-radius: 12px;
             padding: 20px;
             position: fixed;
-            top: 70px;
+            bottom: 70px; /* Адаптировано под bottom header */
             right: 20px;
             width: 320px;
             max-height: 70vh;
@@ -1327,7 +1328,7 @@
         /* **ИСПРАВЛЕННАЯ КНОПКА ПОДДЕРЖКИ** */
         .support-button {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px; /* Адаптировано под bottom header */
             right: 20px;
             width: 56px;
             height: 56px;
@@ -1340,7 +1341,7 @@
             font-size: 1.4rem;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4);
-            z-index: 80;
+            z-index: 200; /* Увеличен z-index для видимости всегда */
             transition: all 0.3s;
             border: none;
             position: relative;
@@ -1592,14 +1593,13 @@
         @media (max-width: 1000px) {
             .bet-coupon {
                 position: fixed;
-                top: 60px;
+                bottom: 60px; /* Адаптировано под bottom header */
                 left: 0;
                 right: 0;
-                bottom: 0;
                 width: 100%;
                 height: auto;
                 max-height: none;
-                border-radius: 0;
+                border-radius: 12px 12px 0 0; /* Закругления сверху */
                 transform: translateY(100%);
             }
 
@@ -1733,25 +1733,6 @@
             transform: translateX(-50%) translateY(-10px);
         }
 
-        /* **СВИП ДЛЯ ДАТ** */
-        .swipe-hint {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            background: rgba(255, 51, 51, 0.1);
-            color: var(--primary-color);
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            z-index: 85;
-            opacity: 0;
-            transition: all 0.3s;
-            border: 1px solid var(--primary-color);
-        }
-
-        .swipe-hint.show {
-            opacity: 1;
-        }
         /* УВЕДОМЛЕНИЯ О ЛИМИТЕ */
 #quickBetToast.error {
     background: linear-gradient(45deg, #ff4444, #ff0066) !important;
@@ -1782,7 +1763,7 @@
 </head>
 <body>
     <div id="preRegistration" class="tg-ready">
-        <!-- HEADER -->
+        <!-- HEADER - Теперь bottom bar -->
         <header>
             <div class="header-left">
                 <img id="logo" src="/IMG/LOGO.svg" alt="EVILBET Logo" class="header-logo" onerror="this.src='https://via.placeholder.com/70x70/00ff88/121212?text=EVILBET'">
@@ -1912,7 +1893,6 @@
 
         <!-- **НОВЫЕ ЭЛЕМЕНТЫ** -->
         <div class="quick-bet-toast" id="quickBetToast"></div>
-        <div class="swipe-hint" id="swipeHint">Свайп для смены даты</div>
 
         <!-- MODALS -->
         <div id="loginModal" class="modal">
@@ -2027,11 +2007,6 @@
         let currentStatus = 'all';
         let currentDate = new Date();
         let searchQuery = '';
-        
-        // **НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ФИШЕК**
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let swipeHintShown = false;
 
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
@@ -2053,8 +2028,7 @@
             loadMatches();
             setupEventListeners();
             initSupportChat();
-            initSwipeGestures();
-            showSwipeHint();
+            // Убрали initSwipeGestures() и showSwipeHint() для удаления свайпа
         }
 
         function applyTheme() {
@@ -2788,142 +2762,6 @@ document.addEventListener('click', (e) => {
             showNotification(`⭐ ${bet} добавлено в избранное`, 'success');
         }
 
-        // **УЛУЧШЕННЫЕ МАТЧ ДЕТАЛИ**
-        function openMatchDetails(match) {
-            console.log('Opening enhanced match details:', match.id);
-            
-            const enhancedMatchData = {
-                id: match.id,
-                time: match.time,
-                league: match.league,
-                teamHome: match.home.name,
-                teamHomeLogo: match.home.logo,
-                teamAway: match.away.name,
-                teamAwayLogo: match.away.logo,
-                status: match.status,
-                currentScore: match.currentScore || null,
-                currentMinute: match.currentMinute || null,
-                finalScore: match.finalScore || null,
-                mainOdds: {
-                    p1: match.odds.p1,
-                    x: match.odds.x,
-                    p2: match.odds.p2
-                },
-                totalOdds: {
-                    over25: match.odds.over25 || 1.85,
-                    under25: match.odds.under25 || 1.95
-                },
-                handicapOdds: {
-                    home0: match.odds.handicapHome || 1.90,
-                    away0: match.odds.handicapAway || 1.90
-                },
-                homeTeamStats: {
-                    name: match.home.name,
-                    form: match.home.form,
-                    recentMatches: [
-                        { opponent: 'Челси', score: '2:1', result: 'W', date: '15.09.2025' },
-                        { opponent: 'Арсенал', score: '1:1', result: 'D', date: '12.09.2025' },
-                        { opponent: 'Тоттенхэм', score: '3:0', result: 'W', date: '08.09.2025' },
-                        { opponent: 'Ман Сити', score: '0:2', result: 'L', date: '01.09.2025' },
-                        { opponent: 'Эвертон', score: '4:0', result: 'W', date: '25.08.2025' }
-                    ],
-                    seasonStats: {
-                        played: 5,
-                        wins: match.home.stats.wins,
-                        draws: match.home.stats.draws,
-                        losses: match.home.stats.losses,
-                        goalsFor: match.home.stats.goalsFor,
-                        goalsAgainst: match.home.stats.goalsAgainst,
-                        points: (match.home.stats.wins * 3) + match.home.stats.draws
-                    }
-                },
-                awayTeamStats: {
-                    name: match.away.name,
-                    form: match.away.form,
-                    recentMatches: [
-                        { opponent: 'Ньюкасл', score: '3:1', result: 'W', date: '15.09.2025' },
-                        { opponent: 'Вест Хэм', score: '2:0', result: 'W', date: '12.09.2025' },
-                        { opponent: 'Брайтон', score: '1:1', result: 'D', date: '08.09.2025' },
-                        { opponent: 'Астон Вилла', score: '0:1', result: 'L', date: '01.09.2025' },
-                        { opponent: 'Вулверхэмптон', score: '2:0', result: 'W', date: '25.08.2025' }
-                    ],
-                    seasonStats: {
-                        played: 5,
-                        wins: match.away.stats.wins,
-                        draws: match.away.stats.draws,
-                        losses: match.away.stats.losses,
-                        goalsFor: match.away.stats.goalsFor,
-                        goalsAgainst: match.away.stats.goalsAgainst,
-                        points: (match.away.stats.wins * 3) + match.away.stats.draws
-                    }
-                },
-                headToHead: {
-                    totalMatches: 15,
-                    homeWins: match.home.h2h.wins,
-                    draws: 3,
-                    awayWins: match.away.h2h.wins,
-                    recentH2H: [
-                        { date: '20.03.2025', homeScore: 2, awayScore: 1, winner: 'home' },
-                        { date: '15.11.2024', homeScore: 1, awayScore: 1, winner: 'draw' },
-                        { date: '25.02.2024', homeScore: 0, awayScore: 3, winner: 'away' },
-                        { date: '10.10.2023', homeScore: 4, awayScore: 0, winner: 'home' }
-                    ]
-                },
-                matchInfo: {
-                    venue: match.venue,
-                    weather: match.weather,
-                    referee: match.referee
-                },
-                additionalMarkets: {
-                    bothTeamsToScore: { yes: 1.70, no: 2.10 },
-                    halftimeResult: { home: 3.25, draw: 2.10, away: 4.50 }
-                },
-                liveStats: match.status === 'live' ? {
-                    possession: { home: 52, away: 48 },
-                    shots: { home: 8, away: 6 },
-                    shotsOnTarget: { home: 3, away: 2 }
-                } : null,
-                predictions: {
-                    winProbability: { home: 42, draw: 28, away: 30 },
-                    recommendedBet: { type: 'over25', odds: 1.75, confidence: 65 }
-                }
-            };
-
-            localStorage.setItem('selectedMatch', JSON.stringify(enhancedMatchData));
-            console.log('Enhanced match data saved:', enhancedMatchData);
-            
-            if (TelegramWebApp) {
-                TelegramWebApp.HapticFeedback.impactOccurred('heavy');
-                setTimeout(() => {
-                    window.location.href = 'match-events.html';
-                }, 300);
-            } else {
-                window.location.href = 'match-events.html';
-            }
-        }
-
-        function highlightSelectedOdds() {
-    document.querySelectorAll('.odds-item').forEach(item => {
-        const event = item.dataset.event;
-        const bet = item.dataset.bet;
-        const matchId = item.dataset.matchId;
-        
-        // **ТОЧНАЯ ПОИСК ПО ВСЕМ ПОЛЯМ**
-        const exists = couponItems.find(c => 
-            c.event === event && 
-            c.bet === bet && 
-            c.matchId === matchId
-        );
-        
-        // ПЛАВНАЯ АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ
-        if (exists && !item.classList.contains('selected')) {
-            item.classList.add('selected');
-        } else if (!exists && item.classList.contains('selected')) {
-            item.classList.remove('selected');
-        }
-    });
-}
-
         // ФИЛЬТРЫ
         function filterBySport(sport) {
             document.querySelectorAll('.sport-item').forEach(item => item.classList.remove('active'));
@@ -2951,50 +2789,6 @@ document.addEventListener('click', (e) => {
             currentDate.setDate(currentDate.getDate() + direction);
             loadMatches();
             TelegramWebApp?.HapticFeedback.impactOccurred('light');
-        }
-
-        // **НОВЫЕ ФИШКИ - СВАЙПЫ**
-        function initSwipeGestures() {
-            document.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            document.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe(e);
-            }, { passive: true });
-        }
-
-        function handleSwipe(e) {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                e.preventDefault();
-                if (diff > 0) {
-                    // Свайп влево - предыдущий день
-                    changeDate(-1);
-                    showNotification('📅 Предыдущий день', 'success');
-                } else {
-                    // Свайп вправо - следующий день
-                    changeDate(1);
-                    showNotification('📅 Следующий день', 'success');
-                }
-                TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-            }
-        }
-
-        function showSwipeHint() {
-            if (!swipeHintShown) {
-                setTimeout(() => {
-                    const hint = document.getElementById('swipeHint');
-                    hint.classList.add('show');
-                    setTimeout(() => {
-                        hint.classList.remove('show');
-                        swipeHintShown = true;
-                    }, 3000);
-                }, 2000);
-            }
         }
 
         // **ИСПРАВЛЕННЫЙ ЧАТ ПОДДЕРЖКИ**
