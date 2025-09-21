@@ -59,6 +59,8 @@
             -moz-osx-font-smoothing: grayscale;
             letter-spacing: 1px;
             text-transform: uppercase;
+            position: relative;
+            padding-bottom: 70px; /* Space for bottom nav */
         }
 
         .tg-ready {
@@ -2243,6 +2245,55 @@
             75% { transform: translateX(8px) scale(1.02); }
         }
 
+        /* **BOTTOM NAVIGATION FOR MOBILE** */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            height: 60px;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 10px;
+            border-top: 1px solid rgba(255, 51, 51, 0.2);
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .bottom-nav-item i {
+            font-size: 1.4rem;
+        }
+
+        .bottom-nav-item:hover, .bottom-nav-item.active {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .bottom-nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 1px;
+        }
+
         /* **RESPONSIVE** */
         @media (max-width: 1200px) {
             .matches-grid {
@@ -2448,6 +2499,32 @@
 
             .coupon-items, .coupon-history {
                 max-height: 250px;
+            }
+
+            /* Show bottom nav */
+            .bottom-nav {
+                display: flex;
+            }
+
+            /* Hide desktop nav */
+            header nav {
+                display: none;
+            }
+
+            .header-left {
+                justify-content: center;
+            }
+
+            .header-right {
+                display: none; /* Actions moved to bottom nav */
+            }
+
+            .support-button {
+                bottom: 85px; /* Above bottom nav */
+            }
+
+            .bet-coupon {
+                bottom: 60px; /* Above bottom nav */
             }
         }
 
@@ -2787,6 +2864,30 @@
         <div class="support-button" onclick="openSupportModal()">
             <i class="fas fa-headset"></i>
             <span style="position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; background: var(--gradient-success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #000; font-weight: bold;">!</span>
+        </div>
+
+        <!-- **BOTTOM NAVIGATION** -->
+        <div class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </a>
+            <a href="sport.html" class="bottom-nav-item">
+                <i class="fas fa-futbol"></i>
+                <span>Спорт</span>
+            </a>
+            <a href="live.html" class="bottom-nav-item">
+                <i class="fas fa-bolt"></i>
+                <span>Live</span>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="openProfile()">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="openDepositModal()">
+                <i class="fas fa-wallet"></i>
+                <span>Депозит</span>
+            </a>
         </div>
 
         <!-- **MODALS** -->
@@ -3336,6 +3437,31 @@
                     }
                 }, 1000);
             }
+
+            // Симуляция live updates
+            setInterval(simulateLiveUpdates, 10000);
+            
+            // Infinite scroll
+            const matchesSection = document.getElementById('matchesContainer');
+            matchesSection.addEventListener('scroll', () => {
+                if (matchesSection.scrollTop + matchesSection.clientHeight >= matchesSection.scrollHeight - 100) {
+                    loadMoreMatches();
+                }
+            });
+        }
+
+        function simulateLiveUpdates() {
+            // Симулируем изменение коэффициентов для live матчей
+            Object.values(enhancedMatchesByDate).flat().forEach(match => {
+                if (match.status === 'live') {
+                    match.odds = match.odds.map(odd => odd * (1 + (Math.random() * 0.1 - 0.05)));
+                    match.winProbabilities = match.winProbabilities.map(prob => Math.max(0, Math.min(100, prob + (Math.random() * 10 - 5))));
+                    match.currentMinute = (match.currentMinute || 0) + 5;
+                    if (match.currentMinute > 90) match.status = 'finished';
+                }
+            });
+            renderEnhancedMatches(currentDateId);
+            showNotification('🔄 Коэффициенты live обновлены!', 'success');
         }
 
         function setupTelegramFeatures() {
@@ -3474,12 +3600,12 @@
         }
 
         // **ДОБАВЛЕНИЕ В КУПОН**
-        function addToCoupon(event, bet, odds, matchId) {
+        function addToCoupon(eventName, bet, odds, matchId) {
             matchId = parseInt(matchId);
             
             // Проверяем дубликат
             const existingIndex = couponItems.findIndex(item => 
-                item.event === event && 
+                item.event === eventName && 
                 item.bet === bet && 
                 item.matchId === matchId
             );
@@ -3503,7 +3629,7 @@
             }
             
             // Проверяем лимит 2 ставки на событие
-            const eventBets = couponItems.filter(item => item.event === event);
+            const eventBets = couponItems.filter(item => item.event === eventName);
             if (eventBets.length >= 2) {
                 showNotification('⚠️ Максимум 2 ставки на одно событие!', 'error');
                 TelegramWebApp?.HapticFeedback.notificationOccurred('error');
@@ -3524,7 +3650,7 @@
             
             // Добавляем в купон
             couponItems.push({ 
-                event, 
+                event: eventName, 
                 bet, 
                 odds: parseFloat(odds), 
                 matchId,
@@ -3771,10 +3897,6 @@
                 item.innerHTML = `
                     <div class="coupon-event">${bet.events.slice(0, 2).join('<br>')}</div>
                     ${bet.events.length > 2 ? `<div style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px;">+${bet.events.length - 2} событие</div>` : ''}
-                    <div class="coupon-bet">
-                        <span style="font-size: 0.8rem;">Ставка: ${bet.stake}$</span>
-                        <span style="font-size: 0.8rem; margin-left: 8px;">Коэф: ${bet.odds}</span>
-                    </div>
                     <div class="coupon-odds" style="justify-content: space-between; gap: 12px;">
                         <div style="color: ${statusColor}; font-size: 1.2rem;">${statusIcon}</div>
                         <div style="text-align: right; color: ${statusColor}; font-weight: bold; font-size: 1rem;">
@@ -3944,7 +4066,7 @@
                     const probability = match.winProbabilities[i] || 50;
                     const betType = betTypes[i];
                     return `
-                        <div class="odds-item" 
+                        <div class="odds-item" onclick="addToCoupon('${match.home} vs ${match.away}', '${betType}', ${odd}, ${match.id})" 
                              data-event="${match.home} vs ${match.away}" 
                              data-bet="${betType}" 
                              data-odds="${odd}" 
@@ -4193,7 +4315,7 @@
                 const handleOddsClick = (e) => {
                     e.stopPropagation();
                     
-                    const event = item.dataset.event;
+                    const eventName = item.dataset.event;
                     const bet = item.dataset.bet;
                     const odds = parseFloat(item.dataset.odds);
                     const matchId = parseInt(item.dataset.matchId);
@@ -4201,7 +4323,7 @@
                     // Ripple эффект
                     createRipple(e.target, '#4caf50');
                     
-                    const added = addToCoupon(event, bet, odds, matchId);
+                    const added = addToCoupon(eventName, bet, odds, matchId);
                     item.classList.toggle('selected', added);
                     
                     if (added) {
@@ -4358,7 +4480,7 @@
             rotateBanners(); // Первая итерация
 
             // Hover пауза
-            let hoverTimeout;
+            let hoverHoverTimeout;
             document.addEventListener('mouseenter', (e) => {
                 if (e.target.closest('.promo-banners')) {
                     clearTimeout(hoverTimeout);
@@ -4536,6 +4658,13 @@
                     });
                 });
             }
+
+            // Bottom nav active
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                if (item.href === window.location.href) {
+                    item.classList.add('active');
+                }
+            });
         }
 
         function setupSearchAutocomplete() {
@@ -4602,7 +4731,7 @@
                 }
             });
 
-            // Клик вне
+            // Фокус вне
             document.addEventListener('click', (e) => {
                 if (!input.contains(e.target) && !suggestions.contains(e.target)) {
                     suggestions.classList.remove('show');
@@ -4910,146 +5039,6 @@
             setTimeout(() => {
                 chat.scrollTop = chat.scrollHeight;
             }, 100);
-        }
-
-        function showNotifications() {
-            const notificationTypes = [
-                { title: '🔥 LIVE матчи', text: '3 активных события', icon: 'fas fa-fire' },
-                { title: '⭐ Избранное', text: `${favorites.length} матчей`, icon: 'fas fa-star' },
-                { title: '💰 Бонус доступен', text: '100$ для новых игроков', icon: 'fas fa-gift' },
-                { title: '📊 Статистика', text: 'Обновлена 5 минут назад', icon: 'fas fa-chart-line' }
-            ];
-            
-            let message = '🔔 Уведомления:\n\n';
-            notificationTypes.forEach(n => {
-                message += `${n.icon} ${n.title}\n${n.text}\n\n`;
-            });
-            
-            showNotification(message);
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-        }
-
-        // **ПРОФИЛЬ И ИСТОРИЯ**
-        function openProfile() {
-            if (!isLoggedIn) {
-                showModal('login');
-                showNotification('🔐 Войдите в аккаунт', 'error');
-                return;
-            }
-            
-            // Обновляем данные профиля
-            document.getElementById('profileName').textContent = currentUser.username;
-            document.getElementById('profileBalance').textContent = `$ ${balance.toFixed(2)}`;
-            
-            // Показываем уровень игрока
-            const totalBets = betHistory.length;
-            const level = totalBets < 10 ? 'Новичок' : totalBets < 50 ? 'Бронза' : totalBets < 200 ? 'Серебро' : 'Золото';
-            const levelColor = totalBets < 10 ? '#aaa' : totalBets < 50 ? '#cd7f32' : totalBets < 200 ? '#c0c0c0' : '#ffd700';
-            
-            const levelElement = document.querySelector('#profileModal .modal-body p:last-child');
-            if (levelElement) {
-                levelElement.innerHTML = `Уровень: <span style="color: ${levelColor};">${level}</span> | Ставок: ${totalBets}`;
-            }
-            
-            showModal('profile');
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-        }
-
-        function closeProfile() {
-            hideModal('profile');
-        }
-
-        function openHistory() {
-            updateCouponHistory();
-            hideModal('profile');
-            showModal('history');
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
-        }
-
-        function closeHistory() {
-            hideModal('history');
-        }
-
-        function updateHistoryUI() {
-            const historyList = document.getElementById('betHistoryList');
-            historyList.innerHTML = '';
-            
-            if (betHistory.length === 0) {
-                historyList.innerHTML = `
-                    <div class="coupon-empty" style="text-align: center; padding: 40px 20px;">
-                        <i class="fas fa-history" style="font-size: 4rem; color: rgba(255,255,255,0.1); margin-bottom: 20px;"></i>
-                        <div style="font-size: 1.3rem; margin-bottom: 8px; letter-spacing: 1px;">Нет ставок</div>
-                        <div style="font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.5px;">Сделайте первую ставку и она появится здесь!</div>
-                    </div>
-                `;
-                return;
-            }
-
-            // Группировка по дням
-            const betsByDay = {};
-            betHistory.slice(0, 20).forEach(b => {
-                const day = new Date(b.date).toLocaleDateString('ru-RU', { 
-                    weekday: 'short', 
-                    day: 'numeric', 
-                    month: 'short' 
-                });
-                if (!betsByDay[day]) betsByDay[day] = [];
-                betsByDay[day].push(b);
-            });
-
-            Object.entries(betsByDay).forEach(([day, bets]) => {
-                // Заголовок дня
-                const dayHeader = document.createElement('div');
-                dayHeader.style.cssText = `
-                    background: linear-gradient(145deg, rgba(40,40,40,0.9), rgba(60,60,60,0.8));
-                    padding: 16px 20px; margin: 16px 0 12px 0; border-radius: 12px;
-                    border-left: 4px solid var(--gradient-primary); 
-                    font-size: 1.2rem; font-weight: bold; color: var(--primary-color);
-                    text-transform: uppercase; letter-spacing: 1px;
-                    text-shadow: 1px 1px 2px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 12px;
-                `;
-                dayHeader.innerHTML = `
-                    <i class="fas fa-calendar-alt" style="font-size: 1.1rem;"></i>
-                    ${day} (${bets.length} ставок)
-                `;
-                historyList.appendChild(dayHeader);
-
-                // Ставки за день
-                bets.forEach((bet, betIndex) => {
-                    const item = document.createElement('div');
-                    item.className = 'coupon-item';
-                    item.style.cssText = `margin-bottom: ${betIndex === bets.length - 1 ? '0' : '12px'}; 
-                                         animation-delay: ${Object.keys(betsByDay).indexOf(day) * 0.2 + betIndex * 0.1}s;`;
-                    
-                    const statusColor = bet.status === 'won' ? '#4caf50' : bet.status === 'lost' ? '#ff4444' : '#aaa';
-                    const statusIcon = bet.status === 'won' ? '✅' : bet.status === 'lost' ? '❌' : '⏳';
-                    const statusText = bet.status === 'pending' ? 'Ожидание' : bet.status === 'won' ? 'Выигрыш!' : 'Проигрыш';
-
-                    const eventsPreview = bet.events.length > 1 ? 
-                        `${bet.events[0]}<br><span style="font-size: 0.8rem; opacity: 0.7;">+${bet.events.length - 1} событие</span>` : 
-                        bet.events[0] || bet.event;
-
-                    item.innerHTML = `
-                        <div class="coupon-event">${eventsPreview}</div>
-                        <div class="coupon-bet" style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem;">${bet.stake}$</span>
-                            <span style="font-size: 0.85rem; color: var(--text-secondary);">× ${bet.odds}</span>
-                        </div>
-                        <div class="coupon-odds" style="justify-content: space-between; gap: 16px; padding-top: 12px; border-top: 1px solid rgba(255,51,51,0.2);">
-                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                                <div style="font-size: 1.2rem; color: ${statusColor}; font-weight: bold;">${statusIcon}</div>
-                                <div style="font-size: 0.8rem; color: ${statusColor}; text-transform: uppercase; letter-spacing: 0.5px;">${statusText}</div>
-                            </div>
-                            <div style="text-align: right; font-weight: bold;">
-                                <div style="font-size: 1.2rem; color: var(--primary-color);">${bet.potentialWin}$</div>
-                                <div style="font-size: 0.8rem; color: var(--text-secondary);">${new Date(bet.date).toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    historyList.appendChild(item);
-                });
-            });
         }
 
         function showNotifications() {
