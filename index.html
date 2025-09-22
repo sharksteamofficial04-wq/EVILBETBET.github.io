@@ -2386,7 +2386,7 @@
                 <i class="fas fa-user"></i>
                 <span>Профиль</span>
             </a>
-            <a href="referal.html" class="nav-item" data-page="referral">
+            <a href="referal.html" class="nav-item" data-page="referal">
                 <i class="fas fa-users"></i>
                 <span>Рефералы</span>
             </a>
@@ -4162,7 +4162,7 @@
                     this.classList.add('active');
                     
                     const page = this.dataset.page;
-                    if (page === 'sport' || page === 'live' || page === 'referral') {
+                    if (page === 'sport' || page === 'live' || page === 'referal') {
                         window.location.href = `${page}.html`;
                     } else if (page === 'profile') {
                         openProfile();
