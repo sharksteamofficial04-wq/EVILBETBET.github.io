@@ -36,6 +36,11 @@
             --text-secondary: #b0b0b0;
             --success-color: #00ff88;
             --live-color: #ff6b35;
+            --football-color: #00b140;
+            --basketball-color: #ff4444;
+            --tennis-color: #ffc107;
+            --esports-color: #9c27b0;
+            --mma-color: #607d8b;
             --border-color: rgba(255, 51, 51, 0.2);
             --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066);
             --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53);
@@ -57,6 +62,7 @@
             text-transform: uppercase;
             padding-bottom: 80px;
             line-height: 1.4;
+            touch-action: manipulation;
         }
 
         .tg-ready {
@@ -91,6 +97,7 @@
             height: 50px;
             filter: drop-shadow(0 0 8px rgba(255, 51, 51, 0.4));
             transition: transform 0.2s ease;
+            cursor: pointer;
         }
 
         #logo:hover {
@@ -114,6 +121,11 @@
             min-width: 70px;
             cursor: pointer;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .balance-display:active {
+            transform: scale(0.98);
         }
 
         .balance-display:hover {
@@ -141,6 +153,11 @@
             white-space: nowrap;
             max-width: 120px;
             overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .user-display:active {
+            transform: scale(0.98);
         }
 
         .user-display:hover {
@@ -160,6 +177,11 @@
             font-size: 0.8rem;
             font-weight: bold;
             flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .user-display:hover .user-avatar {
+            transform: scale(1.1);
         }
 
         .user-name {
@@ -189,6 +211,11 @@
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .notifications-btn:active {
+            transform: scale(0.95);
         }
 
         .notifications-btn:hover {
@@ -211,6 +238,7 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            min-width: 16px;
         }
 
         /* **MAIN CONTAINER** */
@@ -275,17 +303,25 @@
             text-align: center;
             transition: all 0.2s ease;
             cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
         }
 
         .stat-card:hover {
             border-color: var(--primary-color);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.1);
         }
 
         .stat-label {
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
@@ -294,7 +330,7 @@
             color: var(--primary-color);
         }
 
-        /* **MATCHES SECTION** */
+        /* **MATCHES SECTION WITH SPORTS CATEGORIES** */
         .matches-section {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -308,9 +344,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 16px;
         }
 
         .section-title {
@@ -320,39 +356,146 @@
             align-items: center;
             gap: 8px;
             font-weight: bold;
+            margin: 0;
         }
 
-        .date-tabs {
+        /* **SPORTS CATEGORIES - BEAUTIFUL GRID** */
+        .sports-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sport-category {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
+            padding: 12px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            min-height: 80px;
+            justify-content: center;
         }
 
-        .date-tab {
-            background: rgba(255, 51, 51, 0.1);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
+        .sport-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .sport-category:hover::before,
+        .sport-category.active::before {
+            opacity: 1;
+        }
+
+        .sport-category:hover,
+        .sport-category.active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            border: 1px solid var(--primary-color);
+        }
+
+        .sport-category:active {
+            transform: scale(0.98);
+        }
+
+        .sport-icon {
+            font-size: 1.8rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .sport-category:hover .sport-icon,
+        .sport-category.active .sport-icon {
+            transform: scale(1.1);
+        }
+
+        .sport-name {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .sport-count {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--primary-color);
+            color: #000;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
         }
 
-        .date-tab:hover, .date-tab.active {
-            background: var(--gradient-primary);
-            color: #000;
-            border-color: var(--primary-color);
+        /* **TIME FILTER - CLOCK ICONS** */
+        .time-filter {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            min-width: 200px;
         }
 
-        /* **PERFECTLY ALIGNED MATCH CARDS** */
+        .time-icon {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .time-icon:hover,
+        .time-icon.active {
+            color: var(--primary-color);
+            background: rgba(255, 51, 51, 0.1);
+            transform: scale(1.1);
+        }
+
+        .time-icon:active {
+            transform: scale(0.95);
+        }
+
+        /* **MATCHES GRID** */
         .matches-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 16px;
         }
 
+        /* **MATCH CARDS - PERFECTLY ALIGNED** */
         .match-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -364,6 +507,11 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            touch-action: manipulation;
+        }
+
+        .match-card:active {
+            transform: scale(0.99);
         }
 
         .match-card:hover {
@@ -380,6 +528,7 @@
             align-items: center;
             background: linear-gradient(90deg, rgba(255, 51, 51, 0.03), transparent);
             border-bottom: 1px solid var(--border-color);
+            min-height: 60px;
         }
 
         .match-meta {
@@ -396,6 +545,7 @@
             font-size: 0.7rem;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .match-time {
@@ -405,6 +555,7 @@
             border-radius: 4px;
             font-size: 0.8rem;
             font-weight: bold;
+            white-space: nowrap;
         }
 
         .league-name {
@@ -426,6 +577,8 @@
             font-size: 0.75rem;
             font-weight: bold;
             z-index: 3;
+            min-width: 60px;
+            text-align: center;
         }
 
         .status-live {
@@ -434,6 +587,7 @@
             animation: pulse 2s infinite;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 4px;
             box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
         }
@@ -444,12 +598,14 @@
             background: var(--success-color);
             border-radius: 50%;
             animation: blink 1s infinite;
+            flex-shrink: 0;
         }
 
         .status-finished {
             background: var(--success-color);
             color: #000;
             padding: 4px 8px;
+            border-radius: 12px;
         }
 
         /* **FAVORITE BUTTON** */
@@ -470,6 +626,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
             z-index: 3;
+            touch-action: manipulation;
+        }
+
+        .favorite-btn:active {
+            transform: scale(0.95);
         }
 
         .favorite-btn:hover {
@@ -481,6 +642,7 @@
             background: #ffd700;
             color: #000;
             animation: starPulse 0.6s ease;
+            border-color: #ffd700;
         }
 
         @keyframes starPulse {
@@ -490,7 +652,7 @@
 
         /* **TEAMS SECTION** */
         .teams-section {
-            padding: 20px;
+            padding: 20px 20px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -506,6 +668,7 @@
             align-items: center;
             flex: 1;
             position: relative;
+            gap: 6px;
         }
 
         .team-logo {
@@ -519,13 +682,14 @@
             color: #000;
             font-weight: bold;
             font-size: 1.1rem;
-            margin-bottom: 8px;
             box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
             transition: all 0.2s ease;
             z-index: 2;
+            touch-action: manipulation;
         }
 
-        .team-wrapper:hover .team-logo {
+        .team-wrapper:hover .team-logo,
+        .team-wrapper:active .team-logo {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
         }
@@ -534,7 +698,7 @@
             font-size: 1rem;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             max-width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -559,6 +723,12 @@
             font-weight: bold;
             color: #000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .team-wrapper:hover .form-badge,
+        .team-wrapper:active .form-badge {
+            transform: scale(1.05);
         }
 
         .form-w { background: var(--success-color); }
@@ -611,6 +781,13 @@
             min-width: 70px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(255, 51, 51, 0.2);
+            animation: scorePulse 0.6s ease;
+        }
+
+        @keyframes scorePulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         /* **STATS BAR** */
@@ -621,6 +798,7 @@
             padding: 12px 20px;
             gap: 20px;
             align-items: center;
+            min-height: 44px;
         }
 
         .stat-item {
@@ -633,6 +811,7 @@
             color: var(--text-secondary);
             margin-bottom: 2px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
@@ -650,42 +829,60 @@
             font-weight: bold;
         }
 
-        /* **HORIZONTAL ODDS** */
+        /* **HORIZONTAL ODDS SECTION** */
         .odds-section {
             padding: 20px;
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            align-items: center;
+            flex: 1;
+        }
+
+        .odds-header {
+            display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .odds-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .odds-container {
             display: flex;
             gap: 8px;
-            flex: 1;
-            max-width: 280px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .odds-item {
-            flex: 1;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            min-height: 70px;
-            justify-content: center;
-        }
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 70px;
+    justify-content: center;
+    touch-action: manipulation;
+}
 
         .odds-item::before {
             content: '';
@@ -698,7 +895,7 @@
             transition: left 0.4s;
         }
 
-        .odds-item:hover::before {
+        .odds-item:active::before {
             left: 100%;
         }
 
@@ -708,11 +905,22 @@
             box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
         }
 
+        .odds-item:active {
+            transform: scale(0.98);
+        }
+
         .odds-item.selected {
             background: var(--gradient-primary);
             border-color: var(--primary-color);
             color: #000;
             box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            animation: selectionPulse 0.3s ease;
+        }
+
+        @keyframes selectionPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
         .odds-type {
@@ -721,30 +929,39 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            order: 3;
         }
 
         .odds-value {
             font-size: 1.4rem;
             font-weight: bold;
-            margin: 2px 0;
+            margin: 0;
+            order: 2;
+            line-height: 1;
         }
 
         .odds-prob {
             font-size: 0.7rem;
             color: var(--success-color);
             font-weight: bold;
+            order: 1;
         }
 
         .odds-item.selected .odds-prob {
             color: #000;
         }
 
-        /* **BET COUPON** */
+        .odds-item.selected .odds-type {
+            color: #000;
+        }
+
+        /* **BET COUPON - FIXED MOBILE** */
         .bet-coupon {
             position: fixed;
             top: 0;
             right: 0;
-            width: 360px;
+            width: 100%;
+            max-width: 380px;
             height: 100vh;
             background: var(--bg-primary);
             transform: translateX(100%);
@@ -760,6 +977,14 @@
             transform: translateX(0);
         }
 
+        @media (max-width: 480px) {
+            .bet-coupon {
+                width: 100%;
+                right: 0;
+                padding: 20px 16px;
+            }
+        }
+
         .coupon-header {
             display: flex;
             justify-content: space-between;
@@ -767,12 +992,19 @@
             margin-bottom: 24px;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--bg-primary);
+            z-index: 10;
         }
 
         .coupon-title {
             font-size: 1.6rem;
             color: var(--primary-color);
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .close-coupon {
@@ -789,6 +1021,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-coupon:active {
+            transform: scale(0.95);
         }
 
         .close-coupon:hover {
@@ -807,11 +1044,34 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .coupon-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .coupon-item:hover::before {
+            opacity: 1;
         }
 
         .coupon-item:hover {
             border-color: var(--primary-color);
             box-shadow: 0 4px 12px rgba(255, 51, 51, 0.1);
+        }
+
+        .coupon-item:active {
+            transform: scale(0.99);
         }
 
         .coupon-event {
@@ -825,20 +1085,22 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
             margin-top: 2px;
+            font-weight: 500;
         }
 
         .coupon-odds-section {
             display: flex;
             align-items: center;
             gap: 12px;
+            min-width: 80px;
         }
 
         .coupon-odds-value {
             font-size: 1.3rem;
             color: var(--primary-color);
             font-weight: bold;
-            min-width: 40px;
             text-align: right;
+            min-width: 40px;
         }
 
         .remove-bet {
@@ -854,6 +1116,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
             flex-shrink: 0;
+            touch-action: manipulation;
+        }
+
+        .remove-bet:active {
+            transform: scale(0.95);
         }
 
         .remove-bet:hover {
@@ -887,6 +1154,7 @@
             bottom: 0;
             backdrop-filter: blur(10px);
             transform: translateZ(0);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .total-row {
@@ -909,11 +1177,14 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-weight: 500;
         }
 
         .total-value {
             color: var(--text-primary);
             font-weight: bold;
+            text-align: right;
+            min-width: 80px;
         }
 
         .stake-input {
@@ -928,12 +1199,17 @@
             text-align: center;
             margin-bottom: 16px;
             transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
         .stake-input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
+        }
+
+        .stake-input:active {
+            transform: scale(0.99);
         }
 
         .place-bet-btn {
@@ -947,11 +1223,12 @@
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 1px;
+            touch-action: manipulation;
         }
 
         .place-bet-btn::before {
@@ -965,13 +1242,17 @@
             transition: left 0.4s;
         }
 
-        .place-bet-btn:hover:not(:disabled)::before {
+        .place-bet-btn:active::before {
             left: 100%;
         }
 
         .place-bet-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+        }
+
+        .place-bet-btn:active:not(:disabled) {
+            transform: scale(0.98);
         }
 
         .place-bet-btn:disabled {
@@ -1010,6 +1291,7 @@
             z-index: 100;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 3px solid transparent;
+            touch-action: manipulation;
         }
 
         .support-fab::before {
@@ -1025,7 +1307,7 @@
             transition: width 0.4s, height 0.4s;
         }
 
-        .support-fab:hover::before {
+        .support-fab:active::before {
             width: 80px;
             height: 80px;
         }
@@ -1034,6 +1316,26 @@
             transform: scale(1.1) translateY(-4px);
             box-shadow: 0 12px 35px rgba(255, 51, 51, 0.4);
             border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .support-fab:active {
+            transform: scale(0.95);
+        }
+
+        .support-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 16px;
+            height: 16px;
+            background: var(--success-color);
+            border-radius: 50%;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
         }
 
         /* **BOTTOM NAVIGATION** */
@@ -1050,6 +1352,7 @@
             padding: 12px 0;
             z-index: 100;
             backdrop-filter: blur(20px);
+            touch-action: manipulation;
         }
 
         .bottom-nav.active {
@@ -1068,16 +1371,33 @@
             padding: 8px 4px;
             border-radius: 12px;
             min-width: 60px;
+            touch-action: manipulation;
+        }
+
+        .nav-item:active {
+            transform: scale(0.95);
         }
 
         .nav-item i {
             font-size: 1.3rem;
+            transition: transform 0.2s ease;
         }
 
-        .nav-item:hover, .nav-item.active {
+        .nav-item:hover .nav-item i,
+        .nav-item.active .nav-item i {
+            transform: translateY(-2px);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
             color: var(--primary-color);
             background: rgba(255, 51, 51, 0.1);
             transform: translateY(-2px);
+        }
+
+        .nav-item span {
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
         }
 
         /* **MODALS** */
@@ -1140,6 +1460,11 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .modal-close:active {
+            transform: scale(0.95);
         }
 
         .modal-close:hover {
@@ -1179,6 +1504,11 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            touch-action: manipulation;
+        }
+
+        .modal-btn:active {
+            transform: scale(0.98);
         }
 
         .modal-btn:hover {
@@ -1208,6 +1538,20 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            scrollbar-width: thin;
+        }
+
+        .support-chat::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .support-chat::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .support-chat::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
         }
 
         .chat-message {
@@ -1218,6 +1562,7 @@
             line-height: 1.4;
             position: relative;
             animation: messageSlide 0.3s ease;
+            word-wrap: break-word;
         }
 
         @keyframes messageSlide {
@@ -1244,11 +1589,13 @@
             opacity: 0.7;
             margin-top: 4px;
             text-align: right;
+            font-weight: 300;
         }
 
         .chat-input-container {
             display: flex;
             gap: 12px;
+            align-items: flex-end;
         }
 
         .chat-input {
@@ -1263,6 +1610,7 @@
             resize: vertical;
             min-height: 50px;
             max-height: 120px;
+            transition: all 0.2s ease;
         }
 
         .chat-input:focus {
@@ -1283,6 +1631,11 @@
             transition: all 0.2s ease;
             flex-shrink: 0;
             min-width: 100px;
+            touch-action: manipulation;
+        }
+
+        .chat-send:active:not(:disabled) {
+            transform: scale(0.98);
         }
 
         .chat-send:hover:not(:disabled) {
@@ -1312,6 +1665,8 @@
             transition: all 0.3s ease;
             max-width: 320px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+            white-space: pre-line;
         }
 
         .notification.show {
@@ -1348,6 +1703,11 @@
             .matches-grid {
                 grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
                 gap: 14px;
+            }
+            
+            .sports-categories {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
             }
         }
 
@@ -1401,6 +1761,7 @@
 
             .match-header {
                 padding: 12px 16px;
+                min-height: 52px;
             }
 
             .league-name {
@@ -1438,14 +1799,15 @@
             }
 
             .odds-container {
-                max-width: 240px;
                 gap: 6px;
+                justify-content: center;
             }
 
             .odds-item {
                 padding: 10px 6px;
                 min-height: 60px;
                 gap: 2px;
+                max-width: 80px;
             }
 
             .odds-value {
@@ -1459,11 +1821,15 @@
 
             .bet-coupon {
                 width: 100%;
-                right: auto;
-                padding: 20px;
+                right: 0;
+                padding: 20px 16px;
             }
 
             .bottom-nav {
+                display: flex;
+            }
+
+            .bottom-nav.active {
                 display: flex;
             }
 
@@ -1485,6 +1851,50 @@
 
             .stat-value {
                 font-size: 1.2rem;
+            }
+
+            .sports-categories {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 12px 0;
+            }
+
+            .sport-category {
+                padding: 10px 6px;
+                min-height: 70px;
+                gap: 6px;
+            }
+
+            .sport-icon {
+                font-size: 1.5rem;
+                width: 36px;
+                height: 36px;
+            }
+
+            .sport-name {
+                font-size: 0.75rem;
+            }
+
+            .time-filter {
+                min-width: 180px;
+                padding: 10px 12px;
+            }
+
+            .time-icon {
+                padding: 4px;
+                font-size: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+                margin-bottom: 16px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                justify-content: center;
             }
         }
 
@@ -1541,37 +1951,18 @@
                 margin-bottom: 20px;
             }
 
-            .section-header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 16px;
-                margin-bottom: 16px;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-                justify-content: center;
-            }
-
-            .date-tabs {
-                justify-content: center;
-            }
-
-            .date-tab {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-
             .match-header {
                 padding: 10px 12px;
                 flex-direction: column;
                 gap: 8px;
                 align-items: stretch;
+                min-height: auto;
             }
 
             .match-meta {
                 justify-content: space-between;
                 flex-wrap: wrap;
+                gap: 8px;
             }
 
             .sport-badge {
@@ -1582,6 +1973,7 @@
             .league-name {
                 font-size: 0.75rem;
                 text-align: center;
+                max-width: none;
             }
 
             .teams-section {
@@ -1650,12 +2042,14 @@
 
             .odds-section {
                 padding: 12px;
+                gap: 6px;
             }
 
             .odds-item {
                 padding: 8px 4px;
                 min-height: 55px;
                 gap: 1px;
+                max-width: 70px;
             }
 
             .odds-type {
@@ -1701,6 +2095,47 @@
                 padding: 14px;
                 font-size: 0.95rem;
             }
+
+            .sports-categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+
+            .sport-category {
+                padding: 8px 4px;
+                min-height: 60px;
+                gap: 4px;
+            }
+
+            .sport-icon {
+                font-size: 1.3rem;
+                width: 32px;
+                height: 32px;
+            }
+
+            .sport-name {
+                font-size: 0.7rem;
+            }
+
+            .time-filter {
+                min-width: 160px;
+                padding: 8px 10px;
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                justify-content: center;
+                order: 2;
+            }
         }
 
         /* **ANIMATIONS** */
@@ -1726,6 +2161,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes indicatorFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+
         .fade-in {
             animation: fadeIn 0.6s ease forwards;
         }
@@ -1743,6 +2183,24 @@
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* **SCROLLBAR** */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -1751,15 +2209,16 @@
         <header class="header">
             <div class="logo-section">
                 <img id="logo" src="/IMG/LOGO.svg" alt="EVILBET" 
+                     onclick="window.location.reload()"
                      onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 50 50%22><circle cx=%2225%22 cy=%2225%22 r=%2225%22 fill=%22%23ff3333%22/><text x=%2225%22 y=%2230%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>EVIL</text></svg>'">
             </div>
             
             <div class="user-section">
-                <div class="balance-display" onclick="openProfile()" title="Баланс">
+                <div class="balance-display" onclick="openProfile()" title="Баланс и профиль">
                     <div class="balance-value" id="balanceDisplay">$0.00</div>
                 </div>
                 
-                <div class="user-display" id="userDisplay" onclick="toggleAuth()">
+                <div class="user-display" id="userDisplay" onclick="toggleAuth()" title="Авторизация">
                     <div class="user-avatar" id="userAvatar">👤</div>
                     <div class="user-name guest-text" id="userName">Гость</div>
                 </div>
@@ -1783,15 +2242,15 @@
 
             <!-- STATS ROW -->
             <div class="stats-row">
-                <div class="stat-card" onclick="filterByStatus('live')" title="LIVE события">
+                <div class="stat-card" onclick="setFilter('live')" title="LIVE события">
                     <div class="stat-label">LIVE</div>
                     <div class="stat-value" id="liveCount" style="color: var(--live-color);">4</div>
                 </div>
-                <div class="stat-card" onclick="filterByStatus('favorite')" title="Избранное">
+                <div class="stat-card" onclick="setFilter('favorite')" title="Избранное">
                     <div class="stat-label">Избранное</div>
                     <div class="stat-value" id="favoritesCount" style="color: #ffd700;">2</div>
                 </div>
-                <div class="stat-card" onclick="filterByDate('today')" title="Сегодня">
+                <div class="stat-card" onclick="setFilter('today')" title="Сегодня">
                     <div class="stat-label">Сегодня</div>
                     <div class="stat-value" id="todayCount" style="color: var(--success-color);">12</div>
                 </div>
@@ -1804,13 +2263,50 @@
                         <i class="fas fa-fire" style="color: var(--live-color);"></i>
                         Ближайшие события
                     </h2>
-                    <div class="date-tabs" id="dateTabs">
-                        <!-- Dynamic tabs -->
+                    
+                    <div class="time-filter" id="timeFilter">
+                        <i class="fas fa-clock time-icon active" data-time="all" onclick="switchTimeFilter('all')" title="Все время"></i>
+                        <i class="fas fa-hourglass-half time-icon" data-time="today" onclick="switchTimeFilter('today')" title="Сегодня"></i>
+                        <i class="fas fa-calendar-day time-icon" data-time="tomorrow" onclick="switchTimeFilter('tomorrow')" title="Завтра"></i>
+                    </div>
+                </div>
+
+                <!-- SPORTS CATEGORIES -->
+                <div class="sports-categories" id="sportsCategories">
+                    <div class="sport-category active" data-sport="all" onclick="filterBySport('all')">
+                        <i class="fas fa-th-large sport-icon"></i>
+                        <div class="sport-count" id="allCount">18</div>
+                        <div class="sport-name">Все</div>
+                    </div>
+                    <div class="sport-category" data-sport="football" onclick="filterBySport('football')">
+                        <i class="fas fa-futbol sport-icon" style="color: var(--football-color);"></i>
+                        <div class="sport-count" id="footballCount">8</div>
+                        <div class="sport-name">Футбол</div>
+                    </div>
+                    <div class="sport-category" data-sport="basketball" onclick="filterBySport('basketball')">
+                        <i class="fas fa-basketball-ball sport-icon" style="color: var(--basketball-color);"></i>
+                        <div class="sport-count" id="basketballCount">3</div>
+                        <div class="sport-name">Баскетбол</div>
+                    </div>
+                    <div class="sport-category" data-sport="tennis" onclick="filterBySport('tennis')">
+                        <i class="fas fa-table-tennis sport-icon" style="color: var(--tennis-color);"></i>
+                        <div class="sport-count" id="tennisCount">2</div>
+                        <div class="sport-name">Теннис</div>
+                    </div>
+                    <div class="sport-category" data-sport="esports" onclick="filterBySport('esports')">
+                        <i class="fas fa-gamepad sport-icon" style="color: var(--esports-color);"></i>
+                        <div class="sport-count" id="esportsCount">4</div>
+                        <div class="sport-name">Киберспорт</div>
+                    </div>
+                    <div class="sport-category" data-sport="mma" onclick="filterBySport('mma')">
+                        <i class="fas fa-fist-raised sport-icon" style="color: var(--mma-color);"></i>
+                        <div class="sport-count" id="mmaCount">1</div>
+                        <div class="sport-name">MMA</div>
                     </div>
                 </div>
                 
                 <div class="matches-grid" id="matchesGrid">
-                    <!-- Dynamic matches -->
+                    <!-- Dynamic matches will be rendered here -->
                 </div>
             </section>
         </div>
@@ -1820,7 +2316,7 @@
             <div class="coupon-header">
                 <h3 class="coupon-title">
                     <i class="fas fa-ticket-alt"></i>
-                    Купон ставок
+                    Купон ставок (${document.getElementById('couponItems')?.children.length || 0})
                 </h3>
                 <button class="close-coupon" onclick="closeCoupon()">
                     <i class="fas fa-times"></i>
@@ -1830,8 +2326,8 @@
             <div id="couponItems">
                 <div class="coupon-empty">
                     <i class="fas fa-hand-pointer" style="font-size: 2.5rem; opacity: 0.3; margin-bottom: 16px;"></i>
-                    <div style="font-size: 1.1rem; margin-bottom: 4px;">Добавьте события в купон</div>
-                    <div style="font-size: 0.85rem; opacity: 0.7;">Нажмите на коэффициент для выбора</div>
+                    <div style="font-size: 1.1rem; margin-bottom: 4px;">Купон пуст</div>
+                    <div style="font-size: 0.85rem; opacity: 0.7;">Нажмите на коэффициент чтобы добавить событие</div>
                 </div>
             </div>
 
@@ -1841,21 +2337,25 @@
                     <div class="total-value">
                         <input type="number" class="stake-input" id="stakeInput" 
                                placeholder="0.00" min="1" step="0.01" 
-                               oninput="updateTotal()" value="10">
+                               oninput="updateBetTotal()" value="10">
                     </div>
                 </div>
                 <div class="total-row">
-                    <span class="total-label">Коэффициент:</span>
+                    <span class="total-label">Общий коэффициент:</span>
                     <span class="total-value" id="totalOdds">1.00</span>
                 </div>
                 <div class="total-row">
                     <span class="total-label">Потенциальный выигрыш:</span>
                     <span class="total-value" id="potentialWin">$0.00</span>
                 </div>
-                <button class="place-bet-btn" id="placeBetButton" onclick="placeBet()" disabled>
+                <button class="place-bet-btn" id="placeBetButton" onclick="confirmBet()" disabled>
                     <i class="fas fa-play"></i>
                     Сделать ставку
                 </button>
+                <div style="text-align: center; margin-top: 12px; font-size: 0.8rem; color: var(--text-secondary);">
+                    <i class="fas fa-lock" style="margin-right: 4px;"></i>
+                    Ваши ставки защищены
+                </div>
             </div>
         </aside>
 
@@ -1865,7 +2365,7 @@
         <!-- SUPPORT BUTTON -->
         <button class="support-fab" onclick="openSupport()" title="Поддержка 24/7">
             <i class="fas fa-headset"></i>
-            <span style="position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; background: var(--success-color); border-radius: 50%; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold;">!</span>
+            <span class="support-badge">!</span>
         </button>
 
         <!-- BOTTOM NAVIGATION -->
@@ -1908,8 +2408,8 @@
                     Войти через Telegram
                 </button>
                 <div class="modal-text" style="font-size: 0.85rem; opacity: 0.8;">
-                    <i class="fas fa-shield-alt" style="color: var(--success-color); margin-right: 4px;"></i>
-                    Ваши данные полностью защищены
+                    <i class="fas fa-gift" style="color: var(--success-color); margin-right: 4px;"></i>
+                    +100$ бонус при регистрации
                 </div>
             </div>
         </div>
@@ -1956,7 +2456,7 @@
                 <div class="support-chat" id="supportChat">
                     <div class="chat-message bot">
                         <div>🤖 Привет! Я ИИ-ассистент EVILBET</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">Как могу помочь?</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">Как могу помочь с вашим вопросом?</div>
                     </div>
                 </div>
                 <div class="chat-input-container">
@@ -1964,7 +2464,7 @@
                            placeholder="Опишите вашу проблему..." 
                            onkeypress="handleChatEnter(event)">
                     <button class="chat-send" onclick="sendSupportMessage()" disabled id="sendButton">
-                        <i class="fas fa-paper-plane"></i>
+                        <i class="fas fa-paper-plane"></i> Отправить
                     </button>
                 </div>
                 <div style="text-align: center; margin-top: 12px; font-size: 0.8rem; color: var(--text-secondary);">
@@ -1986,17 +2486,93 @@
         let isLoggedIn = !!currentUser;
         let couponItems = JSON.parse(localStorage.getItem('couponItems')) || [];
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        let currentDateFilter = 'today';
+        let currentSportFilter = 'all';
+        let currentTimeFilter = 'all';
         let searchQuery = '';
-        let currentFilter = 'all';
+        let currentStatusFilter = 'all';
 
-        // MATCH DATA WITH ENHANCED STATS
+        // EXPANDED MATCH DATA (добавил больше матчей на основе реальных данных из поиска)
         const matchesData = {
             today: [
+                // Футбол
                 {
                     id: 1,
                     time: '18:45',
-                    league: 'CS2 Major Paris 2025',
+                    league: 'Premier League',
+                    home: 'Manchester City',
+                    away: 'Arsenal',
+                    status: 'live',
+                    score: '1:1',
+                    minute: 45,
+                    odds: { p1: 1.85, x: 3.50, p2: 4.00 },
+                    sport: 'football',
+                    homeForm: ['W', 'W', 'D', 'W', 'W'],
+                    awayForm: ['L', 'W', 'D', 'W', 'L'],
+                    h2h: '4-3',
+                    probabilities: [50, 25, 25],
+                    homeStats: { wins: 4, draws: 1, losses: 0 },
+                    awayStats: { wins: 2, draws: 1, losses: 2 },
+                    categoryColor: 'var(--football-color)'
+                },
+                {
+                    id: 2,
+                    time: '20:00',
+                    league: 'La Liga',
+                    home: 'Real Madrid',
+                    away: 'Barcelona',
+                    status: 'upcoming',
+                    odds: { p1: 1.95, x: 3.60, p2: 3.80 },
+                    sport: 'football',
+                    homeForm: ['W', 'D', 'W', 'L', 'W'],
+                    awayForm: ['W', 'W', 'W', 'D', 'L'],
+                    h2h: '5-4',
+                    probabilities: [48, 28, 24],
+                    homeStats: { wins: 3, draws: 1, losses: 1 },
+                    awayStats: { wins: 4, draws: 1, losses: 0 },
+                    categoryColor: 'var(--football-color)'
+                },
+                // Баскетбол (NBA preseason)
+                {
+                    id: 3,
+                    time: '19:30',
+                    league: 'NBA Preseason',
+                    home: 'Los Angeles Lakers',
+                    away: 'Phoenix Suns',
+                    status: 'upcoming',
+                    odds: { p1: 2.10, p2: 1.70 },
+                    sport: 'basketball',
+                    homeForm: ['W', 'L', 'W', 'W', 'D'],
+                    awayForm: ['L', 'W', 'D', 'W', 'W'],
+                    h2h: '6-5',
+                    probabilities: [45, 55],
+                    homeStats: { wins: 3, losses: 2 },
+                    awayStats: { wins: 3, losses: 2 },
+                    categoryColor: 'var(--basketball-color)'
+                },
+                // Теннис
+                {
+                    id: 4,
+                    time: '15:00',
+                    league: 'US Open Finals',
+                    home: 'Novak Djokovic',
+                    away: 'Carlos Alcaraz',
+                    status: 'finished',
+                    score: '3:2',
+                    odds: { p1: 1.75, p2: 2.05 },
+                    sport: 'tennis',
+                    homeForm: ['W', 'W', 'W', 'W', 'L'],
+                    awayForm: ['L', 'W', 'L', 'W', 'D'],
+                    h2h: '3-2',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 4, losses: 1 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--tennis-color)'
+                },
+                // Esports
+                {
+                    id: 5,
+                    time: '16:00',
+                    league: 'ESL Pro League Season 22',
                     home: 'NAVI',
                     away: 'FaZe Clan',
                     status: 'live',
@@ -2009,65 +2585,33 @@
                     h2h: '5-3',
                     probabilities: [48, 22, 30],
                     homeStats: { wins: 3, draws: 1, losses: 1 },
-                    awayStats: { wins: 2, draws: 2, losses: 1 }
+                    awayStats: { wins: 2, draws: 2, losses: 1 },
+                    categoryColor: 'var(--esports-color)'
                 },
                 {
-                    id: 2,
-                    time: '19:00',
-                    league: 'Premier League',
-                    home: 'Manchester United',
-                    away: 'Liverpool',
-                    status: 'live',
-                    score: '0:1',
-                    minute: 67,
-                    odds: { p1: 2.50, x: 3.20, p2: 2.80 },
-                    sport: 'football',
-                    homeForm: ['W', 'D', 'W', 'L', 'W'],
-                    awayForm: ['W', 'W', 'W', 'D', 'L'],
-                    h2h: '2-4',
-                    probabilities: [35, 28, 37],
-                    homeStats: { wins: 3, draws: 1, losses: 1 },
-                    awayStats: { wins: 4, draws: 1, losses: 0 }
-                },
-                {
-                    id: 3,
-                    time: '20:30',
-                    league: 'NBA Regular Season',
-                    home: 'Los Angeles Lakers',
-                    away: 'Golden State Warriors',
+                    id: 6,
+                    time: '18:00',
+                    league: 'VALORANT Champions 2025',
+                    home: 'T1',
+                    away: 'G2 Esports',
                     status: 'upcoming',
-                    odds: { p1: 1.95, p2: 1.85 },
-                    sport: 'basketball',
-                    homeForm: ['W', 'L', 'W', 'W', 'D'],
-                    awayForm: ['L', 'W', 'D', 'W', 'W'],
-                    h2h: '6-5',
-                    probabilities: [52, 48],
-                    homeStats: { wins: 3, losses: 2 },
-                    awayStats: { wins: 3, losses: 2 }
+                    odds: { p1: 2.20, p2: 1.60 },
+                    sport: 'esports',
+                    homeForm: ['W', 'L', 'W', 'D', 'W'],
+                    awayForm: ['W', 'W', 'L', 'W', 'D'],
+                    h2h: '2-1',
+                    probabilities: [40, 60],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 3, losses: 1, draws: 1 },
+                    categoryColor: 'var(--esports-color)'
                 },
+                // MMA
                 {
-                    id: 4,
-                    time: '21:00',
-                    league: 'ATP Masters 1000',
-                    home: 'Novak Djokovic',
-                    away: 'Carlos Alcaraz',
-                    status: 'finished',
-                    score: '2:1',
-                    odds: { p1: 1.75, p2: 2.05 },
-                    sport: 'tennis',
-                    homeForm: ['W', 'W', 'W', 'W', 'L'],
-                    awayForm: ['L', 'W', 'L', 'W', 'D'],
-                    h2h: '3-2',
-                    probabilities: [62, 38],
-                    homeStats: { wins: 4, losses: 1 },
-                    awayStats: { wins: 2, losses: 2, draws: 1 }
-                },
-                {
-                    id: 5,
+                    id: 7,
                     time: '22:00',
                     league: 'UFC 305',
-                    home: 'Conor McGregor',
-                    away: 'Michael Chandler',
+                    home: 'Usman Nurmagomedov',
+                    away: 'Paul Hughes',
                     status: 'upcoming',
                     odds: { p1: 1.60, p2: 2.30 },
                     sport: 'mma',
@@ -2076,29 +2620,30 @@
                     h2h: '1-0',
                     probabilities: [62, 38],
                     homeStats: { wins: 3, losses: 1, draws: 1 },
-                    awayStats: { wins: 2, losses: 2, draws: 1 }
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--mma-color)'
                 },
                 {
-                    id: 6,
-                    time: '15:00',
-                    league: 'La Liga',
-                    home: 'Real Madrid',
-                    away: 'Barcelona',
+                    id: 8,
+                    time: '23:00',
+                    league: 'UFC Fight Night',
+                    home: 'Magomed Ankalaev',
+                    away: 'Alex Pereira',
                     status: 'upcoming',
-                    odds: { p1: 1.85, x: 3.50, p2: 4.00 },
-                    sport: 'football',
-                    homeForm: ['W', 'W', 'D', 'W', 'W'],
-                    awayForm: ['L', 'W', 'D', 'W', 'L'],
-                    h2h: '4-3',
-                    probabilities: [50, 25, 25],
-                    homeStats: { wins: 4, draws: 1, losses: 0 },
-                    awayStats: { wins: 2, draws: 1, losses: 2 }
-                }
-            ],
-            tomorrow: [
+                    odds: { p1: 2.50, p2: 1.50 },
+                    sport: 'mma',
+                    homeForm: ['W', 'W', 'D', 'L', 'W'],
+                    awayForm: ['L', 'W', 'W', 'D', 'L'],
+                    h2h: '1-1',
+                    probabilities: [40, 60],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 4, losses: 1, draws: 0 },
+                    categoryColor: 'var(--mma-color)'
+                },
+                // Ещё футбол
                 {
-                    id: 7,
-                    time: '14:00',
+                    id: 9,
+                    time: '17:30',
                     league: 'Bundesliga',
                     home: 'Bayern Munich',
                     away: 'Borussia Dortmund',
@@ -2110,11 +2655,16 @@
                     h2h: '8-2',
                     probabilities: [65, 20, 15],
                     homeStats: { wins: 4, draws: 1, losses: 0 },
-                    awayStats: { wins: 2, draws: 1, losses: 2 }
+                    awayStats: { wins: 2, draws: 1, losses: 2 },
+                    categoryColor: 'var(--football-color)'
                 },
+                // ... (можно добавить ещё, но для примера хватит)
+            ],
+            tomorrow: [
+                // Аналогично, добавил матчи на завтра
                 {
-                    id: 8,
-                    time: '16:00',
+                    id: 10,
+                    time: '14:00',
                     league: 'Serie A',
                     home: 'Juventus',
                     away: 'Inter Milan',
@@ -2126,14 +2676,86 @@
                     h2h: '3-4',
                     probabilities: [40, 30, 30],
                     homeStats: { wins: 3, draws: 1, losses: 1 },
-                    awayStats: { wins: 2, draws: 1, losses: 2 }
-                }
-            ]
+                    awayStats: { wins: 2, draws: 1, losses: 2 },
+                    categoryColor: 'var(--football-color)'
+                },
+                // Баскетбол
+                {
+                    id: 11,
+                    time: '20:00',
+                    league: 'NBA Preseason',
+                    home: 'Boston Celtics',
+                    away: 'New York Knicks',
+                    status: 'upcoming',
+                    odds: { p1: 1.80, p2: 2.00 },
+                    sport: 'basketball',
+                    homeForm: ['W', 'W', 'L', 'W', 'D'],
+                    awayForm: ['L', 'D', 'W', 'L', 'W'],
+                    h2h: '4-3',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 3, losses: 1 },
+                    awayStats: { wins: 2, losses: 2 },
+                    categoryColor: 'var(--basketball-color)'
+                },
+                // Теннис
+                {
+                    id: 12,
+                    time: '18:00',
+                    league: 'Laver Cup',
+                    home: 'Team Europe',
+                    away: 'Team World',
+                    status: 'upcoming',
+                    odds: { p1: 1.55, p2: 2.45 },
+                    sport: 'tennis',
+                    homeForm: ['W', 'W', 'W', 'D', 'W'],
+                    awayForm: ['L', 'W', 'D', 'L', 'W'],
+                    h2h: '2-1',
+                    probabilities: [60, 40],
+                    homeStats: { wins: 4, draws: 1, losses: 0 },
+                    awayStats: { wins: 2, draws: 1, losses: 2 },
+                    categoryColor: 'var(--tennis-color)'
+                },
+                // Esports
+                {
+                    id: 13,
+                    time: '19:00',
+                    league: 'The International 2025',
+                    home: 'Team Liquid',
+                    away: 'Team Spirit',
+                    status: 'upcoming',
+                    odds: { p1: 1.90, p2: 1.90 },
+                    sport: 'esports',
+                    homeForm: ['W', 'D', 'L', 'W', 'W'],
+                    awayForm: ['L', 'W', 'D', 'L', 'W'],
+                    h2h: '3-3',
+                    probabilities: [50, 50],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--esports-color)'
+                },
+                // MMA
+                {
+                    id: 14,
+                    time: '21:00',
+                    league: 'UFC Fight Night',
+                    home: 'Merab Dvalishvili',
+                    away: 'Cory Sandhagen',
+                    status: 'upcoming',
+                    odds: { p1: 1.70, p2: 2.10 },
+                    sport: 'mma',
+                    homeForm: ['W', 'W', 'W', 'D', 'L'],
+                    awayForm: ['L', 'D', 'W', 'L', 'W'],
+                    h2h: '1-0',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 4, losses: 1, draws: 0 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--mma-color)'
+                },
+                ]
         };
-
         // INIT APP
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 EVILBET - Clean Design v2.0');
+            console.log('🎯 EVILBET - Enhanced Sports Categories v3.0');
             initApp();
         });
 
@@ -2146,40 +2768,39 @@
             }
 
             updateUserInterface();
-            renderDateTabs();
+            setupSportsCategories();
+            renderTimeFilter();
             renderMatches();
             setupEventListeners();
             startLiveUpdates();
             
-            // Welcome message for new users
+            // Welcome animation
             if (!localStorage.getItem('welcomeShown') && !isLoggedIn) {
                 setTimeout(() => {
-                    showNotification('🎉 Добро пожаловать в EVILBET!\n+100$ бонус за первую регистрацию', 'success');
+                    showNotification('🎉 Добро пожаловать в EVILBET!\n📱 Лучшие коэффициенты в Telegram', 'success');
                     localStorage.setItem('welcomeShown', 'true');
                 }, 1500);
             }
 
-            // Animate in
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => document.body.style.opacity = '1', 100);
+            // Initial stats update
+            updateSportsCounts();
+            updateStatsDisplay();
         }
 
         // TELEGRAM INTEGRATION
         function setupTelegramIntegration() {
-            // Main button for betting
             TelegramWebApp.MainButton.setText('СДЕЛАТЬ СТАВКУ');
-            TelegramWebApp.MainButton.onClick(placeBet);
+            TelegramWebApp.MainButton.onClick(confirmBet);
             TelegramWebApp.MainButton.setParams({
                 color: '#ff3333',
                 text_color: '#ffffff',
                 is_visible: false
             });
 
-            // Back button handling
             TelegramWebApp.BackButton.onClick(function() {
                 if (document.getElementById('betCoupon').classList.contains('open')) {
                     closeCoupon();
+                    TelegramWebApp.HapticFeedback.impactOccurred('light');
                 } else if (document.querySelector('.modal.active')) {
                     closeActiveModal();
                 } else {
@@ -2187,25 +2808,39 @@
                 }
             });
 
-            // Haptic feedback for interactions
-            const hapticElements = ['.odds-item', '.date-tab', '.stat-card', '.modal-btn', '.nav-item', '.favorite-btn'];
-            hapticElements.forEach(selector => {
+            // Haptic feedback for all interactive elements
+            const hapticSelectors = [
+                '.sport-category', '.time-icon', '.stat-card', 
+                '.odds-item', '.favorite-btn', '.nav-item',
+                '.modal-btn', '.close-coupon', '.remove-bet',
+                '.balance-display', '.user-display'
+            ];
+            
+            hapticSelectors.forEach(selector => {
                 document.addEventListener('click', (e) => {
                     if (e.target.closest(selector)) {
                         TelegramWebApp.HapticFeedback.impactOccurred('medium');
                     }
-                });
+                }, { passive: true });
             });
 
-            // Keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeCoupon();
-                    closeActiveModal();
-                }
-                if (e.key === 'Enter' && e.target.id === 'stakeInput' && !e.shiftKey) {
-                    e.preventDefault();
-                    placeBet();
+            // Prevent double bets on same event
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.odds-item')) {
+                    const oddsItem = e.target.closest('.odds-item');
+                    const matchId = parseInt(oddsItem.dataset.matchId);
+                    const betType = oddsItem.dataset.betType;
+                    
+                    const existingBets = couponItems.filter(item => 
+                        item.matchId === matchId
+                    );
+                    
+                    if (existingBets.length >= 1) {
+                        e.preventDefault();
+                        TelegramWebApp.HapticFeedback.notificationOccurred('error');
+                        showNotification('⚠️ Нельзя ставить на несколько исходов одного события!', 'error');
+                        return false;
+                    }
                 }
             });
         }
@@ -2218,20 +2853,18 @@
             const secondaryBg = theme.secondary_bg_color || '#1a1a1a';
             const buttonColor = theme.button_color || '#ff3333';
 
-            // Update CSS variables
             document.documentElement.style.setProperty('--bg-primary', bgColor);
             document.documentElement.style.setProperty('--bg-secondary', secondaryBg);
             document.documentElement.style.setProperty('--primary-color', buttonColor);
             document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${buttonColor}, #ff0066)`);
 
-            // Apply to elements
             document.body.style.background = bgColor;
-            document.querySelectorAll('.card, .modal-content, .bet-coupon, .search-container').forEach(el => {
+            document.querySelectorAll('.matches-section, .bet-coupon, .modal-content, .search-container, .stats-row .stat-card').forEach(el => {
                 el.style.background = secondaryBg;
             });
         }
 
-        // USER INTERFACE UPDATE
+        // USER INTERFACE
         function updateUserInterface() {
             const userDisplay = document.getElementById('userDisplay');
             const userName = document.getElementById('userName');
@@ -2242,350 +2875,378 @@
             const logoutBtn = document.getElementById('logoutBtn');
 
             if (isLoggedIn && currentUser) {
-                // Logged in state
                 userName.textContent = currentUser.username;
                 userName.classList.remove('guest-text');
-                userAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
                 
                 if (currentUser.avatar) {
-                    userAvatar.innerHTML = `<img src="${currentUser.avatar}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+                    userAvatar.innerHTML = `<img src="${currentUser.avatar}" alt="${currentUser.username}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+                } else {
+                    userAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
                 }
                 
                 balanceDisplay.textContent = `$${balance.toFixed(2)}`;
+                balanceDisplay.title = `Баланс: $${balance.toFixed(2)}`;
                 
                 if (profileName) profileName.textContent = currentUser.username;
                 if (profileBalance) profileBalance.textContent = balance.toFixed(2);
                 if (logoutBtn) logoutBtn.style.display = 'block';
                 
-                userDisplay.title = `ID: ${currentUser.id}`;
+                userDisplay.title = `Профиль: ${currentUser.username}`;
             } else {
-                // Guest state
                 userName.textContent = 'Гость';
                 userName.classList.add('guest-text');
                 userAvatar.textContent = '👤';
                 balanceDisplay.textContent = '$0.00';
+                balanceDisplay.title = 'Войдите для просмотра баланса';
                 
                 if (profileName) profileName.textContent = 'Гость';
                 if (profileBalance) profileBalance.textContent = '0.00';
                 if (logoutBtn) logoutBtn.style.display = 'none';
                 
-                userDisplay.title = 'Войти в аккаунт';
+                userDisplay.title = 'Авторизация через Telegram';
             }
 
             updateCouponDisplay();
+            updateSportsCounts();
             updateStatsDisplay();
             updateNotificationBadge();
         }
 
-        // AUTHENTICATION
-        function toggleAuth() {
-            if (isLoggedIn) {
-                openProfile();
-            } else {
-                showModal('authModal');
-                TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-            }
+        // SPORTS CATEGORIES SETUP
+        function setupSportsCategories() {
+            const sports = [
+                { id: 'all', name: 'Все', icon: 'fas fa-th-large', color: 'var(--primary-color)' },
+                { id: 'football', name: 'Футбол', icon: 'fas fa-futbol', color: 'var(--football-color)' },
+                { id: 'basketball', name: 'Баскетбол', icon: 'fas fa-basketball-ball', color: 'var(--basketball-color)' },
+                { id: 'tennis', name: 'Теннис', icon: 'fas fa-table-tennis', color: 'var(--tennis-color)' },
+                { id: 'esports', name: 'Киберспорт', icon: 'fas fa-gamepad', color: 'var(--esports-color)' },
+                { id: 'mma', name: 'MMA', icon: 'fas fa-fist-raised', color: 'var(--mma-color)' }
+            ];
+
+            const container = document.getElementById('sportsCategories');
+            container.innerHTML = sports.map(sport => `
+                <div class="sport-category ${currentSportFilter === sport.id ? 'active' : ''}" 
+                     data-sport="${sport.id}" 
+                     onclick="filterBySport('${sport.id}')"
+                     style="--sport-color: ${sport.color};">
+                    <i class="${sport.icon} sport-icon" style="color: ${sport.color};"></i>
+                    <div class="sport-count" id="${sport.id}Count">0</div>
+                    <div class="sport-name">${sport.name}</div>
+                </div>
+            `).join('');
+
+            // Set initial active state
+            document.querySelector(`[data-sport="${currentSportFilter}"]`).classList.add('active');
         }
 
-        function connectTelegram() {
-            if (!TelegramWebApp?.initDataUnsafe?.user) {
-                showNotification('❌ Ошибка подключения к Telegram', 'error');
-                return;
-            }
+        function updateSportsCounts() {
+            const sports = ['all', 'football', 'basketball', 'tennis', 'esports', 'mma'];
+            const allMatches = [...matchesData.today, ...matchesData.tomorrow];
+            
+            sports.forEach(sportId => {
+                const countEl = document.getElementById(`${sportId}Count`);
+                if (!countEl) return;
 
-            const user = TelegramWebApp.initDataUnsafe.user;
-            currentUser = {
-                id: user.id,
-                username: user.username || `${user.first_name || 'User'}_${user.id}`,
-                firstName: user.first_name || '',
-                lastName: user.last_name || '',
-                avatar: user.photo_url || null
-            };
-
-            isLoggedIn = true;
-            
-            // Initialize balance with welcome bonus
-            if (balance === 0) {
-                balance = 100; // Welcome bonus
-                showNotification('🎁 +100$ приветственный бонус!', 'success');
-            }
-            
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('balance', balance.toString());
-
-            updateUserInterface();
-            closeModal('authModal');
-            
-            TelegramWebApp.HapticFeedback.notificationOccurred('success');
-            showNotification(`🎉 Добро пожаловать, ${currentUser.username}!`, 'success');
-        }
-
-        function logout() {
-            if (!confirm('Вы уверены, что хотите выйти из аккаунта?')) return;
-            
-            isLoggedIn = false;
-            currentUser = null;
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('isLoggedIn');
-            
-            updateUserInterface();
-            closeModal('profileModal');
-            
-            showNotification('👋 Вы вышли из аккаунта', 'error');
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
-        }
-
-        // MATCH RENDERING
-        function renderMatches(filter = 'all') {
-            currentFilter = filter;
-            const container = document.getElementById('matchesGrid');
-            let allMatches = [];
-            
-            // Get matches based on date filter
-            if (currentDateFilter === 'today') {
-                allMatches = matchesData.today;
-            } else if (currentDateFilter === 'tomorrow') {
-                allMatches = matchesData.tomorrow;
-            } else {
-                allMatches = [...matchesData.today, ...matchesData.tomorrow];
-            }
-
-            // Apply filters
-            let filteredMatches = allMatches.filter(match => {
-                // Search filter
-                if (searchQuery) {
-                    const query = searchQuery.toLowerCase();
-                    if (!match.home.toLowerCase().includes(query) && 
-                        !match.away.toLowerCase().includes(query) && 
-                        !match.league.toLowerCase().includes(query)) {
-                        return false;
-                    }
+                if (sportId === 'all') {
+                    countEl.textContent = allMatches.length;
+                } else {
+                    const count = allMatches.filter(match => match.sport === sportId).length;
+                    countEl.textContent = count;
+                    countEl.style.display = count > 0 ? 'flex' : 'none';
                 }
-
-                // Status filter
-                if (filter === 'live' && match.status !== 'live') return false;
-                if (filter === 'finished' && match.status !== 'finished') return false;
-                if (filter === 'upcoming' && match.status !== 'upcoming') return false;
-                if (filter === 'favorite' && !favorites.includes(match.id)) return false;
-
-                return true;
             });
+        }
 
+        function filterBySport(sportId) {
+            // Update active state
+            document.querySelectorAll('.sport-category').forEach(category => {
+                category.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            currentSportFilter = sportId;
+            renderMatches(currentStatusFilter);
+            
+            TelegramWebApp?.HapticFeedback.impactOccurred('selection');
+            showNotification(`Фильтр: ${sportId === 'all' ? 'Все виды спорта' : sportId.toUpperCase()}`, 'success');
+        }
+
+        // TIME FILTER
+        function renderTimeFilter() {
+            const container = document.getElementById('timeFilter');
+            const times = [
+                { id: 'all', icon: 'fas fa-clock', title: 'Все время', count: '18' },
+                { id: 'today', icon: 'fas fa-hourglass-half', title: 'Сегодня', count: '12' },
+                { id: 'tomorrow', icon: 'fas fa-calendar-day', title: 'Завтра', count: '6' }
+            ];
+
+            container.innerHTML = times.map(time => `
+                <i class="${time.icon} time-icon ${currentTimeFilter === time.id ? 'active' : ''}" 
+                   data-time="${time.id}" 
+                   onclick="switchTimeFilter('${time.id}')" 
+                   title="${time.title} (${time.count})">
+                </i>
+            `).join('');
+        }
+
+        function switchTimeFilter(timeId) {
+            // Update active state
+            document.querySelectorAll('.time-icon').forEach(icon => {
+                icon.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            currentTimeFilter = timeId;
+            renderMatches(currentStatusFilter);
+            
+            TelegramWebApp?.HapticFeedback.impactOccurred('selection');
+        }
+
+        // MATCH RENDERING WITH FILTERS
+        function renderMatches(statusFilter = 'all') {
+            currentStatusFilter = statusFilter;
+            
+            let filteredMatches = [];
+            
+            // Apply time filter
+            if (currentTimeFilter === 'today') {
+                filteredMatches = matchesData.today;
+            } else if (currentTimeFilter === 'tomorrow') {
+                filteredMatches = matchesData.tomorrow;
+            } else {
+                filteredMatches = [...matchesData.today, ...matchesData.tomorrow];
+            }
+
+            // Apply sport filter
+            if (currentSportFilter !== 'all') {
+                filteredMatches = filteredMatches.filter(match => match.sport === currentSportFilter);
+            }
+
+            // Apply status filter
+            if (statusFilter !== 'all') {
+                filteredMatches = filteredMatches.filter(match => match.status === statusFilter);
+            }
+
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filteredMatches = filteredMatches.filter(match => 
+                    match.home.toLowerCase().includes(query) ||
+                    match.away.toLowerCase().includes(query) ||
+                    match.league.toLowerCase().includes(query)
+                );
+            }
+
+            // Apply favorites filter
+            if (statusFilter === 'favorite') {
+                filteredMatches = filteredMatches.filter(match => favorites.includes(match.id));
+            }
+
+            const container = document.getElementById('matchesGrid');
+            
             if (filteredMatches.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-secondary);">
                         <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
                         <div style="font-size: 1.3rem; margin-bottom: 8px;">События не найдены</div>
-                        <div style="font-size: 0.9rem; opacity: 0.7;">${filter === 'all' ? 'Попробуйте изменить фильтры' : 'Нет событий по выбранному фильтру'}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">${getEmptyMessage()}</div>
+                        ${searchQuery ? `<button onclick="clearSearch()" style="margin-top: 16px; background: var(--gradient-primary); color: #000; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Очистить поиск</button>` : ''}
                     </div>
                 `;
                 return;
             }
 
-            // Animate in with stagger
+            // Render with stagger animation
             container.innerHTML = filteredMatches.map((match, index) => 
                 createMatchCard(match, index)
             ).join('');
 
-            // Setup interactions after render
+            // Setup interactions
             setTimeout(() => {
                 setupMatchCardInteractions();
                 highlightSelectedBets();
             }, 100);
 
+            // Update stats
             updateStatsDisplay();
         }
 
         function createMatchCard(match, index) {
+            const isFavorite = favorites.includes(match.id);
             const isLive = match.status === 'live';
             const isFinished = match.status === 'finished';
-            const isThreeWay = Object.keys(match.odds).length === 3;
-            const isFavorite = favorites.includes(match.id);
-            
-            // Form badges
-            const homeFormBadges = match.homeForm.slice(-3).map(result => 
-                `<div class="form-badge form-${result.toLowerCase()}" title="${result}">${result}</div>`
-            ).join('');
-            
-            const awayFormBadges = match.awayForm.slice(-3).map(result => 
-                `<div class="form-badge form-${result.toLowerCase()}" title="${result}">${result}</div>`
-            ).join('');
+            const delay = index * 50;
 
-            // Status badge
-            let statusBadge = '';
-            if (isLive) {
-                statusBadge = `
-                    <div class="match-status status-live">
-                        <span class="status-dot"></span>
-                        LIVE ${match.minute || Math.floor(Math.random() * 45) + 1}'
+            let oddsHTML = '';
+            if (match.odds.x) { // football etc with draw
+                oddsHTML = `
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P1" data-odds="${match.odds.p1}" onclick="toggleBetInCoupon(event, ${match.id}, 'P1', ${match.odds.p1})">
+                        <span class="odds-prob">${match.probabilities[0]}%</span>
+                        <span class="odds-value">${match.odds.p1.toFixed(2)}</span>
+                        <span class="odds-type">P1</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="X" data-odds="${match.odds.x}" onclick="toggleBetInCoupon(event, ${match.id}, 'X', ${match.odds.x})">
+                        <span class="odds-prob">${match.probabilities[1]}%</span>
+                        <span class="odds-value">${match.odds.x.toFixed(2)}</span>
+                        <span class="odds-type">X</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P2" data-odds="${match.odds.p2}" onclick="toggleBetInCoupon(event, ${match.id}, 'P2', ${match.odds.p2})">
+                        <span class="odds-prob">${match.probabilities[2]}%</span>
+                        <span class="odds-value">${match.odds.p2.toFixed(2)}</span>
+                        <span class="odds-type">P2</span>
                     </div>
                 `;
-            } else if (isFinished) {
-                statusBadge = `
-                    <div class="match-status status-finished">
-                        FT ${match.score}
+            } else { // no draw
+                oddsHTML = `
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P1" data-odds="${match.odds.p1}" onclick="toggleBetInCoupon(event, ${match.id}, 'P1', ${match.odds.p1})">
+                        <span class="odds-prob">${match.probabilities[0]}%</span>
+                        <span class="odds-value">${match.odds.p1.toFixed(2)}</span>
+                        <span class="odds-type">P1</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P2" data-odds="${match.odds.p2}" onclick="toggleBetInCoupon(event, ${match.id}, 'P2', ${match.odds.p2})">
+                        <span class="odds-prob">${match.probabilities[1]}%</span>
+                        <span class="odds-value">${match.odds.p2.toFixed(2)}</span>
+                        <span class="odds-type">P2</span>
                     </div>
                 `;
             }
 
-            // Live score
-            const liveScore = (isLive || isFinished) ? 
-                `<div class="match-score">${match.score}</div>` : '';
+            let statusHTML = '';
+            if (isLive) {
+                statusHTML = `<div class="match-status status-live"><span class="status-dot"></span>LIVE ${match.minute}'</div>`;
+            } else if (isFinished) {
+                statusHTML = `<div class="match-status status-finished"><i class="fas fa-check"></i> FT</div>`;
+            }
 
-            // H2H and recent form
-            const h2hDisplay = match.h2h;
-            const homeRecent = match.homeForm[0] || '-';
-            const awayRecent = match.awayForm[0] || '-';
+            let scoreHTML = '';
+            if (match.score) {
+                scoreHTML = `<div class="match-score">${match.score}</div>`;
+            }
 
-            // Odds with probabilities
-            const oddsHTML = Object.entries(match.odds).map(([key, value], oddsIndex) => {
-                const betType = key === 'p1' ? 'П1' : key === 'x' ? 'X' : 'П2';
-                const probability = match.probabilities[oddsIndex] || 50;
-                const isSelected = couponItems.some(item => 
-                    item.matchId === match.id && item.betType === betType
-                );
+            const homeLogo = match.home.charAt(0);
+            const awayLogo = match.away.charAt(0);
 
-                return `
-                    <div class="odds-item ${isSelected ? 'selected' : ''}" 
-                         data-match-id="${match.id}" 
-                         data-bet-type="${betType}"
-                         data-odds="${value}"
-                         onclick="toggleBetInCoupon(event, ${match.id}, '${betType}', ${value})">
-                        <div class="odds-type">${betType}</div>
-                        <div class="odds-value">${value.toFixed(2)}</div>
-                        <div class="odds-prob">${probability}%</div>
-                    </div>
-                `;
-            }).join('');
+            const homeFormHTML = match.homeForm.map(f => `<div class="form-badge form-${f.toLowerCase()}">${f}</div>`).join('');
+            const awayFormHTML = match.awayForm.map(f => `<div class="form-badge form-${f.toLowerCase()}">${f}</div>`).join('');
 
             return `
-                <article class="match-card stagger-in" 
-                         style="animation-delay: ${index * 0.1}s;" 
-                         data-match-id="${match.id}"
-                         onclick="openMatchDetail(${match.id})">
-                    
-                    <!-- Favorite Button -->
-                    <button class="favorite-btn ${isFavorite ? 'active' : ''}" 
-                            onclick="toggleFavorite(event, ${match.id})"
-                            title="${isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'}">
-                        ${isFavorite ? '★' : '☆'}
+                <div class="match-card stagger-in" data-match-id="${match.id}" onclick="openMatchDetail(${match.id})" style="animation-delay: ${delay}ms;">
+                    ${statusHTML}
+                    <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(event, ${match.id})" title="${isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'}">
+                        <i class="fas fa-star"></i>
                     </button>
-                    
-                    <!-- Status Badge -->
-                    ${statusBadge}
-                    
-                    <!-- Header -->
                     <div class="match-header">
                         <div class="match-meta">
-                            <span class="sport-badge">${match.sport.toUpperCase()}</span>
+                            <span class="sport-badge">${match.league}</span>
                             <span class="match-time">${match.time}</span>
                         </div>
-                        <div class="league-name">${match.league}</div>
+                        <span class="league-name">${match.league}</span>
                     </div>
-
-                    <!-- Teams -->
                     <div class="teams-section">
                         <div class="team-wrapper">
-                            <div class="team-logo">${match.home.charAt(0)}</div>
+                            <div class="team-logo">${homeLogo}</div>
                             <div class="team-name">${match.home}</div>
-                            <div class="team-form">${homeFormBadges}</div>
+                            <div class="team-form">${homeFormHTML}</div>
                         </div>
-
                         <div class="vs-separator">
-                            <div class="vs-line"></div>
                             <div class="vs-text">VS</div>
                             <div class="vs-line"></div>
                         </div>
-
                         <div class="team-wrapper">
-                            <div class="team-logo">${match.away.charAt(0)}</div>
+                            <div class="team-logo">${awayLogo}</div>
                             <div class="team-name">${match.away}</div>
-                            <div class="team-form">${awayFormBadges}</div>
+                            <div class="team-form">${awayFormHTML}</div>
                         </div>
-
-                        ${liveScore}
+                        ${scoreHTML}
                     </div>
-
-                    <!-- Stats -->
                     <div class="stats-bar">
                         <div class="stat-item">
                             <div class="stat-label">H2H</div>
-                            <div class="stat-value h2h-badge">${h2hDisplay}</div>
+                            <div class="stat-value h2h-badge">${match.h2h}</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Форма</div>
-                            <div class="stat-value">${homeRecent}</div>
+                            <div class="stat-label">Home W/D/L</div>
+                            <div class="stat-value">${match.homeStats.wins}/${match.homeStats.draws || 0}/${match.homeStats.losses}</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Форма</div>
-                            <div class="stat-value">${awayRecent}</div>
+                            <div class="stat-label">Away W/D/L</div>
+                            <div class="stat-value">${match.awayStats.wins}/${match.awayStats.draws || 0}/${match.awayStats.losses}</div>
                         </div>
                     </div>
-
-                    <!-- Odds -->
                     <div class="odds-section">
+                        <div class="odds-header">
+                            <span class="odds-title">Основные исходы</span>
+                        </div>
                         <div class="odds-container">
                             ${oddsHTML}
                         </div>
                     </div>
-                </article>
+                </div>
             `;
         }
 
-        // INTERACTION SETUP
-        function setupMatchCardInteractions() {
-            // Team logos hover
-            document.querySelectorAll('.team-wrapper').forEach(wrapper => {
-                wrapper.addEventListener('mouseenter', () => {
-                    wrapper.querySelector('.team-logo').style.transform = 'scale(1.1)';
-                });
-                wrapper.addEventListener('mouseleave', () => {
-                    wrapper.querySelector('.team-logo').style.transform = 'scale(1)';
-                });
-            });
-
-            // Stats cards
-            document.querySelectorAll('.stat-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const filter = card.querySelector('.stat-label').textContent.toLowerCase();
-                    if (filter === 'live') renderMatches('live');
-                    if (filter === 'избранное') renderMatches('favorite');
-                    if (filter === 'сегодня') renderMatches('today');
-                });
-            });
-
-            // Date tabs
-            document.querySelectorAll('.date-tab').forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    const date = tab.dataset.date || 'today';
-                    renderMatches('all', date);
-                });
-            });
+        function getEmptyMessage() {
+            if (searchQuery) return 'Попробуйте изменить запрос поиска';
+            if (currentSportFilter !== 'all') return `Нет событий по ${currentSportFilter}`;
+            if (currentStatusFilter !== 'all') return `Нет ${currentStatusFilter} событий`;
+            if (currentTimeFilter !== 'all') return `Нет событий на ${currentTimeFilter}`;
+            return 'Попробуйте изменить фильтры';
         }
 
-        // BETTING SYSTEM (FIXED)
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            renderMatches(currentStatusFilter);
+            document.getElementById('searchInput').blur();
+        }
+
+        function setFilter(filterType) {
+            let statusFilter = 'all';
+            switch(filterType) {
+                case 'live': statusFilter = 'live'; break;
+                case 'favorite': statusFilter = 'favorite'; break;
+                case 'today': 
+                    switchTimeFilter('today');
+                    statusFilter = 'all'; 
+                    break;
+            }
+            renderMatches(statusFilter);
+            showNotification(`Фильтр: ${filterType.toUpperCase()}`, 'success');
+        }
+
+        // BETTING SYSTEM - FIXED SINGLE EVENT LIMIT
         function toggleBetInCoupon(event, matchId, betType, odds) {
             event.stopPropagation();
             
-            // Find existing bet
+            // Check existing bets for this match
+            const existingBetsForMatch = couponItems.filter(item => item.matchId === matchId);
+            
+            if (existingBetsForMatch.length >= 1) {
+                TelegramWebApp?.HapticFeedback.notificationOccurred('error');
+                showNotification('⚠️ Нельзя ставить на несколько исходов одного события!', 'error');
+                createRipple(event.currentTarget, 400, '#ff4444');
+                return;
+            }
+
+            // Find if this specific bet exists
             const existingIndex = couponItems.findIndex(item => 
                 item.matchId === matchId && item.betType === betType
             );
 
-            let oddsElement = event.currentTarget;
+            const oddsElement = event.currentTarget;
             
             if (existingIndex > -1) {
                 // Remove bet
                 const removedBet = couponItems.splice(existingIndex, 1)[0];
                 oddsElement.classList.remove('selected');
                 
-                showNotification(`❌ ${removedBet.betType} удалено из купона`, 'error');
+                localStorage.setItem('couponItems', JSON.stringify(couponItems));
+                updateCouponDisplay();
+                
+                showNotification(`❌ ${removedBet.betType} удалено`, 'error');
                 TelegramWebApp?.HapticFeedback.impactOccurred('light');
+                createRipple(oddsElement, 400, '#ff4444');
             } else {
-                // Add bet
                 couponItems.push({
                     matchId,
                     betType,
@@ -2594,29 +3255,29 @@
                 });
                 
                 oddsElement.classList.add('selected');
+                localStorage.setItem('couponItems', JSON.stringify(couponItems));
+                updateCouponDisplay();
+                
+                // Auto-open coupon on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('betCoupon').classList.add('open');
+                    document.getElementById('overlay').classList.add('active');
+                }
+                
                 showNotification(`✓ ${betType} (${odds.toFixed(2)}) добавлено`, 'success');
                 TelegramWebApp?.HapticFeedback.impactOccurred('success');
-                
-                // Open coupon
-                document.getElementById('betCoupon').classList.add('open');
-                document.getElementById('overlay').classList.add('active');
+                createRipple(oddsElement);
             }
 
-            // Save and update
-            localStorage.setItem('couponItems', JSON.stringify(couponItems));
-            updateCouponDisplay();
-            
-            // Ripple effect
-            createRipple(event.currentTarget);
+            highlightSelectedBets();
         }
 
-        function createRipple(element, duration = 600) {
+        function createRipple(element, duration = 600, color = 'rgba(0, 255, 136, 0.4)') {
             const ripple = document.createElement('span');
             const rect = element.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
             const x = event.clientX - rect.left - size / 2;
             const y = event.clientY - rect.top - size / 2;
-            const finalSize = size * 2;
 
             ripple.style.cssText = `
                 position: absolute;
@@ -2624,7 +3285,7 @@
                 height: ${size}px;
                 left: ${x}px;
                 top: ${y}px;
-                background: rgba(0, 255, 136, 0.4);
+                background: ${color};
                 border-radius: 50%;
                 transform: scale(0);
                 pointer-events: none;
@@ -2636,28 +3297,72 @@
 
             ripple.animate([
                 { transform: 'scale(0)', opacity: 1 },
-                { transform: `scale(${finalSize / size})`, opacity: 0 }
+                { transform: 'scale(4)', opacity: 0 }
             ], {
                 duration: duration,
-                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
             }).onfinish = () => ripple.remove();
+        }
+
+        function removeBetFromCoupon(index) {
+            event.stopPropagation();
+            const removedItem = couponItems.splice(index, 1)[0];
+            
+            // Update odds selection
+            const oddsElement = document.querySelector(`[data-match-id="${removedItem.matchId}"][data-bet-type="${removedItem.betType}"]`);
+            if (oddsElement) {
+                oddsElement.classList.remove('selected');
+            }
+
+            localStorage.setItem('couponItems', JSON.stringify(couponItems));
+            updateCouponDisplay();
+            
+            showNotification(`🗑️ ${removedItem.betType} удалено`, 'error');
+            TelegramWebApp?.HapticFeedback.impactOccurred('light');
+            
+            if (couponItems.length === 0) {
+                setTimeout(closeCoupon, 1000);
+            }
+        }
+
+        function updateBetTotal() {
+            const stakeInput = document.getElementById('stakeInput');
+            const stake = parseFloat(stakeInput.value) || 0;
+            const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
+            const potentialWin = (stake * totalOdds).toFixed(2);
+            
+            document.getElementById('potentialWin').textContent = `$${potentialWin}`;
+            
+            // Validate stake
+            if (stake > balance && stake > 0) {
+                stakeInput.style.borderColor = '#ff4444';
+                stakeInput.style.boxShadow = '0 0 0 2px rgba(255, 68, 68, 0.2)';
+                showNotification('⚠️ Недостаточно средств на балансе', 'error');
+            } else {
+                stakeInput.style.borderColor = 'var(--border-color)';
+                stakeInput.style.boxShadow = 'none';
+            }
         }
 
         function updateCouponDisplay() {
             const container = document.getElementById('couponItems');
             const totalSection = document.getElementById('couponTotal');
             const totalOddsEl = document.getElementById('totalOdds');
-            const potentialWinEl = document.getElementById('potentialWin');
             const placeBetBtn = document.getElementById('placeBetButton');
-            const stakeInput = document.getElementById('stakeInput');
             const mainButton = TelegramWebApp?.MainButton;
+            const couponTitle = document.querySelector('.coupon-title');
+
+            // Update title count
+            if (couponTitle) {
+                couponTitle.innerHTML = `<i class="fas fa-ticket-alt"></i> Купон ставок (${couponItems.length})`;
+            }
 
             if (couponItems.length === 0) {
                 container.innerHTML = `
                     <div class="coupon-empty">
                         <i class="fas fa-hand-pointer" style="font-size: 2.5rem; opacity: 0.3; margin-bottom: 16px;"></i>
                         <div style="font-size: 1.1rem; margin-bottom: 4px;">Купон пуст</div>
-                        <div style="font-size: 0.85rem; opacity: 0.7;">Нажмите на коэффициент чтобы добавить</div>
+                        <div style="font-size: 0.85rem; opacity: 0.7;">Нажмите на коэффициент чтобы добавить событие</div>
                     </div>
                 `;
                 totalSection.style.display = 'none';
@@ -2679,11 +3384,14 @@
                     <div class="coupon-item" data-bet-index="${index}">
                         <div>
                             <div class="coupon-event">${match.home} vs ${match.away}</div>
-                            <div class="coupon-details">${item.betType} @ <strong>${item.odds.toFixed(2)}</strong></div>
+                            <div class="coupon-details">
+                                <span style="color: var(--text-secondary);">${item.betType}</span> 
+                                <span style="color: var(--primary-color); font-weight: bold;">@${item.odds.toFixed(2)}</span>
+                            </div>
                         </div>
                         <div class="coupon-odds-section">
                             <span class="coupon-odds-value">${item.odds.toFixed(2)}</span>
-                            <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить">
+                            <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить ставку">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -2693,15 +3401,14 @@
 
             // Calculate totals
             const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
-            const stakeAmount = parseFloat(stakeInput.value) || 0;
+            const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
             const potentialWin = (stakeAmount * totalOdds).toFixed(2);
 
             totalOddsEl.textContent = totalOdds.toFixed(2);
-            potentialWinEl.textContent = `$${potentialWin}`;
             totalSection.style.display = 'block';
 
             // Update button state
-            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0;
+            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
             placeBetBtn.disabled = !canPlaceBet;
             
             if (canPlaceBet) {
@@ -2709,7 +3416,7 @@
                 placeBetBtn.classList.add('success');
                 
                 if (mainButton) {
-                    mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)}`);
+                    mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
                     mainButton.setParams({ is_visible: true });
                 }
             } else {
@@ -2719,61 +3426,40 @@
                 if (mainButton) {
                     mainButton.hide();
                 }
-            }
-
-            // Stake input handler
-            stakeInput.oninput = function() {
-                const value = parseFloat(this.value);
-                if (value < 1) this.value = '';
-                if (value > balance) {
-                    this.style.borderColor = '#ff4444';
-                    showNotification('⚠️ Сумма превышает баланс', 'error');
-                } else {
-                    this.style.borderColor = 'var(--border-color)';
+                
+                if (couponItems.length > 10) {
+                    showNotification('⚠️ Максимум 10 событий в купоне', 'error');
                 }
-                updateCouponDisplay();
-            };
-        }
-
-        function removeBetFromCoupon(index) {
-            const removedItem = couponItems.splice(index, 1)[0];
-            
-            // Update odds selection
-            const oddsElement = document.querySelector(`[data-match-id="${removedItem.matchId}"][data-bet-type="${removedItem.betType}"]`);
-            if (oddsElement) {
-                oddsElement.classList.remove('selected');
             }
 
-            localStorage.setItem('couponItems', JSON.stringify(couponItems));
-            updateCouponDisplay();
-            
-            showNotification(`🗑️ ${removedItem.betType} удалено`, 'error');
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            
-            if (couponItems.length === 0) {
-                closeCoupon();
+            // Auto-calculate on input
+            const stakeInput = document.getElementById('stakeInput');
+            if (stakeInput && !stakeInput.oninput) {
+                stakeInput.oninput = updateBetTotal;
             }
         }
 
-        function updateTotal() {
-            updateCouponDisplay();
-        }
-
-        function placeBet() {
+        function confirmBet() {
             if (!isLoggedIn) {
-                showNotification('🔐 Войдите в аккаунт для ставок', 'error');
+                showNotification('🔐 Войдите в аккаунт для оформления ставок', 'error');
                 openProfile();
                 return;
             }
 
             const stake = parseFloat(document.getElementById('stakeInput').value);
             if (!stake || stake < 1 || stake > balance) {
-                showNotification('💰 Неверная сумма ставки', 'error');
+                showNotification('💰 Неверная сумма ставки или недостаточно средств', 'error');
+                document.getElementById('stakeInput').focus();
                 return;
             }
 
             if (couponItems.length === 0) {
-                showNotification('🛒 Добавьте события в купон', 'error');
+                showNotification('🛒 Добавьте хотя бы одно событие в купон', 'error');
+                return;
+            }
+
+            if (couponItems.length > 10) {
+                showNotification('⚠️ Максимум 10 событий в одном купоне', 'error');
                 return;
             }
 
@@ -2781,25 +3467,34 @@
             const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
             const potentialWin = (stake * totalOdds).toFixed(2);
 
-            // Create bet record
+            // Create comprehensive bet record
             const betRecord = {
-                id: Date.now(),
+                id: `bet_${Date.now()}`,
                 timestamp: new Date().toISOString(),
-                events: couponItems.map(item => ({
-                    matchId: item.matchId,
-                    betType: item.betType,
-                    odds: item.odds
-                })),
-                stake: stake,
+                userId: currentUser?.id || 'guest',
+                events: couponItems.map(item => {
+                    const match = Object.values(matchesData).flat().find(m => m.id === item.matchId);
+                    return {
+                        matchId: item.matchId,
+                        match: match ? `${match.home} vs ${match.away}` : 'Unknown',
+                        league: match?.league || 'Unknown',
+                        betType: item.betType,
+                        odds: item.odds,
+                        sport: match?.sport || 'unknown'
+                    };
+                }),
+                stake: parseFloat(stake),
                 odds: totalOdds,
                 potentialWin: parseFloat(potentialWin),
-                status: 'pending'
+                status: 'pending',
+                payout: null,
+                currency: 'USD'
             };
 
-            // Save to history
+            // Save to bet history
             let betHistory = JSON.parse(localStorage.getItem('betHistory') || '[]');
             betHistory.unshift(betRecord);
-            localStorage.setItem('betHistory', JSON.stringify(betHistory.slice(0, 100))); // Keep last 100
+            localStorage.setItem('betHistory', JSON.stringify(betHistory.slice(0, 100)));
 
             // Deduct balance
             balance -= stake;
@@ -2813,78 +3508,193 @@
             updateUserInterface();
             closeCoupon();
             
-            // Success feedback
-            showNotification(`✅ Ставка на $${stake} принята!\nВыигрыш: $${potentialWin}`, 'success');
+            // Success feedback with details
+            const eventsSummary = betRecord.events.length > 1 
+                ? `${betRecord.events.length} событий` 
+                : `${betRecord.events[0].betType} (${betRecord.events[0].match})`;
+            
+            showNotification(
+                `✅ Ставка успешно оформлена!\n` +
+                `📊 ${eventsSummary}\n` +
+                `💰 Сумма: $${stake}\n` +
+                `🎯 Коэффициент: ${totalOdds.toFixed(2)}\n` +
+                `🏆 Возможный выигрыш: $${potentialWin}`,
+                'success', 5000
+            );
+            
             TelegramWebApp?.HapticFeedback.notificationOccurred('success');
             
-            // Animate button
+            // Animate success
             const btn = document.getElementById('placeBetButton');
+            const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check"></i> Ставка принята!';
             btn.style.background = 'var(--success-color)';
             btn.disabled = true;
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-play"></i> Сделать ставку';
+                btn.innerHTML = originalHTML;
                 btn.style.background = 'var(--gradient-primary)';
                 btn.disabled = false;
             }, 2000);
         }
 
-        // FILTERING & SEARCH
-        function filterMatches(query) {
-            searchQuery = query.trim();
-            renderMatches(currentFilter);
-            
-            if (query) {
-                const count = document.querySelectorAll('#matchesGrid .match-card').length;
-                showNotification(`🔍 Найдено: ${count} ${count === 1 ? 'событие' : 'событий'}`, 'success');
+        // MATCH INTERACTIONS
+        function setupMatchCardInteractions() {
+            // Team logos animation
+            document.querySelectorAll('.team-wrapper').forEach(wrapper => {
+                const logo = wrapper.querySelector('.team-logo');
+                wrapper.addEventListener('mouseenter', () => {
+                    logo.style.transform = 'scale(1.1)';
+                });
+                wrapper.addEventListener('mouseleave', () => {
+                    logo.style.transform = 'scale(1)';
+                });
+                wrapper.addEventListener('touchstart', (e) => {
+                    logo.style.transform = 'scale(1.05)';
+                }, { passive: true });
+                wrapper.addEventListener('touchend', () => {
+                    setTimeout(() => logo.style.transform = 'scale(1)', 200);
+                }, { passive: true });
+            });
+
+            // Stats cards filter
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const label = card.querySelector('.stat-label').textContent.toLowerCase();
+                    setFilter(label);
+                });
+            });
+
+            // Sports categories
+            document.querySelectorAll('.sport-category').forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const sportId = category.dataset.sport;
+                    filterBySport(sportId);
+                });
+            });
+
+            // Time filter icons
+            document.querySelectorAll('.time-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const timeId = icon.dataset.time;
+                    switchTimeFilter(timeId);
+                });
+            });
+        }
+
+        function openMatchDetail(matchId) {
+            const match = Object.values(matchesData).flat().find(m => m.id === matchId);
+            if (!match) {
+                showNotification('❌ Событие не найдено', 'error');
+                return;
             }
+
+            // Prepare comprehensive match data for detail page
+            const matchData = {
+                id: match.id,
+                timestamp: Date.now(),
+                league: match.league,
+                home: match.home,
+                away: match.away,
+                sport: match.sport,
+                status: match.status,
+                time: match.time,
+                score: match.score,
+                minute: match.minute,
+                odds: { ...match.odds },
+                probabilities: [...match.probabilities],
+                h2h: match.h2h,
+                homeForm: [...match.homeForm],
+                awayForm: [...match.awayForm],
+                homeStats: { ...match.homeStats },
+                awayStats: { ...match.awayStats },
+                categoryColor: match.categoryColor,
+                // Enhanced data for detail page
+                venue: getVenueForSport(match.sport),
+                weather: getWeatherForSport(match.sport),
+                referee: 'John Smith',
+                broadcast: getBroadcastForSport(match.sport),
+                // Live stats if applicable
+                liveStats: match.status === 'live' ? generateLiveStats() : null,
+                // Predictions
+                prediction: {
+                    recommended: match.probabilities[0] > 50 ? 'p1' : 'p2',
+                    confidence: Math.max(...match.probabilities)
+                }
+            };
+
+            // Save to sessionStorage for match-events.html
+            sessionStorage.setItem('currentMatch', JSON.stringify(matchData));
+            sessionStorage.setItem('returnUrl', window.location.pathname);
+            
+            // Smooth page transition
+            document.body.style.transition = 'opacity 0.2s ease';
+            document.body.style.opacity = '0.3';
+            
+            // Delay for animation
+            setTimeout(() => {
+                window.location.href = `match-events.html?id=${matchId}`;
+            }, 150);
         }
 
-        function filterByStatus(status) {
-            renderMatches(status);
-            showNotification(`Фильтр: ${status === 'live' ? 'LIVE' : status === 'favorite' ? 'Избранное' : status.toUpperCase()}`, 'success');
+        function getVenueForSport(sport) {
+            const venues = {
+                football: 'Allianz Arena',
+                basketball: 'Staples Center',
+                tennis: 'Wimbledon Centre Court',
+                esports: 'LAN Arena',
+                mma: 'T-Mobile Arena'
+            };
+            return venues[sport] || 'Stadium';
         }
 
-        function renderDateTabs() {
-            const tabsContainer = document.getElementById('dateTabs');
-            const dates = [
-                { id: 'today', label: 'Сегодня', count: matchesData.today.length },
-                { id: 'tomorrow', label: 'Завтра', count: matchesData.tomorrow.length },
-                { id: 'week', label: 'Неделя', count: matchesData.today.length + matchesData.tomorrow.length }
-            ];
-
-            tabsContainer.innerHTML = dates.map(date => `
-                <button class="date-tab ${currentDateFilter === date.id ? 'active' : ''}" 
-                        data-date="${date.id}"
-                        onclick="switchDateFilter('${date.id}')">
-                    ${date.label} (${date.count})
-                </button>
-            `).join('');
+        function getWeatherForSport(sport) {
+            if (sport === 'esports' || sport === 'basketball' || sport === 'mma') return 'Indoor';
+            const weathers = ['☀️ 18°C', '🌤️ 20°C', '⛅ 16°C', '🌦️ 22°C'];
+            return weathers[Math.floor(Math.random() * weathers.length)];
         }
 
-        function switchDateFilter(dateId) {
-            currentDateFilter = dateId;
-            renderDateTabs();
-            renderMatches(currentFilter);
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
+        function getBroadcastForSport(sport) {
+            const broadcasts = {
+                football: 'ESPN, Sky Sports',
+                basketball: 'NBA TV, TNT',
+                tennis: 'Tennis Channel',
+                esports: 'Twitch, YouTube Gaming',
+                mma: 'UFC Fight Pass, ESPN+'
+            };
+            return broadcasts[sport] || 'Live Stream';
         }
 
-        // FAVORITES
+        function generateLiveStats() {
+            return {
+                possession: { home: Math.round(30 + Math.random() * 40), away: 100 - (30 + Math.random() * 40) },
+                shots: { home: Math.floor(Math.random() * 15), away: Math.floor(Math.random() * 15) },
+                shotsOnTarget: { home: Math.floor(Math.random() * 6), away: Math.floor(Math.random() * 6) },
+                corners: { home: Math.floor(Math.random() * 8), away: Math.floor(Math.random() * 8) },
+                fouls: { home: Math.floor(Math.random() * 10), away: Math.floor(Math.random() * 10) },
+                yellowCards: { home: Math.floor(Math.random() * 3), away: Math.floor(Math.random() * 3) },
+                attacks: { home: Math.floor(50 + Math.random() * 30), away: Math.floor(50 + Math.random() * 30) }
+            };
+        }
+
+        // FAVORITES SYSTEM
         function toggleFavorite(event, matchId) {
             event.stopPropagation();
             const index = favorites.indexOf(matchId);
             const button = event.currentTarget;
             
             if (index > -1) {
-                // Remove from favorites
                 favorites.splice(index, 1);
                 button.classList.remove('active');
+                button.title = 'Добавить в избранное';
                 showNotification('⭐ Событие убрано из избранного', 'error');
             } else {
-                // Add to favorites
                 favorites.push(matchId);
                 button.classList.add('active');
+                button.title = 'Убрать из избранного';
                 showNotification('❤️ Событие добавлено в избранное', 'success');
             }
             
@@ -2907,35 +3717,6 @@
             });
         }
 
-        // MATCH DETAIL
-        function openMatchDetail(matchId) {
-            const match = Object.values(matchesData).flat().find(m => m.id === matchId);
-            if (!match) {
-                showNotification('❌ Событие не найдено', 'error');
-                return;
-            }
-
-            // Prepare enhanced match data
-            const matchData = {
-                ...match,
-                fullOdds: match.odds,
-                returnUrl: window.location.pathname,
-                timestamp: Date.now(),
-                couponItems: couponItems.filter(item => item.matchId === matchId)
-            };
-
-            // Save to session storage
-            sessionStorage.setItem('matchDetail', JSON.stringify(matchData));
-            
-            // Smooth transition
-            document.body.style.transition = 'opacity 0.2s ease';
-            document.body.style.opacity = '0.7';
-            
-            setTimeout(() => {
-                window.location.href = `match-events.html?id=${matchId}`;
-            }, 200);
-        }
-
         // STATS & COUNTERS
         function updateStatsDisplay() {
             const liveCount = Object.values(matchesData).flat().filter(m => m.status === 'live').length;
@@ -2945,68 +3726,87 @@
             document.getElementById('liveCount').textContent = liveCount;
             document.getElementById('favoritesCount').textContent = favoritesCount;
             document.getElementById('todayCount').textContent = todayCount;
-            document.getElementById('notificationBadge').textContent = favoritesCount || '';
-            document.getElementById('notificationBadge').style.display = favoritesCount ? 'flex' : 'none';
         }
 
-        // LIVE UPDATES
+        // LIVE UPDATES SYSTEM
         function startLiveUpdates() {
             setInterval(() => {
                 // Update live match timers
                 document.querySelectorAll('.status-live').forEach(status => {
-                    const timeText = status.textContent;
-                    const matchTime = parseInt(timeText.match(/(\d+)'\)/)?.[1]) || 0;
-                    if (matchTime < 90) {
-                        status.innerHTML = `<span class="status-dot"></span>LIVE ${matchTime + 1}'`;
+                    const timeMatch = status.textContent.match(/LIVE (\d+)'\)/);
+                    if (timeMatch) {
+                        const currentMinute = parseInt(timeMatch[1]);
+                        if (currentMinute < 90) {
+                            status.innerHTML = `<span class="status-dot"></span>LIVE ${currentMinute + 1}'`;
+                        } else {
+                            // Match finished
+                            status.innerHTML = '<i class="fas fa-check"></i> FT';
+                            status.className = 'match-status status-finished';
+                        }
                     }
                 });
 
-                // Fluctuate odds for live matches
+                // Fluctuate odds for live matches (more realistic)
                 document.querySelectorAll('.match-card').forEach(card => {
-                    if (card.querySelector('.status-live')) {
+                    const status = card.querySelector('.match-status');
+                    if (status && status.classList.contains('status-live')) {
                         const oddsItems = card.querySelectorAll('.odds-item');
-                        oddsItems.forEach(item => {
-                            if (Math.random() < 0.4) { // 40% chance
+                        oddsItems.forEach((item, index) => {
+                            if (Math.random() < 0.3) { // 30% chance per update
                                 const currentOdds = parseFloat(item.dataset.odds);
-                                const change = (Math.random() - 0.5) * 0.08; // ±4%
+                                const volatility = currentOdds > 2 ? 0.03 : 0.05; // Higher volatility for underdogs
+                                const change = (Math.random() - 0.5) * volatility * 2;
                                 const newOdds = Math.max(1.01, currentOdds + change);
                                 
                                 item.dataset.odds = newOdds.toFixed(2);
                                 item.querySelector('.odds-value').textContent = newOdds.toFixed(2);
                                 
                                 // Visual change indicator
-                                const changeIndicator = document.createElement('span');
-                                changeIndicator.textContent = change > 0 ? '+' : '';
-                                changeIndicator.style.cssText = `
+                                const indicator = document.createElement('span');
+                                indicator.textContent = change > 0 ? '+' : '';
+                                indicator.style.cssText = `
                                     position: absolute;
                                     top: 2px;
                                     right: 2px;
                                     background: ${change > 0 ? 'var(--success-color)' : '#ff4444'};
                                     color: #000;
-                                    padding: 1px 4px;
+                                    padding: 1px 3px;
                                     border-radius: 3px;
                                     font-size: 0.6rem;
                                     font-weight: bold;
-                                    animation: indicatorFade 1s ease forwards;
+                                    animation: indicatorFade 0.8s ease forwards;
+                                    z-index: 10;
                                 `;
-                                item.appendChild(changeIndicator);
+                                item.appendChild(indicator);
                                 
-                                setTimeout(() => changeIndicator.remove(), 1000);
+                                setTimeout(() => indicator.remove(), 800);
                             }
                         });
+                        
+                        // Update coupon if this match is in it
+                        couponItems.forEach((couponItem, index) => {
+                            if (couponItem.matchId === parseInt(card.dataset.matchId)) {
+                                const newOdds = parseFloat(card.querySelector('.odds-item').dataset.odds);
+                                couponItems[index].odds = newOdds;
+                            }
+                        });
+                        localStorage.setItem('couponItems', JSON.stringify(couponItems));
+                        updateCouponDisplay();
                     }
                 });
 
+                updateSportsCounts();
                 updateStatsDisplay();
-            }, 8000); // Update every 8 seconds
+            }, 7000); // Update every 7 seconds for realism
         }
 
-        // MODALS
+        // MODALS & UI
         function showModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.classList.add('active');
                 document.getElementById('overlay').classList.add('active');
+                TelegramWebApp?.HapticFeedback.impactOccurred('light');
             }
         }
 
@@ -3016,55 +3816,73 @@
                 modal.classList.remove('active');
             }
             document.getElementById('overlay').classList.remove('active');
+            TelegramWebApp?.HapticFeedback.impactOccurred('light');
         }
 
         function closeActiveModal() {
             const activeModal = document.querySelector('.modal.active');
             if (activeModal) {
-                const modalId = activeModal.id;
-                closeModal(modalId);
+                closeModal(activeModal.id);
             }
         }
 
         function openProfile() {
             showModal('profileModal');
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
         }
 
         function openHistory() {
             const history = JSON.parse(localStorage.getItem('betHistory') || '[]');
             if (history.length === 0) {
-                showNotification('📝 История ставок пуста', 'error');
+                showNotification('📝 История ставок пуста. Сделайте первую ставку!', 'error');
                 return;
             }
 
-            const recentBets = history.slice(0, 5).map(bet => {
-                const date = new Date(bet.timestamp).toLocaleDateString('ru-RU');
-                const eventsCount = bet.events.length;
-                const status = bet.status === 'won' ? '✅' : bet.status === 'lost' ? '❌' : '⏳';
-                return `${status} ${date} | ${eventsCount} событий | $${bet.stake} → $${bet.potentialWin}`;
+            const recentBets = history.slice(0, 5).reverse().map(bet => {
+                const date = new Date(bet.timestamp).toLocaleString('ru-RU', {
+                    day: 'numeric',
+                    month: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                const status = bet.status === 'won' ? '✅ Выигрыш' : bet.status === 'lost' ? '❌ Проигрыш' : '⏳ Ожидание';
+                const events = bet.events.length > 1 ? `${bet.events.length} событий` : bet.events[0].betType;
+                
+                return `${status} | ${date}\n${events} | $${bet.stake} → $${bet.potentialWin}`;
             }).join('\n\n');
 
+            const stats = {
+                totalBets: history.length,
+                totalStaked: history.reduce((sum, bet) => sum + bet.stake, 0).toFixed(2),
+                totalWon: history.filter(bet => bet.status === 'won').reduce((sum, bet) => sum + bet.potentialWin, 0).toFixed(2),
+                winRate: history.filter(bet => bet.status === 'won').length / history.length * 100
+            };
+
             TelegramWebApp?.showAlert(
-                `📊 Последние ставки (${history.length} всего):\n\n${recentBets}\n\nПолная история в профиле`
+                `📊 История ставок (${stats.totalBets} всего)\n\n` +
+                `${recentBets}\n\n` +
+                `📈 Статистика:\n` +
+                `• Общая сумма ставок: $${stats.totalStaked}\n` +
+                `• Общий выигрыш: $${stats.totalWon}\n` +
+                `• Процент выигрышей: ${stats.winRate.toFixed(1)}%`
             );
         }
 
         function openDeposit() {
             closeModal('profileModal');
             if (!isLoggedIn) {
-                showNotification('🔐 Войдите для пополнения', 'error');
+                showNotification('🔐 Войдите в аккаунт для пополнения', 'error');
                 return;
             }
 
-            const amount = prompt('💰 Сумма пополнения (мин. 10$):', '50');
+            const amount = prompt('💰 Сумма пополнения (от 10$):', '50');
             if (!amount || isNaN(amount) || parseFloat(amount) < 10) {
-                showNotification('❌ Минимальная сумма: 10$', 'error');
+                showNotification('❌ Минимальная сумма пополнения: 10$', 'error');
                 return;
             }
 
-            const depositAmount = parseFloat(amount);
-            const bonus = Math.min(depositAmount * 0.1, 100); // 10% bonus, max $100
+            const depositAmount = Math.max(10, parseFloat(amount));
+            const bonusPercent = depositAmount >= 100 ? 0.15 : 0.10; // 15% for 100$+, 10% otherwise
+            const bonus = Math.min(depositAmount * bonusPercent, 150);
             const total = depositAmount + bonus;
 
             balance += total;
@@ -3076,16 +3894,23 @@
                 id: Date.now(),
                 type: 'deposit',
                 amount: depositAmount,
-                bonus,
-                total,
+                bonus: bonus,
+                total: total,
                 method: 'telegram',
+                bonusPercent: bonusPercent * 100,
                 date: new Date().toISOString(),
                 status: 'completed'
             });
             localStorage.setItem('transactions', JSON.stringify(transactions.slice(0, 50)));
 
             updateUserInterface();
-            showNotification(`💳 Пополнение успешно!\n+$${depositAmount} +$${bonus} бонус = $${total}`, 'success');
+            showNotification(
+                `💳 Пополнение успешно!\n` +
+                `+$${depositAmount} +${bonusPercent * 100}% бонус ($${bonus})\n` +
+                `Итого: $${total} на счёте`,
+                'success'
+            );
+            
             TelegramWebApp?.HapticFeedback.notificationOccurred('success');
         }
 
@@ -3094,18 +3919,32 @@
             const chatInput = document.getElementById('chatInput');
             chatInput.focus();
             
-            // Load chat history if exists
+            // Load previous chat if exists
             const chatHistory = JSON.parse(localStorage.getItem('supportChat') || '[]');
+            const chatContainer = document.getElementById('supportChat');
+            
             if (chatHistory.length > 0) {
-                const chatContainer = document.getElementById('supportChat');
-                chatContainer.innerHTML = chatHistory.map(msg => `
+                chatContainer.innerHTML = chatHistory.slice(-10).map(msg => `
                     <div class="chat-message ${msg.isUser ? 'user' : 'bot'}">
-                        <div>${msg.text}</div>
+                        <div>${escapeHtml(msg.text)}</div>
                         <div class="chat-time">${new Date(msg.timestamp).toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
                     </div>
                 `).join('');
                 chatContainer.scrollTop = chatContainer.scrollHeight;
+            } else {
+                // Welcome message
+                chatContainer.innerHTML = `
+                    <div class="chat-message bot">
+                        <div>🤖 Привет! Я ИИ-ассистент EVILBET</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">Спрашивайте о ставках, бонусах, пополнении или технических вопросах</div>
+                    </div>
+                `;
             }
+            
+            // Enable send button
+            chatInput.oninput = function() {
+                document.getElementById('sendButton').disabled = !this.value.trim();
+            };
             
             TelegramWebApp?.HapticFeedback.impactOccurred('medium');
         }
@@ -3129,58 +3968,78 @@
             const userMessage = document.createElement('div');
             userMessage.className = 'chat-message user';
             userMessage.innerHTML = `
-                <div>${message}</div>
+                <div>${escapeHtml(message)}</div>
                 <div class="chat-time">${time}</div>
             `;
             chatContainer.appendChild(userMessage);
 
-            // Clear input and disable send
+            // Clear and disable
             input.value = '';
             document.getElementById('sendButton').disabled = true;
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
-            // AI Response
+            // AI Response System
             setTimeout(() => {
                 const responses = {
-                    'пополнить|депозит|деньги|пополнение': [
-                        '💳 Для пополнения используйте кнопку "Пополнить" в профиле',
-                        'Минимальная сумма: 10$ | Бонус: 10% (макс. 100$)',
-                        'Способы: Telegram Stars, криптовалюта, банковские карты'
-                    ].join('\n'),
+                    'пополнить|депозит|деньги|пополнение|баланс': [
+                        '💳 <strong>Пополнение счёта:</strong>',
+                        '• Минимальная сумма: 10$',
+                        '• Бонус: 10% (15% при 100$+) до 150$',
+                        '• Способы: Telegram Stars, криптовалюта',
+                        '• Нажмите "Пополнить" в профиле 👆'
+                    ].join('<br>'),
                     
-                    'ставка|коэффициент|купон': [
-                        '⚽ Если ставка не прошла - проверьте "Историю ставок"',
-                        'Коэффициенты обновляются в реальном времени',
-                        'LIVE события могут меняться за секунды - это нормально!'
-                    ].join('\n'),
+                    'ставка|коэффициент|купон|не проходит': [
+                        '⚽ <strong>Проблемы со ставками:</strong>',
+                        '• Проверьте "Историю ставок" в профиле',
+                        '• LIVE коэффициенты обновляются в реальном времени',
+                        '• Если ставка не прошла - средства возвращаются',
+                        '• Максимум 10 событий в купоне'
+                    ].join('<br>'),
                     
-                    'вывод|снятие|вывести': [
-                        '💸 Минимальная сумма вывода: 20$',
-                        'Обработка: 1-24 часа | Комиссия: 0%',
-                        'Способы: криптовалюта, банковский перевод'
-                    ].join('\n'),
+                    'вывод|снятие|вывести|выигрыш': [
+                        '💸 <strong>Вывод средств:</strong>',
+                        '• Минимальная сумма: 20$',
+                        '• Обработка: 1-24 часа',
+                        '• Комиссия: 0%',
+                        '• Способы: криптовалюта, банковский перевод',
+                        '• Заявки в разделе "Вывод" профиля'
+                    ].join('<br>'),
                     
-                    'реферал|пригласить|друг': [
-                        '👥 Реферальная программа EVILBET:',
+                    'реферал|пригласить|друг|друзья': [
+                        '👥 <strong>Реферальная программа:</strong>',
                         '• 5% от проигрышей друзей пожизненно',
-                        '• 2% от выигрышей друзей (cashback)',
-                        'Ссылка для приглашения в профиле!'
-                    ].join('\n'),
+                        '• 2% кэшбэк от выигрышей друзей',
+                        '• Бонус 50$ за 5 активных рефералов',
+                        '• Ваша ссылка: t.me/EvilBetBot?start=ref_[ID]',
+                        '• Ссылка в разделе "Рефералы"'
+                    ].join('<br>'),
                     
-                    'бонус|промокод|акция': [
-                        '🎁 Активные бонусы:',
+                    'бонус|промокод|акция|промо': [
+                        '🎁 <strong>Активные бонусы:</strong>',
                         '• +100$ за регистрацию (уже получен)',
-                        '• 10% на первый депозит (макс. 100$)',
+                        '• 10-15% на депозит (до 150$)',
                         '• Еженедельный кэшбэк 5%',
-                        'Промокоды вводятся в профиле'
-                    ].join('\n'),
+                        '• Фрибеты по пятницам +10$',
+                        '• Промокоды в профиле'
+                    ].join('<br>'),
+                    
+                    'технический|ошибка|не работает|глючит': [
+                        '🔧 <strong>Технические проблемы:</strong>',
+                        '• Очистите кэш браузера',
+                        '• Попробуйте перезагрузить страницу',
+                        '• Проверьте интернет-соединение',
+                        '• Если проблема остаётся - опишите детали',
+                        '• Оператор ответит в течение 15 минут'
+                    ].join('<br>'),
 
                     default: [
-                        '🤖 Спасибо за обращение!',
+                        '🤖 <strong>Спасибо за обращение!</strong>',
                         'Ваш запрос принят и передан оператору',
-                        'Ожидайте ответа в течение 30 минут',
-                        'Могу помочь с чем-то ещё?'
-                    ].join('\n')
+                        'Ожидайте ответа в течение 15-30 минут',
+                        'Могу помочь с другими вопросами?',
+                        '<br><em>Популярные темы: пополнение, ставки, бонусы, вывод</em>'
+                    ].join('<br>')
                 };
 
                 let response = responses.default;
@@ -3210,21 +4069,32 @@
                     isUser: true,
                     timestamp: Date.now()
                 }, {
-                    text: response,
+                    text: response.replace(/<br>/g, '\n'),
                     isUser: false,
                     timestamp: Date.now()
                 });
-                localStorage.setItem('supportChat', JSON.stringify(chatHistory.slice(-50))); // Keep last 50 messages
+                localStorage.setItem('supportChat', JSON.stringify(chatHistory.slice(-50)));
 
-                showNotification('📤 Сообщение отправлено!', 'success');
+                showNotification('📤 Сообщение отправлено! Ожидайте ответа', 'success');
                 TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            }, 800 + Math.random() * 1200);
+            }, 500 + Math.random() * 1500); // Random response time 0.5-2s
         }
 
-        // NOTIFICATIONS
-        function showNotification(message, type = 'success', duration = 3000) {
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // NOTIFICATIONS SYSTEM
+        function showNotification(message, type = 'success', duration = 3500) {
             const notification = document.getElementById('notification');
-            notification.textContent = message;
+            notification.innerHTML = message.replace(/\n/g, '<br>');
             notification.className = `notification ${type} show`;
             
             setTimeout(() => {
@@ -3236,38 +4106,7 @@
             const badge = document.getElementById('notificationBadge');
             const count = favorites.length;
             badge.textContent = count > 99 ? '99+' : count;
-            badge.style.display = count ? 'flex' : 'none';
-        }
-
-        // HISTORY MODAL
-        function openHistory() {
-            const history = JSON.parse(localStorage.getItem('betHistory') || '[]');
-            if (history.length === 0) {
-                showNotification('📝 История ставок пуста. Сделайте первую ставку!', 'error');
-                return;
-            }
-
-            // Format recent bets
-            const recentBets = history.slice(0, 5).map(bet => {
-                const date = new Date(bet.timestamp).toLocaleString('ru-RU', {
-                    day: 'numeric',
-                    month: 'short',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                const statusEmoji = bet.status === 'won' ? '✅' : bet.status === 'lost' ? '❌' : '⏳';
-                const events = bet.events.length > 1 ? `${bet.events.length} событий` : bet.events[0].betType;
-                
-                return `${statusEmoji} ${date}\n${events} | $${bet.stake} → $${bet.potentialWin}`;
-            }).join('\n\n');
-
-            const totalBets = history.length;
-            const totalStaked = history.reduce((sum, bet) => sum + bet.stake, 0).toFixed(2);
-            const totalWon = history.filter(bet => bet.status === 'won').reduce((sum, bet) => sum + bet.potentialWin, 0).toFixed(2);
-
-            TelegramWebApp?.showAlert(
-                `📊 История ставок\n\n${recentBets}\n\n📈 Статистика:\n• Всего ставок: ${totalBets}\n• Общая сумма: $${totalStaked}\n• Выигрыш: $${totalWon}`
-            );
+            badge.style.display = count > 0 ? 'flex' : 'none';
         }
 
         // UTILITY FUNCTIONS
@@ -3281,72 +4120,116 @@
             const notifications = [
                 `⭐ Избранных событий: ${favorites.length}`,
                 `🔥 Активных LIVE: ${Object.values(matchesData).flat().filter(m => m.status === 'live').length}`,
-                `💰 Баланс: $${balance.toFixed(2)}`,
-                `🎁 Доступный бонус: $${Math.min(balance * 0.1, 100).toFixed(2)}`,
-                `📅 Сегодня: ${matchesData.today.length} событий`
+                `💰 Текущий баланс: $${balance.toFixed(2)}`,
+                `🎁 Доступный бонус: $${Math.min(balance * 0.15, 150).toFixed(2)}`,
+                `📅 Сегодня: ${matchesData.today.length} событий | Завтра: ${matchesData.tomorrow.length}`
             ];
 
-            TelegramWebApp?.showAlert(`🔔 Уведомления EVILBET:\n\n${notifications.join('\n')}`);
+            TelegramWebApp?.showAlert(`🔔 Уведомления EVILBET:\n\n${notifications.join('\n\n')}`);
             TelegramWebApp?.HapticFeedback.impactOccurred('medium');
         }
 
-        // EVENT LISTENERS
+        // EVENT LISTENERS SETUP
         function setupEventListeners() {
-            // Overlay close
-            document.getElementById('overlay').addEventListener('click', function() {
-                closeCoupon();
-                closeActiveModal();
+            // Overlay interactions
+            document.getElementById('overlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeCoupon();
+                    closeActiveModal();
+                }
             });
 
-            // Search focus
-            document.getElementById('searchInput').addEventListener('focus', () => {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('focus', () => {
                 TelegramWebApp?.HapticFeedback.impactOccurred('light');
+                if (searchInput.value) {
+                    searchInput.select();
+                }
             });
+
+            searchInput.addEventListener('input', debounce(function() {
+                filterMatches(this.value);
+            }, 300));
 
             // Bottom navigation
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
+                    
+                    // Update active state
                     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
                     
                     const page = this.dataset.page;
-                    if (page === 'referral') {
-                        window.location.href = 'referal.html';
-                    } else if (page === 'home') {
-                        // Already on home
+                    if (page === 'sport' || page === 'live' || page === 'referral') {
+                        window.location.href = `${page}.html`;
+                    } else if (page === 'profile') {
+                        openProfile();
                     }
+                    // home does nothing - already on home page
                 });
             });
 
-            // Window resize handler
+            // Window resize for mobile nav
             let resizeTimeout;
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(() => {
                     const isMobile = window.innerWidth <= 768;
                     document.getElementById('bottomNav').classList.toggle('active', isMobile);
-                }, 100);
+                }, 150);
             });
 
-            // Initial resize
+            // Initial mobile check
             setTimeout(() => {
                 const isMobile = window.innerWidth <= 768;
                 document.getElementById('bottomNav').classList.toggle('active', isMobile);
             }, 100);
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeCoupon();
+                    closeActiveModal();
+                }
+                if (e.key === 'Enter' && document.activeElement.id === 'stakeInput' && !e.shiftKey) {
+                    e.preventDefault();
+                    confirmBet();
+                }
+            });
+
+            // Touch optimizations
+            let touchStartY = 0;
+            document.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchmove', (e) => {
+                const touchY = e.touches[0].clientY;
+                const deltaY = touchY - touchStartY;
+                
+                // Close coupon on downward swipe
+                if (deltaY > 100 && document.getElementById('betCoupon').classList.contains('open')) {
+                    closeCoupon();
+                }
+            }, { passive: true });
         }
 
-        // CSS ANIMATIONS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes indicatorFade {
-                0% { opacity: 1; transform: scale(1); }
-                100% { opacity: 0; transform: scale(1.2); }
-            }
-        `;
-        document.head.appendChild(style);
+        // UTILITY FUNCTIONS
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
 
-        // INITIALIZE
+        // Initialize app
         initApp();
     </script>
 </body>
