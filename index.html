@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>EVILBET - Главная</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2" as="font" type="font/woff2" crossorigin>
@@ -42,7 +42,7 @@
             --esports-color: #9c27b0 ;
             --mma-color: #607d8b ;
             --border-color: rgba(255, 51, 51, 0.2) ;
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066); 
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066) !important; /* Fixed gradient */
             --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53) ;
         }
 
@@ -861,8 +861,7 @@
         .odds-container {
             display: flex;
             gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: space-between; /* Made even spacing */
         }
 
         .odds-item {
@@ -882,6 +881,7 @@
             min-height: 70px;
             justify-content: center;
             touch-action: manipulation;
+            flex: 1; /* Equal width */
         }
 
         .odds-item::before {
@@ -924,7 +924,7 @@
         }
 
         .odds-type {
-            font-size: 0.75rem;
+            font-size: 0.9rem; /* Slightly larger */
             color: var(--text-secondary);
             font-weight: bold;
             text-transform: uppercase;
@@ -933,7 +933,7 @@
         }
 
         .odds-value {
-            font-size: 1.4rem;
+            font-size: 1.7rem; /* Larger odds value */
             font-weight: bold;
             margin: 0;
             order: 2;
@@ -941,7 +941,7 @@
         }
 
         .odds-prob {
-            font-size: 0.7rem;
+            font-size: 0.8rem; /* Slightly larger */
             color: var(--success-color);
             font-weight: bold;
             order: 1;
@@ -955,7 +955,7 @@
             color: #000;
         }
 
-        /* **BET COUPON - FIXED MOBILE** */
+        /* **BET COUPON - REDESIGNED FOR MOBILE** */
         .bet-coupon {
             position: fixed;
             top: 0;
@@ -971,6 +971,8 @@
             overflow-y: auto;
             border-left: 1px solid var(--border-color);
             box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
         .bet-coupon.open {
@@ -981,12 +983,15 @@
             .bet-coupon {
                 width: 100%;
                 right: 0;
-                padding: 20px 16px;
+                padding: 16px;
                 bottom: 0;
                 top: auto;
                 height: auto;
-                max-height: 80vh;
+                max-height: 70vh; /* Reduced height for better visibility */
                 transform: translateY(100%);
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
             }
             
             .bet-coupon.open {
@@ -998,8 +1003,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
+            margin-bottom: 16px; /* Reduced margin */
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -1008,7 +1013,7 @@
         }
 
         .coupon-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem; /* Smaller title for mobile */
             color: var(--primary-color);
             font-weight: bold;
             display: flex;
@@ -1047,8 +1052,8 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 12px; /* Reduced padding */
+            margin-bottom: 8px; /* Reduced margin */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1056,6 +1061,7 @@
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
+            font-size: 0.9rem; /* Smaller text */
         }
 
         .coupon-item::before {
@@ -1084,14 +1090,14 @@
         }
 
         .coupon-event {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
             font-weight: bold;
             max-width: 180px;
         }
 
         .coupon-details {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             margin-top: 2px;
             font-weight: 500;
@@ -1105,7 +1111,7 @@
         }
 
         .coupon-odds-value {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--primary-color);
             font-weight: bold;
             text-align: right;
@@ -1157,8 +1163,8 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 16px; /* Reduced padding */
+            margin-top: 12px; /* Reduced margin */
             position: sticky;
             bottom: 0;
             backdrop-filter: blur(10px);
@@ -1170,10 +1176,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 0;
+            margin-bottom: 8px; /* Reduced */
+            padding: 6px 0; /* Reduced */
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Smaller */
         }
 
         .total-row:last-child {
@@ -1201,14 +1207,15 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 14px 12px;
+            padding: 10px 12px; /* Reduced padding */
             color: var(--text-primary);
             font-family: inherit;
             font-size: 1rem;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px; /* Reduced */
             transition: all 0.2s ease;
             touch-action: manipulation;
+            height: 40px; /* Fixed smaller height */
         }
 
         .stake-input:focus {
@@ -1226,7 +1233,7 @@
             background: var(--gradient-primary);
             color: #000;
             border: none;
-            padding: 16px;
+            padding: 12px; /* Reduced */
             border-radius: 8px;
             font-family: inherit;
             font-size: 1rem;
@@ -1814,18 +1821,26 @@
 
             .odds-container {
                 gap: 6px;
-                justify-content: center;
+                justify-content: space-between; /* Even in mobile */
             }
 
             .odds-item {
-                padding: 20px 60px;
+                padding: 12px 8px; /* Adjusted for mobile */
                 min-height: 60px;
                 gap: 2px;
-                max-width: 80px;
+                flex: 1; /* Equal width */
             }
 
             .odds-value {
-                font-size: 1.3rem;
+                font-size: 1.5rem; /* Larger in mobile */
+            }
+
+            .odds-type {
+                font-size: 0.8rem;
+            }
+
+            .odds-prob {
+                font-size: 0.75rem;
             }
 
             .stats-bar {
@@ -2063,51 +2078,51 @@
                 padding: 8px 4px;
                 min-height: 55px;
                 gap: 1px;
-                max-width: 70px;
+                flex: 1; /* Equal in small screens */
             }
 
             .odds-type {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
 
             .odds-value {
-                font-size: 1.2rem;
+                font-size: 1.4rem; /* Larger */
             }
 
             .odds-prob {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
             }
 
             .coupon-header {
-                margin-bottom: 20px;
+                margin-bottom: 16px;
             }
 
             .coupon-title {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
 
             .coupon-item {
-                padding: 12px;
-                margin-bottom: 10px;
+                padding: 10px;
+                margin-bottom: 8px;
             }
 
             .coupon-event {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 max-width: 140px;
             }
 
             .coupon-odds-value {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 min-width: 35px;
             }
 
             .total-row {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
 
             .place-bet-btn {
-                padding: 14px;
-                font-size: 0.95rem;
+                padding: 12px;
+                font-size: 0.9rem;
             }
 
             .sports-categories {
@@ -2214,6 +2229,41 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
+        }
+
+        /* New Fichka: Dark Mode Toggle (example, can be triggered) */
+        .dark-mode-toggle {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+
+        .dark-mode-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* New Fichka: Quick Bet Buttons in Coupon */
+        .quick-bet-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .quick-bet-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .quick-bet-btn:hover {
+            background: var(--gradient-primary);
+            color: #000;
         }
     </style>
 </head>
@@ -2346,6 +2396,12 @@
             </div>
 
             <div class="coupon-total" id="couponTotal" style="display: none;">
+                <div class="quick-bet-buttons"> <!-- New Fichka: Quick Bet Amounts -->
+                    <button class="quick-bet-btn" onclick="setStake(10)">10$</button>
+                    <button class="quick-bet-btn" onclick="setStake(50)">50$</button>
+                    <button class="quick-bet-btn" onclick="setStake(100)">100$</button>
+                    <button class="quick-bet-btn" onclick="setStake(balance)">MAX</button>
+                </div>
                 <div class="total-row">
                     <span class="total-label">Сумма ставки:</span>
                     <div class="total-value">
@@ -2647,7 +2703,7 @@
                     odds: { p1: 2.50, p2: 1.50 },
                     sport: 'mma',
                     homeForm: ['W', 'W', 'D', 'L', 'W'],
-                    awayForm: ['L', 'W', 'W', 'D', 'L'],
+                    awayForm: ['L', 'W', 'W', 'W', 'D', 'L'],
                     h2h: '1-1',
                     probabilities: [40, 60],
                     homeStats: { wins: 3, losses: 1, draws: 1 },
@@ -2769,7 +2825,7 @@
         };
         // INIT APP
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 EVILBET - Enhanced Sports Categories v3.0');
+            console.log('🎯 EVILBET - - Enhanced Sports Categories v3.0');
             initApp();
         });
 
@@ -3407,7 +3463,7 @@
             totalSection.style.display = 'block';
 
             // Update button state
-            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stake <= balance && couponItems.length > 0 && couponItems.length <= 10;
+            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
             placeBetBtn.disabled = !canPlaceBet;
             
             if (canPlaceBet) {
@@ -3436,6 +3492,14 @@
             if (stakeInput && !stakeInput.oninput) {
                 stakeInput.oninput = updateBetTotal;
             }
+        }
+
+        // New Fichka: Quick Stake Setter
+        function setStake(amount) {
+            const stakeInput = document.getElementById('stakeInput');
+            stakeInput.value = Math.min(amount, balance);
+            updateBetTotal();
+            TelegramWebApp?.HapticFeedback.impactOccurred('light');
         }
 
         function confirmBet() {
