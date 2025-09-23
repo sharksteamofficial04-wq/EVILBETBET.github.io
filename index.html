@@ -959,13 +959,11 @@
         .bet-coupon {
             position: fixed;
             top: 0;
-            right: 0;
-            width: 100%;
-            max-width: 380px;
+            right: -380px;
+            width: 380px;
             height: 100vh;
             background: var(--bg-primary);
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 999;
             padding: 24px;
             overflow-y: auto;
@@ -976,13 +974,13 @@
         }
 
         .bet-coupon.open {
-            transform: translateX(0);
+            right: 0;
         }
 
         @media (max-width: 768px) {
             .bet-coupon {
                 width: 100%;
-                right: 0;
+                right: -100%;
                 padding: 16px;
                 bottom: 0;
                 top: auto;
@@ -995,7 +993,22 @@
             }
             
             .bet-coupon.open {
+                right: 0;
                 transform: translateY(0);
+            }
+
+            #couponItems {
+                overflow-y: auto;
+                flex: 1;
+                display: block !important;
+                visibility: visible !important;
+                height: auto;
+                margin-bottom: 16px;
+            }
+
+            #betHistorySection {
+                overflow-y: auto;
+                max-height: 150px;
             }
         }
 
@@ -2265,6 +2278,44 @@
             background: var(--gradient-primary);
             color: #000;
         }
+
+        /* Bet History Section */
+        #betHistorySection {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        #betHistorySection h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item.won {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .history-item.lost {
+            border-left: 4px solid #ff4444;
+        }
+
+        .history-item.pending {
+            border-left: 4px solid var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -2287,6 +2338,11 @@
                     <div class="user-name guest-text" id="userName">Гость</div>
                 </div>
                 
+                <button id="openCouponBtn" class="notifications-btn" onclick="toggleCoupon()" title="Купон ставок" style="margin-right: 8px;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="notification-badge" id="couponBadge">0</span>
+                </button>
+
                 <button class="notifications-btn" onclick="showNotifications()" title="Уведомления">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge" id="notificationBadge">0</span>
@@ -2382,7 +2438,7 @@
                     <i class="fas fa-ticket-alt"></i>
                     Купон ставок (<span id="couponCount">0</span>)
                 </h3>
-                <button class="close-coupon" onclick="closeCoupon()">
+                <button class="close-coupon" onclick="toggleCoupon()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -2393,6 +2449,11 @@
                     <div style="font-size: 1.1rem; margin-bottom: 4px;">Купон пуст</div>
                     <div style="font-size: 0.85rem; opacity: 0.7;">Нажмите на коэффициент чтобы добавить событие</div>
                 </div>
+            </div>
+
+            <div id="betHistorySection" style="display: none;">
+                <h4>История ставок</h4>
+                <div id="betHistoryList"></div>
             </div>
 
             <div class="coupon-total" id="couponTotal" style="display: none;">
@@ -2430,7 +2491,7 @@
         </aside>
 
         <!-- OVERLAY -->
-        <div class="overlay" id="overlay" onclick="closeCoupon()"></div>
+        <div class="overlay" id="overlay" onclick="toggleCoupon()"></div>
 
         <!-- SUPPORT BUTTON -->
         <button class="support-fab" onclick="openSupport()" title="Поддержка 24/7">
@@ -2869,7 +2930,7 @@
 
             TelegramWebApp.BackButton.onClick(function() {
                 if (document.getElementById('betCoupon').classList.contains('open')) {
-                    closeCoupon();
+                    toggleCoupon();
                     TelegramWebApp.HapticFeedback.impactOccurred('light');
                 } else if (document.querySelector('.modal.active')) {
                     closeActiveModal();
@@ -2913,6 +2974,18 @@
                     }
                 }
             });
+
+            // Real Telegram Auth
+            if (TelegramWebApp.initDataUnsafe.user) {
+                currentUser = {
+                    id: TelegramWebApp.initDataUnsafe.user.id,
+                    username: TelegramWebApp.initDataUnsafe.user.username || TelegramWebApp.initDataUnsafe.user.first_name,
+                    avatar: TelegramWebApp.initDataUnsafe.user.photo_url || null
+                };
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUserInterface();
+            }
         }
 
         
@@ -3284,9 +3357,7 @@
             }
 
             // Find if this specific bet exists
-            const existingIndex = couponItems.findIndex(item => 
-                item.matchId === matchId && item.betType === betType
-            );
+            const existingIndex = couponItems.findIndex(item => item.matchId === matchId && item.betType === betType);
 
             const oddsElement = event.currentTarget;
             
@@ -3376,7 +3447,7 @@
             TelegramWebApp?.HapticFeedback.impactOccurred('light');
             
             if (couponItems.length === 0) {
-                setTimeout(closeCoupon, 1000);
+                setTimeout(toggleCoupon, 1000);
             }
         }
 
@@ -3406,10 +3477,18 @@
             const placeBetBtn = document.getElementById('placeBetButton');
             const mainButton = TelegramWebApp?.MainButton;
             const couponTitle = document.querySelector('.coupon-title');
+            const couponBadge = document.getElementById('couponBadge');
+            const historySection = document.getElementById('betHistorySection');
+            const historyList = document.getElementById('betHistoryList');
 
             // Update title count
             if (couponTitle) {
                 couponTitle.innerHTML = `<i class="fas fa-ticket-alt"></i> Купон ставок (${couponItems.length})`;
+            }
+
+            if (couponBadge) {
+                couponBadge.textContent = couponItems.length;
+                couponBadge.style.display = couponItems.length > 0 ? 'flex' : 'none';
             }
 
             if (couponItems.length === 0) {
@@ -3427,70 +3506,85 @@
                 if (mainButton) {
                     mainButton.hide();
                 }
-                return;
-            }
+            } else {
+                // Render coupon items
+                container.innerHTML = couponItems.map((item, index) => {
+                    const match = Object.values(matchesData).flat().find(m => m.id === item.matchId);
+                    if (!match) return '';
 
-            // Render coupon items
-            container.innerHTML = couponItems.map((item, index) => {
-                const match = Object.values(matchesData).flat().find(m => m.id === item.matchId);
-                if (!match) return '';
-
-                return `
-                    <div class="coupon-item" data-bet-index="${index}">
-                        <div>
-                            <div class="coupon-event">${match.home} vs ${match.away}</div>
-                            <div class="coupon-details">
-                                <span style="color: var(--text-secondary);">${item.betType}</span> 
-                                <span style="color: var(--primary-color); font-weight: bold;">@${item.odds.toFixed(2)}</span>
+                    return `
+                        <div class="coupon-item" data-bet-index="${index}">
+                            <div>
+                                <div class="coupon-event">${match.home} vs ${match.away}</div>
+                                <div class="coupon-details">
+                                    <span style="color: var(--text-secondary);">${item.betType}</span> 
+                                    <span style="color: var(--primary-color); font-weight: bold;">@${item.odds.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <div class="coupon-odds-section">
+                                <span class="coupon-odds-value">${item.odds.toFixed(2)}</span>
+                                <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить ставку">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="coupon-odds-section">
-                            <span class="coupon-odds-value">${item.odds.toFixed(2)}</span>
-                            <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить ставку">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
 
-            // Calculate totals
-            const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
-            const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
-            const potentialWin = (stakeAmount * totalOdds).toFixed(2);
+                // Calculate totals
+                const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
+                const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
+                const potentialWin = (stakeAmount * totalOdds).toFixed(2);
 
-            totalOddsEl.textContent = totalOdds.toFixed(2);
-            totalSection.style.display = 'block';
+                totalOddsEl.textContent = totalOdds.toFixed(2);
+                totalSection.style.display = 'block';
 
-            // Update button state
-            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
-            placeBetBtn.disabled = !canPlaceBet;
-            
-            if (canPlaceBet) {
-                placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stakeAmount.toFixed(2)}`;
-                placeBetBtn.classList.add('success');
+                // Update button state
+                const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
+                placeBetBtn.disabled = !canPlaceBet;
                 
-                if (mainButton) {
-                    mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
-                    mainButton.setParams({ is_visible: true });
+                if (canPlaceBet) {
+                    placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stakeAmount.toFixed(2)}`;
+                    placeBetBtn.classList.add('success');
+                    
+                    if (mainButton) {
+                        mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
+                        mainButton.setParams({ is_visible: true });
+                    }
+                } else {
+                    placeBetBtn.innerHTML = '<i class="fas fa-play"></i> Сделать ставку';
+                    placeBetBtn.classList.remove('success');
+                    
+                    if (mainButton) {
+                        mainButton.hide();
+                    }
+                    
+                    if (couponItems.length > 10) {
+                        showNotification('⚠️ Максимум 10 событий в купоне', 'error');
+                    }
                 }
-            } else {
-                placeBetBtn.innerHTML = '<i class="fas fa-play"></i> Сделать ставку';
-                placeBetBtn.classList.remove('success');
-                
-                if (mainButton) {
-                    mainButton.hide();
-                }
-                
-                if (couponItems.length > 10) {
-                    showNotification('⚠️ Максимум 10 событий в купоне', 'error');
+
+                // Auto-calculate on input
+                const stakeInput = document.getElementById('stakeInput');
+                if (stakeInput && !stakeInput.oninput) {
+                    stakeInput.oninput = updateBetTotal;
                 }
             }
 
-            // Auto-calculate on input
-            const stakeInput = document.getElementById('stakeInput');
-            if (stakeInput && !stakeInput.oninput) {
-                stakeInput.oninput = updateBetTotal;
+            // Render history
+            const history = JSON.parse(localStorage.getItem('betHistory') || '[]');
+            if (history.length > 0) {
+                historySection.style.display = 'block';
+                historyList.innerHTML = history.slice(0, 5).map(bet => {
+                    const statusClass = bet.status === 'won' ? 'won' : bet.status === 'lost' ? 'lost' : 'pending';
+                    const statusText = bet.status === 'won' ? '✅ Выиграно' : bet.status === 'lost' ? '❌ Проиграно' : '⏳ Ожидание';
+                    return `<div class="history-item ${statusClass}">
+                        <span>${statusText} - $${bet.stake}</span>
+                        <span>${new Date(bet.timestamp).toLocaleDateString()}</span>
+                    </div>`;
+                }).join('');
+            } else {
+                historySection.style.display = 'none';
             }
         }
 
@@ -3569,7 +3663,7 @@
 
             // Update UI
             updateUserInterface();
-            closeCoupon();
+            toggleCoupon();
             
             // Success feedback with details
             const eventsSummary = betRecord.events.length > 1 
@@ -4028,9 +4122,11 @@
         }
 
         // UTILITY FUNCTIONS
-        function closeCoupon() {
-            document.getElementById('betCoupon').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
+        function toggleCoupon() {
+            const betCoupon = document.getElementById('betCoupon');
+            const overlay = document.getElementById('overlay');
+            betCoupon.classList.toggle('open');
+            overlay.classList.toggle('active');
             TelegramWebApp?.HapticFeedback.impactOccurred('light');
         }
 
@@ -4052,7 +4148,7 @@
             // Overlay interactions
             document.getElementById('overlay').addEventListener('click', function(e) {
                 if (e.target === this) {
-                    closeCoupon();
+                    toggleCoupon();
                     closeActiveModal();
                 }
             });
@@ -4108,7 +4204,7 @@
             // Keyboard shortcuts
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
-                    closeCoupon();
+                    toggleCoupon();
                     closeActiveModal();
                 }
                 if (e.key === 'Enter' && document.activeElement.id === 'stakeInput' && !e.shiftKey) {
@@ -4129,7 +4225,7 @@
                 
                 // Close coupon on downward swipe
                 if (deltaY > 100 && document.getElementById('betCoupon').classList.contains('open')) {
-                    closeCoupon();
+                    toggleCoupon();
                 }
             }, { passive: true });
         }
