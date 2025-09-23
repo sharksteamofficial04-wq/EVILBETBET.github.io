@@ -27,23 +27,23 @@
         }
 
         :root {
-            --primary-color: #ff3333;!important
-            --primary-hover: #cc0000;!important
-            --bg-primary: #0a0a0a;!important
-            --bg-secondary: #1a1a1a;!important
-            --card-bg: rgba(26, 26, 26, 0.95);!important
-            --text-primary: #fff;!important
-            --text-secondary: #b0b0b0;!important
-            --success-color: #00ff88;!important
-            --live-color: #ff6b35;!important
-            --football-color: #00b140;!important
-            --basketball-color: #ff4444;!important
-            --tennis-color: #ffc107;!important
-            --esports-color: #9c27b0;!important
-            --mma-color: #607d8b;!important
-            --border-color: rgba(255, 51, 51, 0.2);!important
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066);!important
-            --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53);!important
+            --primary-color: #ff3333 ;
+            --primary-hover: #cc0000 ;
+            --bg-primary: #0a0a0a ;
+            --bg-secondary: #1a1a1a; 
+            --card-bg: rgba(26, 26, 26, 0.95) ;
+            --text-primary: #fff ;
+            --text-secondary: #b0b0b0 ;
+            --success-color: #00ff88 ;
+            --live-color: #ff6b35 ;
+            --football-color: #00b140 ;
+            --basketball-color: #ff4444 ;
+            --tennis-color: #ffc107 ;
+            --esports-color: #9c27b0 ;
+            --mma-color: #607d8b ;
+            --border-color: rgba(255, 51, 51, 0.2) ;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066); 
+            --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53) ;
         }
 
         * {
@@ -866,23 +866,23 @@
         }
 
         .odds-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    min-height: 70px;
-    justify-content: center;
-    touch-action: manipulation;
-}
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-height: 70px;
+            justify-content: center;
+            touch-action: manipulation;
+        }
 
         .odds-item::before {
             content: '';
@@ -977,11 +977,20 @@
             transform: translateX(0);
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .bet-coupon {
                 width: 100%;
                 right: 0;
                 padding: 20px 16px;
+                bottom: 0;
+                top: auto;
+                height: auto;
+                max-height: 80vh;
+                transform: translateY(100%);
+            }
+            
+            .bet-coupon.open {
+                transform: translateY(0);
             }
         }
 
@@ -1774,6 +1783,11 @@
                 gap: 16px;
             }
 
+            .teams-section {
+                padding: 16px;
+                gap: 16px;
+            }
+
             .team-logo {
                 width: 42px;
                 height: 42px;
@@ -1804,7 +1818,7 @@
             }
 
             .odds-item {
-                padding: 10px 6px;
+                padding: 20px 60px;
                 min-height: 60px;
                 gap: 2px;
                 max-width: 80px;
@@ -2046,7 +2060,7 @@
             }
 
             .odds-item {
-                padding: 8px 60px;
+                padding: 8px 4px;
                 min-height: 55px;
                 gap: 1px;
                 max-width: 70px;
@@ -2218,7 +2232,7 @@
                     <div class="balance-value" id="balanceDisplay">$0.00</div>
                 </div>
                 
-                <div class="user-display" id="userDisplay" onclick="toggleAuth()" title="Авторизация">
+                <div class="user-display" id="userDisplay" title="Авторизация">
                     <div class="user-avatar" id="userAvatar">👤</div>
                     <div class="user-name guest-text" id="userName">Гость</div>
                 </div>
@@ -2275,32 +2289,32 @@
                 <div class="sports-categories" id="sportsCategories">
                     <div class="sport-category active" data-sport="all" onclick="filterBySport('all')">
                         <i class="fas fa-th-large sport-icon"></i>
-                        <div class="sport-count" id="allCount">18</div>
+                        <div class="sport-count" id="allCount">0</div>
                         <div class="sport-name">Все</div>
                     </div>
                     <div class="sport-category" data-sport="football" onclick="filterBySport('football')">
                         <i class="fas fa-futbol sport-icon" style="color: var(--football-color);"></i>
-                        <div class="sport-count" id="footballCount">8</div>
+                        <div class="sport-count" id="footballCount">0</div>
                         <div class="sport-name">Футбол</div>
                     </div>
                     <div class="sport-category" data-sport="basketball" onclick="filterBySport('basketball')">
                         <i class="fas fa-basketball-ball sport-icon" style="color: var(--basketball-color);"></i>
-                        <div class="sport-count" id="basketballCount">3</div>
+                        <div class="sport-count" id="basketballCount">0</div>
                         <div class="sport-name">Баскетбол</div>
                     </div>
                     <div class="sport-category" data-sport="tennis" onclick="filterBySport('tennis')">
                         <i class="fas fa-table-tennis sport-icon" style="color: var(--tennis-color);"></i>
-                        <div class="sport-count" id="tennisCount">2</div>
+                        <div class="sport-count" id="tennisCount">0</div>
                         <div class="sport-name">Теннис</div>
                     </div>
                     <div class="sport-category" data-sport="esports" onclick="filterBySport('esports')">
                         <i class="fas fa-gamepad sport-icon" style="color: var(--esports-color);"></i>
-                        <div class="sport-count" id="esportsCount">4</div>
+                        <div class="sport-count" id="esportsCount">0</div>
                         <div class="sport-name">Киберспорт</div>
                     </div>
                     <div class="sport-category" data-sport="mma" onclick="filterBySport('mma')">
                         <i class="fas fa-fist-raised sport-icon" style="color: var(--mma-color);"></i>
-                        <div class="sport-count" id="mmaCount">1</div>
+                        <div class="sport-count" id="mmaCount">0</div>
                         <div class="sport-name">MMA</div>
                     </div>
                 </div>
@@ -2316,7 +2330,7 @@
             <div class="coupon-header">
                 <h3 class="coupon-title">
                     <i class="fas fa-ticket-alt"></i>
-                    Купон ставок (${document.getElementById('couponItems')?.children.length || 0})
+                    Купон ставок (<span id="couponCount">0</span>)
                 </h3>
                 <button class="close-coupon" onclick="closeCoupon()">
                     <i class="fas fa-times"></i>
@@ -2837,7 +2851,7 @@
                     
                     if (existingBets.length >= 1) {
                         e.preventDefault();
-                        TelegramWebApp.HapticFeedback.notificationOccurred('error');
+                        TelegramWebApp?.HapticFeedback.notificationOccurred('error');
                         showNotification('⚠️ Нельзя ставить на несколько исходов одного события!', 'error');
                         return false;
                     }
@@ -2875,6 +2889,7 @@
                 if (logoutBtn) logoutBtn.style.display = 'block';
                 
                 userDisplay.title = `Профиль: ${currentUser.username}`;
+                userDisplay.onclick = openProfile;
             } else {
                 userName.textContent = 'Гость';
                 userName.classList.add('guest-text');
@@ -2887,6 +2902,7 @@
                 if (logoutBtn) logoutBtn.style.display = 'none';
                 
                 userDisplay.title = 'Авторизация через Telegram';
+                userDisplay.onclick = toggleAuth;
             }
 
             updateCouponDisplay();
@@ -3391,7 +3407,7 @@
             totalSection.style.display = 'block';
 
             // Update button state
-            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
+            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stake <= balance && couponItems.length > 0 && couponItems.length <= 10;
             placeBetBtn.disabled = !canPlaceBet;
             
             if (canPlaceBet) {
@@ -3813,6 +3829,26 @@
             showModal('profileModal');
         }
 
+        function toggleAuth() {
+            showModal('authModal');
+        }
+
+        function connectTelegram() {
+            // Simulate Telegram login
+            currentUser = { username: 'TestUser', avatar: null, id: Date.now() };
+            isLoggedIn = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Bonus for registration
+            balance += 100;
+            localStorage.setItem('balance', balance.toString());
+
+            updateUserInterface();
+            closeModal('authModal');
+            showNotification('✅ Вход выполнен! +100$ бонус добавлен', 'success');
+        }
+
         function openHistory() {
             const history = JSON.parse(localStorage.getItem('betHistory') || '[]');
             if (history.length === 0) {
@@ -3897,181 +3933,16 @@
             TelegramWebApp?.HapticFeedback.notificationOccurred('success');
         }
 
-        function openSupport() {
-            showModal('supportModal');
-            const chatInput = document.getElementById('chatInput');
-            chatInput.focus();
-            
-            // Load previous chat if exists
-            const chatHistory = JSON.parse(localStorage.getItem('supportChat') || '[]');
-            const chatContainer = document.getElementById('supportChat');
-            
-            if (chatHistory.length > 0) {
-                chatContainer.innerHTML = chatHistory.slice(-10).map(msg => `
-                    <div class="chat-message ${msg.isUser ? 'user' : 'bot'}">
-                        <div>${escapeHtml(msg.text)}</div>
-                        <div class="chat-time">${new Date(msg.timestamp).toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
-                    </div>
-                `).join('');
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            } else {
-                // Welcome message
-                chatContainer.innerHTML = `
-                    <div class="chat-message bot">
-                        <div>🤖 Привет! Я ИИ-ассистент EVILBET</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">Спрашивайте о ставках, бонусах, пополнении или технических вопросах</div>
-                    </div>
-                `;
+        function logout() {
+            if (confirm('Выйти из аккаунта?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.setItem('isLoggedIn', 'false');
+                isLoggedIn = false;
+                currentUser = null;
+                updateUserInterface();
+                closeModal('profileModal');
+                showNotification('👋 Вы вышли из аккаунта', 'error');
             }
-            
-            // Enable send button
-            chatInput.oninput = function() {
-                document.getElementById('sendButton').disabled = !this.value.trim();
-            };
-            
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-        }
-
-        function handleChatEnter(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendSupportMessage();
-            }
-        }
-
-        function sendSupportMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            const chatContainer = document.getElementById('supportChat');
-            const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'chat-message user';
-            userMessage.innerHTML = `
-                <div>${escapeHtml(message)}</div>
-                <div class="chat-time">${time}</div>
-            `;
-            chatContainer.appendChild(userMessage);
-
-            // Clear and disable
-            input.value = '';
-            document.getElementById('sendButton').disabled = true;
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-
-            // AI Response System
-            setTimeout(() => {
-                const responses = {
-                    'пополнить|депозит|деньги|пополнение|баланс': [
-                        '💳 <strong>Пополнение счёта:</strong>',
-                        '• Минимальная сумма: 10$',
-                        '• Бонус: 10% (15% при 100$+) до 150$',
-                        '• Способы: Telegram Stars, криптовалюта',
-                        '• Нажмите "Пополнить" в профиле 👆'
-                    ].join('<br>'),
-                    
-                    'ставка|коэффициент|купон|не проходит': [
-                        '⚽ <strong>Проблемы со ставками:</strong>',
-                        '• Проверьте "Историю ставок" в профиле',
-                        '• LIVE коэффициенты обновляются в реальном времени',
-                        '• Если ставка не прошла - средства возвращаются',
-                        '• Максимум 10 событий в купоне'
-                    ].join('<br>'),
-                    
-                    'вывод|снятие|вывести|выигрыш': [
-                        '💸 <strong>Вывод средств:</strong>',
-                        '• Минимальная сумма: 20$',
-                        '• Обработка: 1-24 часа',
-                        '• Комиссия: 0%',
-                        '• Способы: криптовалюта, банковский перевод',
-                        '• Заявки в разделе "Вывод" профиля'
-                    ].join('<br>'),
-                    
-                    'реферал|пригласить|друг|друзья': [
-                        '👥 <strong>Реферальная программа:</strong>',
-                        '• 5% от проигрышей друзей пожизненно',
-                        '• 2% кэшбэк от выигрышей друзей',
-                        '• Бонус 50$ за 5 активных рефералов',
-                        '• Ваша ссылка: t.me/EvilBetBot?start=ref_[ID]',
-                        '• Ссылка в разделе "Рефералы"'
-                    ].join('<br>'),
-                    
-                    'бонус|промокод|акция|промо': [
-                        '🎁 <strong>Активные бонусы:</strong>',
-                        '• +100$ за регистрацию (уже получен)',
-                        '• 10-15% на депозит (до 150$)',
-                        '• Еженедельный кэшбэк 5%',
-                        '• Фрибеты по пятницам +10$',
-                        '• Промокоды в профиле'
-                    ].join('<br>'),
-                    
-                    'технический|ошибка|не работает|глючит': [
-                        '🔧 <strong>Технические проблемы:</strong>',
-                        '• Очистите кэш браузера',
-                        '• Попробуйте перезагрузить страницу',
-                        '• Проверьте интернет-соединение',
-                        '• Если проблема остаётся - опишите детали',
-                        '• Оператор ответит в течение 15 минут'
-                    ].join('<br>'),
-
-                    default: [
-                        '🤖 <strong>Спасибо за обращение!</strong>',
-                        'Ваш запрос принят и передан оператору',
-                        'Ожидайте ответа в течение 15-30 минут',
-                        'Могу помочь с другими вопросами?',
-                        '<br><em>Популярные темы: пополнение, ставки, бонусы, вывод</em>'
-                    ].join('<br>')
-                };
-
-                let response = responses.default;
-                const lowerMessage = message.toLowerCase();
-                
-                for (const [key, msg] of Object.entries(responses)) {
-                    if (key !== 'default' && new RegExp(key, 'i').test(lowerMessage)) {
-                        response = msg;
-                        break;
-                    }
-                }
-
-                // Add bot response
-                const botMessage = document.createElement('div');
-                botMessage.className = 'chat-message bot';
-                botMessage.innerHTML = `
-                    <div>${response}</div>
-                    <div class="chat-time">${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
-                `;
-                chatContainer.appendChild(botMessage);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-
-                // Save chat history
-                const chatHistory = JSON.parse(localStorage.getItem('supportChat') || '[]');
-                chatHistory.push({
-                    text: message,
-                    isUser: true,
-                    timestamp: Date.now()
-                }, {
-                    text: response.replace(/<br>/g, '\n'),
-                    isUser: false,
-                    timestamp: Date.now()
-                });
-                localStorage.setItem('supportChat', JSON.stringify(chatHistory.slice(-50)));
-
-                showNotification('📤 Сообщение отправлено! Ожидайте ответа', 'success');
-                TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            }, 500 + Math.random() * 1500); // Random response time 0.5-2s
-        }
-
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, m => map[m]);
         }
 
         // NOTIFICATIONS SYSTEM
@@ -4217,4 +4088,3 @@
     </script>
 </body>
 </html>
-
