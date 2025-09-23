@@ -27,23 +27,24 @@
         }
 
         :root {
-            --primary-color: #ff3333 ;
-            --primary-hover: #cc0000 ;
-            --bg-primary: #0a0a0a ;
-            --bg-secondary: #1a1a1a; 
-            --card-bg: rgba(26, 26, 26, 0.95) ;
-            --text-primary: #fff ;
-            --text-secondary: #b0b0b0 ;
-            --success-color: #00ff88 ;
-            --live-color: #ff6b35 ;
-            --football-color: #00b140 ;
-            --basketball-color: #ff4444 ;
-            --tennis-color: #ffc107 ;
-            --esports-color: #9c27b0 ;
-            --mma-color: #607d8b ;
-            --border-color: rgba(255, 51, 51, 0.2) ;
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066) !important; /* Fixed gradient */
-            --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53) ;
+            --primary-color: #ff3333;
+            --primary-hover: #cc0000;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #b0b0b0;
+            --success-color: #00ff88;
+            --live-color: #ff6b35;
+            --football-color: #00b140;
+            --basketball-color: #ff4444;
+            --tennis-color: #ffc107;
+            --esports-color: #9c27b0;
+            --mma-color: #607d8b;
+            --border-color: rgba(255, 51, 51, 0.2);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066);
+            --referral-gradient: linear-gradient(135deg, var(--primary-color), #ff0066);
+            --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53);
         }
 
         * {
@@ -69,7 +70,7 @@
             padding-top: 80px;
         }
 
-        /* **HEADER - ТОЧНО КАК В INDEX** */
+        /* HEADER */
         header {
             position: fixed;
             top: 0;
@@ -241,133 +242,96 @@
             min-width: 16px;
         }
 
-        /* **MAIN CONTAINER** */
+        /* MAIN CONTAINER */
         .main-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 16px;
         }
 
-        /* **REFERRAL BANNER - АДАПТИРОВАН ПОД ИНДЕКС** */
+        /* REFERRAL BANNER */
         .referral-banner {
-            background: var(--referral-gradient);
+            background: var(--gradient-primary);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px 24px;
-            margin-bottom: 24px;
+            border-radius: 12px;
+            padding: 24px 16px;
+            margin-bottom: 16px;
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             text-align: center;
-            box-shadow: 0 16px 40px rgba(255, 51, 51, 0.15);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.15);
             animation: bannerPulse 3s ease-in-out infinite alternate;
+            touch-action: pan-x;
         }
 
         @keyframes bannerPulse {
-            0% { box-shadow: 0 16px 40px rgba(255, 51, 51, 0.15); }
-            100% { box-shadow: 0 20px 50px rgba(255, 51, 51, 0.25); }
+            0% { box-shadow: 0 8px 20px rgba(255, 51, 51, 0.15); }
+            100% { box-shadow: 0 12px 30px rgba(255, 51, 51, 0.25); }
         }
 
         .banner-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
+            gap: 16px;
             z-index: 2;
-            position: relative;
         }
 
         .banner-text {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .banner-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #000;
             font-weight: bold;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             letter-spacing: 1px;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
-            100% { text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); }
         }
 
         .banner-subtitle {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: rgba(241, 241, 241, 0.9);
             margin: 0;
             letter-spacing: 0.5px;
-            animation: subtitleFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes subtitleFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
         }
 
         .banner-main-btn {
             background: rgba(255, 255, 255, 0.95);
             color: #000;
             border: none;
-            padding: 16px 32px;
-            border-radius: 25px;
+            padding: 12px 24px;
+            border-radius: 20px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            min-width: 180px;
             touch-action: manipulation;
-            min-width: 220px;
-            animation: buttonPulse 2s infinite;
-        }
-
-        .banner-main-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .banner-main-btn:hover::before {
-            left: 100%;
         }
 
         .banner-main-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .banner-main-btn:active {
             transform: scale(0.98);
         }
 
-        @keyframes buttonPulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-        }
-
         .banner-referral-stats {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
             justify-content: center;
             flex-wrap: wrap;
@@ -376,12 +340,13 @@
         .stat-item {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 12px;
             text-align: center;
-            min-width: 120px;
+            min-width: 100px;
             transition: all 0.2s ease;
             backdrop-filter: blur(10px);
+            touch-action: manipulation;
         }
 
         .stat-item:hover {
@@ -391,21 +356,19 @@
         }
 
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 4px;
-            letter-spacing: 0.5px;
         }
 
         .stat-value {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 4px;
         }
 
         .stat-change {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.9);
             display: flex;
             align-items: center;
@@ -413,13 +376,13 @@
             gap: 4px;
         }
 
-        /* **REFERRAL SECTIONS - ПОД ИНДЕКС** */
+        /* REFERRAL SECTIONS */
         .referral-section {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
             overflow: hidden;
         }
 
@@ -427,13 +390,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
 
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
             display: flex;
             align-items: center;
@@ -442,25 +405,28 @@
             margin: 0;
         }
 
-        /* **STATS GRID** */
+        /* STATS GRID */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
         .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px;
             text-align: center;
             transition: all 0.2s ease;
             cursor: pointer;
-            touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
+            touch-action: pan-y;
+            scroll-snap-align: center;
+            min-width: 260px;
         }
 
         .stat-card::before {
@@ -469,8 +435,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--referral-gradient);
+            height: 2px;
+            background: var(--gradient-primary);
         }
 
         .stat-card:active {
@@ -480,20 +446,20 @@
         .stat-card:hover {
             border-color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 8px;
             color: #000;
-            font-size: 1.2rem;
+            font-size: 1rem;
             box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
             transition: transform 0.2s ease;
         }
@@ -503,21 +469,20 @@
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .stat-change {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--success-color);
             display: flex;
             align-items: center;
@@ -525,18 +490,18 @@
             gap: 4px;
         }
 
-        /* **REFERRAL LINKS** */
+        /* REFERRAL LINKS */
         .referral-links {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
         }
 
         .link-item {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -552,8 +517,8 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: var(--referral-gradient);
+            width: 3px;
+            background: var(--gradient-primary);
             opacity: 0;
             transition: opacity 0.2s ease;
         }
@@ -564,7 +529,7 @@
 
         .link-item:hover {
             border-color: var(--primary-color);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
             transform: translateY(-2px);
         }
 
@@ -573,19 +538,18 @@
         }
 
         .link-type {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
             font-weight: bold;
             margin-bottom: 4px;
-            letter-spacing: 0.5px;
         }
 
         .link-value {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             word-break: break-all;
             max-width: 60%;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .link-actions {
@@ -600,14 +564,14 @@
             padding: 8px 12px;
             border-radius: 6px;
             font-family: inherit;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             touch-action: manipulation;
-            min-width: 80px;
+            min-width: 70px;
         }
 
         .action-btn:hover {
@@ -623,24 +587,29 @@
             background: var(--success-color);
         }
 
-        /* **LEVELS SYSTEM** */
+        /* LEVELS SYSTEM */
         .levels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
         .level-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            touch-action: manipulation;
+            touch-action: pan-y;
+            scroll-snap-align: center;
+            min-width: 240px;
         }
 
         .level-card::before {
@@ -649,18 +618,18 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--referral-gradient);
+            height: 2px;
+            background: var(--gradient-primary);
         }
 
         .level-card.current {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.2);
+            box-shadow: 0 0 0 2px rgba(255, 51, 51, 0.2);
         }
 
         .level-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
             border-color: var(--primary-color);
         }
 
@@ -671,22 +640,22 @@
         .level-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
         }
 
         .level-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #000;
-            font-size: 1rem;
+            font-size: 0.9rem;
             flex-shrink: 0;
         }
 
@@ -695,7 +664,7 @@
         }
 
         .level-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 4px;
@@ -703,8 +672,8 @@
 
         .level-status {
             padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -727,28 +696,28 @@
         }
 
         .level-progress {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.8rem;
+            margin-bottom: 6px;
+            font-size: 0.75rem;
             color: var(--text-secondary);
         }
 
         .progress-bar {
-            height: 6px;
+            height: 5px;
             background: var(--bg-secondary);
-            border-radius: 3px;
+            border-radius: 2px;
             overflow: hidden;
             border: 1px solid var(--border-color);
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--referral-gradient);
+            background: var(--gradient-primary);
             transition: width 0.3s ease;
             border-radius: 2px;
         }
@@ -756,46 +725,51 @@
         .level-rewards {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .reward-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px;
+            padding: 6px;
             background: rgba(255, 51, 51, 0.05);
             border-radius: 6px;
-            border-left: 3px solid var(--primary-color);
+            border-left: 2px solid var(--primary-color);
         }
 
         .reward-desc {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-primary);
         }
 
         .reward-value {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
             color: var(--success-color);
         }
 
-        /* **HISTORY GRID** */
+        /* HISTORY GRID */
         .history-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 16px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
         .history-item {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 12px;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
-            touch-action: manipulation;
+            touch-action: pan-y;
+            scroll-snap-align: center;
+            min-width: 280px;
         }
 
         .history-item::before {
@@ -805,13 +779,13 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--referral-gradient);
+            background: var(--gradient-primary);
         }
 
         .history-item:hover {
             transform: translateY(-2px);
             border-color: var(--primary-color);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
         }
 
         .history-item:active {
@@ -822,28 +796,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .history-user {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             color: var(--primary-color);
         }
 
         .history-date {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
         }
 
         .history-action {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--success-color);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .history-amount {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: var(--success-color);
             text-align: right;
@@ -852,13 +826,13 @@
         .history-status {
             display: flex;
             justify-content: flex-end;
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
         .status-badge {
             padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -876,12 +850,12 @@
             border: 1px solid #ffa500;
         }
 
-        /* **QUICK ACTIONS** */
+        /* QUICK ACTIONS */
         .quick-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
-            margin: 24px 0;
+            margin: 16px 0;
             flex-wrap: wrap;
         }
 
@@ -889,10 +863,10 @@
             background: var(--gradient-primary);
             color: #000;
             border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
+            padding: 10px 16px;
+            border-radius: 20px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -901,37 +875,42 @@
             touch-action: manipulation;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .quick-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.3);
         }
 
         .quick-btn:active {
             transform: scale(0.98);
         }
 
-        /* **BONUS CARDS** */
+        /* BONUS CARDS */
         .bonus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
         .bonus-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px;
             text-align: center;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            touch-action: manipulation;
+            touch-action: pan-y;
+            scroll-snap-align: center;
+            min-width: 240px;
         }
 
         .bonus-card::before {
@@ -940,14 +919,14 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 2px;
             background: var(--success-color);
         }
 
         .bonus-card:hover {
             transform: translateY(-2px);
             border-color: var(--success-color);
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 255, 136, 0.15);
         }
 
         .bonus-card:active {
@@ -955,48 +934,48 @@
         }
 
         .bonus-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--success-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 8px;
             color: #000;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .bonus-title {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
 
         .bonus-amount {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--success-color);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .bonus-desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.4;
         }
 
-        /* **LOAD MORE BUTTON** */
+        /* LOAD MORE BUTTON */
         .load-more-btn {
             background: var(--gradient-primary);
             color: #000;
             border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 10px 20px;
+            border-radius: 20px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -1005,15 +984,15 @@
             touch-action: manipulation;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin: 20px auto 0;
+            gap: 6px;
+            margin: 16px auto 0;
             width: 100%;
-            max-width: 200px;
+            max-width: 180px;
         }
 
         .load-more-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 6px 15px rgba(255, 51, 51, 0.3);
         }
 
         .load-more-btn:active {
@@ -1027,35 +1006,35 @@
             opacity: 0.6;
         }
 
-        /* **EMPTY STATE** */
+        /* EMPTY STATE */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 16px;
             color: var(--text-secondary);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
         .empty-state i {
-            font-size: 4rem;
+            font-size: 3rem;
             opacity: 0.3;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .empty-state h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
             color: var(--text-primary);
         }
 
         .empty-state p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0.7;
         }
 
-        /* **MODALS - ПОД ИНДЕКС** */
+        /* MODALS */
         .modal {
             display: none;
             position: fixed;
@@ -1067,7 +1046,7 @@
             z-index: 10000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             backdrop-filter: blur(10px);
         }
 
@@ -1078,38 +1057,32 @@
         .modal-content {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 420px;
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 400px;
             width: 90%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
             animation: modalSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         @keyframes modalSlide {
-            from {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 12px;
+            right: 12px;
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1129,18 +1102,18 @@
         }
 
         .modal-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: bold;
         }
 
         .modal-text {
             text-align: center;
             color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
@@ -1149,13 +1122,13 @@
             background: var(--gradient-primary);
             color: #000;
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 8px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -1168,7 +1141,7 @@
 
         .modal-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 51, 51, 0.3);
         }
 
         .modal-btn.secondary {
@@ -1177,23 +1150,23 @@
             border: 1px solid var(--border-color);
         }
 
-        /* **NOTIFICATION** */
+        /* NOTIFICATION */
         .notification {
             position: fixed;
-            top: 100px;
-            right: 20px;
+            top: 90px;
+            right: 16px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             z-index: 10001;
             transform: translateX(100%);
             opacity: 0;
             transition: all 0.3s ease;
-            max-width: 320px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             line-height: 1.4;
             white-space: pre-line;
         }
@@ -1204,56 +1177,38 @@
         }
 
         .notification.success {
-            border-left: 4px solid var(--success-color);
+            border-left: 3px solid var(--success-color);
         }
 
         .notification.error {
-            border-left: 4px solid var(--primary-color);
+            border-left: 3px solid var(--primary-color);
         }
 
-        /* **SUPPORT FAB** */
+        /* SUPPORT FAB */
         .support-fab {
             position: fixed;
-            bottom: 95px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
+            bottom: 85px;
+            right: 16px;
+            width: 48px;
+            height: 48px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #000;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
             z-index: 100;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 3px solid transparent;
+            border: 2px solid transparent;
             touch-action: manipulation;
-        }
-
-        .support-fab::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s, height 0.4s;
-        }
-
-        .support-fab:active::before {
-            width: 80px;
-            height: 80px;
         }
 
         .support-fab:hover {
             transform: scale(1.1) translateY(-4px);
-            box-shadow: 0 12px 35px rgba(255, 51, 51, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 51, 51, 0.4);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
@@ -1265,11 +1220,11 @@
             position: absolute;
             top: -4px;
             right: -4px;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: var(--success-color);
             border-radius: 50%;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1277,7 +1232,7 @@
             font-weight: bold;
         }
 
-        /* **BOTTOM NAVIGATION - ТОЧНО КАК В INDEX** */
+        /* BOTTOM NAVIGATION */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -1288,7 +1243,7 @@
             display: none;
             justify-content: space-around;
             align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             z-index: 100;
             backdrop-filter: blur(20px);
             touch-action: manipulation;
@@ -1305,11 +1260,11 @@
             gap: 4px;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: all 0.2s ease;
-            padding: 8px 4px;
-            border-radius: 12px;
-            min-width: 60px;
+            padding: 6px 4px;
+            border-radius: 10px;
+            min-width: 56px;
             touch-action: manipulation;
         }
 
@@ -1318,7 +1273,7 @@
         }
 
         .nav-item i {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: transform 0.2s ease;
         }
 
@@ -1335,18 +1290,14 @@
         }
 
         .nav-item span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 0.5px;
         }
 
-        /* **RESPONSIVE DESIGN** */
+        /* RESPONSIVE DESIGN */
         @media (max-width: 1200px) {
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            
-            .levels-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            .stats-grid, .levels-grid, .history-grid, .bonus-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
         }
 
@@ -1356,56 +1307,41 @@
             }
 
             .referral-banner {
-                padding: 24px 16px;
-                border-radius: 12px;
+                padding: 16px 12px;
+                border-radius: 10px;
             }
 
             .banner-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
 
             .banner-subtitle {
-                font-size: 1.1rem;
+                font-size: 0.9rem;
             }
 
             .banner-main-btn {
-                padding: 14px 24px;
-                min-width: 200px;
-                font-size: 0.9rem;
+                padding: 10px 20px;
+                min-width: 160px;
+                font-size: 0.85rem;
             }
 
             .banner-referral-stats {
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
             }
 
             .stat-item {
                 min-width: auto;
-                padding: 12px;
+                padding: 10px;
             }
 
             .stat-value {
-                font-size: 1.5rem;
+                font-size: 1.1rem;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
-                gap: 12px;
-            }
-
-            .levels-grid {
+            .stats-grid, .levels-grid, .history-grid, .bonus-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .history-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .bonus-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 10px;
             }
 
             .bottom-nav {
@@ -1413,10 +1349,10 @@
             }
 
             .support-fab {
-                bottom: 85px;
-                right: 16px;
-                width: 48px;
-                height: 48px;
+                bottom: 80px;
+                right: 12px;
+                width: 44px;
+                height: 44px;
                 font-size: 1.1rem;
             }
 
@@ -1425,20 +1361,20 @@
             }
 
             .quick-btn {
-                padding: 10px 16px;
+                padding: 8px 14px;
                 font-size: 0.8rem;
                 min-width: auto;
             }
 
             .link-item {
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 text-align: center;
             }
 
             .link-value {
                 max-width: 100%;
-                margin-bottom: 12px;
+                margin-bottom: 10px;
             }
 
             .link-actions {
@@ -1449,19 +1385,19 @@
             .section-header {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 16px;
+                gap: 12px;
             }
 
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 justify-content: center;
             }
         }
 
         @media (max-width: 480px) {
             .header {
-                padding: 10px 12px;
-                height: 65px;
+                padding: 8px 10px;
+                height: 60px;
             }
 
             #logo {
@@ -1479,99 +1415,78 @@
             }
 
             .referral-banner {
-                padding: 20px 12px;
+                padding: 12px 8px;
                 border-radius: 8px;
             }
 
             .banner-title {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
 
             .banner-subtitle {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
 
             .banner-main-btn {
-                padding: 12px 20px;
-                font-size: 0.85rem;
-                min-width: 180px;
+                padding: 10px 16px;
+                font-size: 0.8rem;
+                min-width: 140px;
             }
 
             .stat-value {
-                font-size: 1.3rem;
+                font-size: 1rem;
             }
 
             .referral-section {
-                padding: 16px;
-                border-radius: 12px;
-            }
-
-            .stats-grid,
-            .levels-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .history-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .bonus-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+                padding: 12px;
+                border-radius: 10px;
             }
 
             .quick-actions {
                 flex-direction: column;
                 align-items: center;
-                gap: 12px;
+                gap: 10px;
             }
 
             .quick-btn {
                 width: 100%;
-                max-width: 250px;
+                max-width: 220px;
                 justify-content: center;
             }
 
             .load-more-btn {
-                max-width: 180px;
-                font-size: 0.85rem;
+                max-width: 160px;
+                font-size: 0.8rem;
             }
         }
 
-        /* **ANIMATIONS** */
+        /* ANIMATIONS */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
         .fade-in {
-            animation: fadeIn 0.6s ease forwards;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .stagger-in {
-            animation: staggerIn 0.4s ease forwards;
-        }
-
-        @keyframes staggerIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* **SCROLLBAR** */
+        .stagger-in {
+            animation: staggerIn 0.3s ease forwards;
+        }
+
+        @keyframes staggerIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         ::-webkit-scrollbar-track {
@@ -1580,7 +1495,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--border-color);
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -1590,24 +1505,20 @@
 </head>
 <body>
     <div id="app" class="tg-ready">
-        <!-- HEADER - ТОЧНО КАК В INDEX -->
         <header class="header">
             <div class="logo-section">
                 <img id="logo" src="/IMG/LOGO.svg" alt="EVILBET" 
                      onclick="window.location.href='index.html'"
                      onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 50 50%22><circle cx=%2225%22 cy=%2225%22 r=%2225%22 fill=%22%23ff3333%22/><text x=%2225%22 y=%2230%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22white%22 font-weight=%22bold%22>EVIL</text></svg>'">
             </div>
-            
             <div class="user-section">
                 <div class="balance-display" onclick="openProfile()" title="Баланс и профиль">
                     <div class="balance-value" id="balanceDisplay">$0.00</div>
                 </div>
-                
                 <div class="user-display" id="userDisplay" onclick="toggleAuth()" title="Авторизация">
                     <div class="user-avatar" id="userAvatar">👤</div>
                     <div class="user-name guest-text" id="userName">Гость</div>
                 </div>
-                
                 <button class="notifications-btn" onclick="showNotifications()" title="Уведомления">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge" id="notificationBadge">0</span>
@@ -1616,38 +1527,35 @@
         </header>
 
         <div class="main-container">
-            <!-- REFERRAL BANNER -->
             <section class="referral-banner fade-in">
                 <div class="banner-content">
                     <div class="banner-text">
                         <h1 class="banner-title">
-                            <i class="fas fa-users" style="margin-right: 12px;"></i>
-                            РЕФЕРАЛЬНАЯ СИСТЕМА
+                            <i class="fas fa-users" style="margin-right: 8px;"></i>
+                            РЕФЕРАЛЫ
                         </h1>
-                        <p class="banner-subtitle">ЗАРАБАТЫВАЙ ДО 30% СТАВОК СВОИХ ДРУЗЕЙ ПОЖИЗНЕННО</p>
+                        <p class="banner-subtitle">ДО 30% СТАВОК ДРУЗЕЙ</p>
                     </div>
-                    
                     <button class="banner-main-btn" id="copyReferralBtn" onclick="copyReferralLink()">
-                        <i class="fas fa-copy"></i> СКОПИРОВАТЬ ССЫЛКУ
+                        <i class="fas fa-copy"></i> КОПИРОВАТЬ ССЫЛКУ
                     </button>
-                    
                     <div class="banner-referral-stats">
                         <div class="stat-item">
-                            <div class="stat-label">Ваши рефералы</div>
+                            <div class="stat-label">Рефералы</div>
                             <div class="stat-value" id="totalReferrals">0</div>
                             <div class="stat-change">
-                                <i class="fas fa-arrow-up"></i> +0 за неделю
+                                <i class="fas fa-arrow-up"></i> +0/нед
                             </div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Заработано</div>
+                            <div class="stat-label">Доход</div>
                             <div class="stat-value" id="totalEarnings">$0</div>
                             <div class="stat-change">
-                                <i class="fas fa-dollar-sign"></i> +$0 за месяц
+                                <i class="fas fa-dollar-sign"></i> +$0/мес
                             </div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Ваш уровень</div>
+                            <div class="stat-label">Уровень</div>
                             <div class="stat-value" id="currentLevel">1</div>
                             <div class="stat-change">
                                 <i class="fas fa-crown"></i> Бронза
@@ -1657,12 +1565,11 @@
                 </div>
             </section>
 
-            <!-- STATS SECTION -->
             <section class="referral-section">
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas fa-chart-line"></i>
-                        СТАТИСТИКА РЕФЕРАЛОВ
+                        СТАТИСТИКА
                     </h2>
                     <div class="time-filter" id="statsFilter">
                         <i class="fas fa-calendar-week time-icon active" data-filter="week" onclick="filterStats('week')" title="За неделю"></i>
@@ -1670,43 +1577,42 @@
                         <i class="fas fa-calendar-alt time-icon" data-filter="all" onclick="filterStats('all')" title="За всё время"></i>
                     </div>
                 </div>
-                
                 <div class="stats-grid">
                     <div class="stat-card stagger-in" style="animation-delay: 0.1s;" onclick="showReferralDetails('active')">
                         <div class="stat-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <div class="stat-label">АКТИВНЫХ РЕФЕРАЛОВ</div>
+                        <div class="stat-label">АКТИВНЫЕ</div>
                         <div class="stat-value" id="activeReferrals">0</div>
                         <div class="stat-change">
-                            <i class="fas fa-arrow-up"></i> +0 за 30 дней
+                            <i class="fas fa-arrow-up"></i> +0/30 дней
                         </div>
                     </div>
                     <div class="stat-card stagger-in" style="animation-delay: 0.2s;" onclick="showReferralDetails('income')">
                         <div class="stat-icon">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
-                        <div class="stat-label">ОБЩИЙ ДОХОД</div>
+                        <div class="stat-label">ДОХОД</div>
                         <div class="stat-value" id="totalIncome">$0.00</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> +$0.00 за месяц
+                        <div class="stat-change">
+                            <i class="fas fa-arrow-up"></i> +$0.00/мес
                         </div>
                     </div>
                     <div class="stat-card stagger-in" style="animation-delay: 0.3s;" onclick="showReferralDetails('level')">
                         <div class="stat-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
-                        <div class="stat-label">ТЕКУЩИЙ УРОВЕНЬ</div>
+                        <div class="stat-label">УРОВЕНЬ</div>
                         <div class="stat-value" id="levelNumber">1</div>
                         <div class="stat-change">
-                            <i class="fas fa-fire"></i> До Золота: 25 рефералов
+                            <i class="fas fa-fire"></i> До Золота: 25
                         </div>
                     </div>
                     <div class="stat-card stagger-in" style="animation-delay: 0.4s;" onclick="showReferralDetails('last')">
                         <div class="stat-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <div class="stat-label">ПОСЛЕДНИЙ РЕФЕРАЛ</div>
+                        <div class="stat-label">ПОСЛЕДНИЙ</div>
                         <div class="stat-value" id="lastReferral">—</div>
                         <div class="stat-change">
                             <i class="fas fa-calendar-alt"></i> <span id="lastReferralDate">—</span>
@@ -1715,22 +1621,20 @@
                 </div>
             </section>
 
-            <!-- REFERRAL LINKS -->
             <section class="referral-section">
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas fa-link"></i>
-                        ВАШИ РЕФЕРАЛЬНЫЕ ССЫЛКИ
+                        ССЫЛКИ
                     </h2>
                     <button class="quick-btn" onclick="shareReferral()">
-                        <i class="fas fa-share-alt"></i> Быстро поделиться
+                        <i class="fas fa-share-alt"></i> Поделиться
                     </button>
                 </div>
-                
                 <div class="referral-links">
                     <div class="link-item">
                         <div>
-                            <div class="link-type">РЕФЕРАЛЬНЫЙ КОД</div>
+                            <div class="link-type">КОД</div>
                             <div class="link-value" id="referralCode">EVIL123456</div>
                         </div>
                         <div class="link-actions">
@@ -1744,7 +1648,7 @@
                     </div>
                     <div class="link-item">
                         <div>
-                            <div class="link-type">ПОЛНАЯ ССЫЛКА</div>
+                            <div class="link-type">ССЫЛКА</div>
                             <div class="link-value" id="referralLink">https://evilbet.com/ref/EVIL123456</div>
                         </div>
                         <div class="link-actions">
@@ -1757,7 +1661,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="quick-actions">
                     <button class="quick-btn" onclick="shareTelegram()">
                         <i class="fab fa-telegram-plane"></i> Telegram
@@ -1771,67 +1674,58 @@
                 </div>
             </section>
 
-            <!-- LEVELS SYSTEM -->
             <section class="referral-section">
                 <h2 class="section-title">
                     <i class="fas fa-crown"></i>
-                    СИСТЕМА УРОВНЕЙ
+                    УРОВНИ
                 </h2>
-                <div class="levels-grid" id="levelsGrid">
-                    <!-- Dynamic levels will be rendered here -->
-                </div>
+                <div class="levels-grid" id="levelsGrid"></div>
             </section>
 
-            <!-- RECENT REFERRALS -->
             <section class="referral-section">
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas fa-history"></i>
-                        НЕДАВНИЕ РЕФЕРАЛЫ
+                        ИСТОРИЯ
                     </h2>
                     <button class="quick-btn" onclick="loadMoreReferrals()">
-                        <i class="fas fa-plus"></i> Загрузить ещё
+                        <i class="fas fa-plus"></i> Ещё
                     </button>
                 </div>
-                <div class="history-grid" id="referralHistory">
-                    <!-- Dynamic history will be rendered here -->
-                </div>
+                <div class="history-grid" id="referralHistory"></div>
             </section>
 
-            <!-- BONUS CARDS -->
             <section class="referral-section">
                 <h2 class="section-title">
                     <i class="fas fa-gift"></i>
-                    ДОСТУПНЫЕ БОНУСЫ
+                    БОНУСЫ
                 </h2>
                 <div class="bonus-grid">
                     <div class="bonus-card" onclick="openWithdrawModal()">
                         <div class="bonus-icon">
                             <i class="fas fa-wallet"></i>
                         </div>
-                        <div class="bonus-title">ВЫВОДИМЫЕ СРЕДСТВА</div>
+                        <div class="bonus-title">ВЫВОД</div>
                         <div class="bonus-amount" id="withdrawableAmount">$0.00</div>
-                        <div class="bonus-desc">Средства доступны для вывода после верификации</div>
+                        <div class="bonus-desc">Средства для вывода</div>
                     </div>
                     <div class="bonus-card" onclick="claimReferralBonus()">
                         <div class="bonus-icon">
                             <i class="fas fa-star"></i>
                         </div>
-                        <div class="bonus-title">РЕФЕРАЛЬНЫЙ БОНУС</div>
+                        <div class="bonus-title">БОНУС</div>
                         <div class="bonus-amount" id="referralBonusAmount">$0.00</div>
-                        <div class="bonus-desc">Бонус за каждого активного реферала</div>
+                        <div class="bonus-desc">За активных рефералов</div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- SUPPORT BUTTON -->
         <button class="support-fab" onclick="openSupport()" title="Поддержка 24/7">
             <i class="fas fa-headset"></i>
             <span class="support-badge">!</span>
         </button>
 
-        <!-- BOTTOM NAVIGATION -->
         <nav class="bottom-nav active">
             <a href="index.html" class="nav-item" data-page="index">
                 <i class="fas fa-home"></i>
@@ -1855,7 +1749,6 @@
             </a>
         </nav>
 
-        <!-- AUTH MODAL -->
         <div id="authModal" class="modal">
             <div class="modal-content">
                 <button class="modal-close" onclick="closeModal('authModal')">
@@ -1863,65 +1756,61 @@
                 </button>
                 <h2 class="modal-title">EVILBET РЕФЕРАЛЫ</h2>
                 <div class="modal-text">
-                    Подключите аккаунт для доступа к реферальной системе<br>
-                    и заработку на приглашениях друзей
+                    Подключите аккаунт для доступа<br>к реферальной системе
                 </div>
                 <button class="modal-btn" onclick="connectTelegram()">
                     <i class="fab fa-telegram-plane" style="margin-right: 8px;"></i>
-                    Подключить Telegram
+                    Telegram
                 </button>
-                <div class="modal-text" style="font-size: 0.85rem; opacity: 0.8;">
+                <div class="modal-text" style="font-size: 0.8rem; opacity: 0.8;">
                     <i class="fas fa-gift" style="color: var(--success-color); margin-right: 4px;"></i>
-                    +50$ бонус за первого реферала
+                    +50$ за первого реферала
                 </div>
             </div>
         </div>
 
-        <!-- WITHDRAW MODAL -->
         <div id="withdrawModal" class="modal">
             <div class="modal-content">
                 <button class="modal-close" onclick="closeModal('withdrawModal')">
                     <i class="fas fa-times"></i>
                 </button>
-                <h2 class="modal-title">ВЫВОД СРЕДСТВ</h2>
+                <h2 class="modal-title">ВЫВОД</h2>
                 <div class="modal-text" style="text-align: left;">
-                    <div style="margin-bottom: 16px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-primary);">Доступно для вывода:</label>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--success-color); margin-bottom: 16px;" id="withdrawAvailable">$0.00</div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 6px; color: var(--text-primary);">Доступно:</label>
+                        <div style="font-size: 1.4rem; font-weight: bold; color: var(--success-color); margin-bottom: 12px;" id="withdrawAvailable">$0.00</div>
                     </div>
-                    <div style="margin-bottom: 16px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-primary);">Способ вывода:</label>
-                        <select id="withdrawMethod" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary); font-family: inherit;">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 6px; color: var(--text-primary);">Метод:</label>
+                        <select id="withdrawMethod" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; color: var(--text-primary); font-family: inherit;">
                             <option value="btc">Bitcoin (BTC)</option>
                             <option value="eth">Ethereum (ETH)</option>
                             <option value="usdt">USDT (TRC20)</option>
-                            <option value="card">Банковская карта</option>
+                            <option value="card">Карта</option>
                         </select>
                     </div>
-                    <div style="margin-bottom: 16px;">
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-primary);">Сумма ($):</label>
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; margin-bottom: 6px; color: var(--text-primary);">Сумма ($):</label>
                         <input type="number" id="withdrawAmountInput" min="10" step="0.01" 
-                               style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary); font-family: inherit; text-align: center;" 
+                               style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; color: var(--text-primary); font-family: inherit; text-align: center;" 
                                placeholder="0.00">
                     </div>
-                    <div style="background: var(--bg-secondary); padding: 12px; border-radius: 8px; border-left: 4px solid var(--live-color); margin-bottom: 20px; font-size: 0.85rem; color: var(--text-secondary);">
-                        <i class="fas fa-info-circle" style="color: var(--live-color); margin-right: 8px;"></i>
-                        Минимальная сумма: $10. Обработка: 1-24 часа. Комиссия: 0%
+                    <div style="background: var(--bg-secondary); padding: 10px; border-radius: 6px; border-left: 3px solid var(--live-color); margin-bottom: 16px; font-size: 0.8rem; color: var(--text-secondary);">
+                        <i class="fas fa-info-circle" style="color: var(--live-color); margin-right: 6px;"></i>
+                        Мин. $10. Обработка: 1-24ч. Комиссия: 0%
                     </div>
                 </div>
                 <button class="modal-btn" id="confirmWithdrawBtn" onclick="processWithdraw()" disabled>
-                    <i class="fas fa-paper-plane"></i> Отправить заявку
+                    <i class="fas fa-paper-plane"></i> Вывести
                 </button>
                 <button class="modal-btn secondary" onclick="closeModal('withdrawModal')">Отмена</button>
             </div>
         </div>
 
-        <!-- NOTIFICATION -->
         <div id="notification" class="notification"></div>
     </div>
 
     <script>
-        // GLOBAL STATE
         const TelegramWebApp = window.Telegram?.WebApp;
         let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
@@ -1943,33 +1832,14 @@
         let referralHistory = JSON.parse(localStorage.getItem('referralHistory')) || [];
         let currentStatsFilter = 'week';
 
-        // REFERRAL LEVELS
         const referralLevels = [
-            { 
-                level: 1, name: 'Бронза', minReferrals: 0, maxReferrals: 5, 
-                rate: 1.0, registrationBonus: 5, cashback: 2,
-                icon: 'fas fa-medal', color: '#cd7f32'
-            },
-            { 
-                level: 2, name: 'Серебро', minReferrals: 6, maxReferrals: 15, 
-                rate: 1.5, registrationBonus: 10, cashback: 3,
-                icon: 'fas fa-gem', color: '#c0c0c0'
-            },
-            { 
-                level: 3, name: 'Золото', minReferrals: 16, maxReferrals: 35, 
-                rate: 2.0, registrationBonus: 25, cashback: 5,
-                icon: 'fas fa-crown', color: '#ffd700'
-            },
-            { 
-                level: 4, name: 'Платина', minReferrals: 36, maxReferrals: Infinity, 
-                rate: 3.0, registrationBonus: 50, cashback: 10,
-                icon: 'fas fa-star', color: '#e5e4e2'
-            }
+            { level: 1, name: 'Бронза', minReferrals: 0, maxReferrals: 5, rate: 1.0, registrationBonus: 5, cashback: 2, icon: 'fas fa-medal', color: '#cd7f32' },
+            { level: 2, name: 'Серебро', minReferrals: 6, maxReferrals: 15, rate: 1.5, registrationBonus: 10, cashback: 3, icon: 'fas fa-gem', color: '#c0c0c0' },
+            { level: 3, name: 'Золото', minReferrals: 16, maxReferrals: 35, rate: 2.0, registrationBonus: 25, cashback: 5, icon: 'fas fa-crown', color: '#ffd700' },
+            { level: 4, name: 'Платина', minReferrals: 36, maxReferrals: Infinity, rate: 3.0, registrationBonus: 50, cashback: 10, icon: 'fas fa-star', color: '#e5e4e2' }
         ];
 
-        // INIT APP
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 EVILBET - Referral System v3.0');
             initReferralApp();
         });
 
@@ -1980,122 +1850,86 @@
                 setupTelegramIntegration();
                 applyTelegramTheme();
             }
-
-            // Initialize data
             initializeReferralData();
-            
             updateUserInterface();
             renderLevels();
             renderReferralHistory();
             setupEventListeners();
+            setupSwipeEvents();
             startLiveUpdates();
-            
-            // Welcome animation
             if (!localStorage.getItem('referralWelcomeShown') && isLoggedIn) {
                 setTimeout(() => {
-                    showNotification('🎉 Добро пожаловать в реферальную систему!\n💰 Приглашайте друзей и зарабатывайте до 30%', 'success');
+                    showNotification('🎉 Добро пожаловать!\n💰 Приглашайте друзей!', 'success');
                     localStorage.setItem('referralWelcomeShown', 'true');
-                }, 1500);
+                }, 1000);
             }
-
             updateReferralStats();
         }
 
-        // TELEGRAM INTEGRATION
         function setupTelegramIntegration() {
-            TelegramWebApp.MainButton.setText('ПОДЕЛИТЬСЯ РЕФЕРАЛкой');
+            TelegramWebApp.MainButton.setText('ПОДЕЛИТЬСЯ');
             TelegramWebApp.MainButton.onClick(shareReferral);
             TelegramWebApp.MainButton.setParams({
                 color: '#ff3333',
                 text_color: '#ffffff',
                 is_visible: isLoggedIn
             });
-
             TelegramWebApp.BackButton.onClick(function() {
                 if (document.querySelector('.modal.active')) {
                     closeActiveModal();
                     TelegramWebApp.HapticFeedback.impactOccurred('light');
                 } else {
-                    window.history.back();
+                    window.location.href = 'index.html';
                 }
             });
-
-            // Haptic feedback for interactive elements
-            const hapticSelectors = [
-                '.stat-card', '.level-card', '.bonus-card', '.link-item',
-                '.quick-btn', '.action-btn', '.banner-main-btn', '.nav-item'
-            ];
-            
+            const hapticSelectors = ['.stat-card', '.level-card', '.bonus-card', '.link-item', '.quick-btn', '.action-btn', '.banner-main-btn', '.nav-item'];
             hapticSelectors.forEach(selector => {
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest(selector)) {
-                        TelegramWebApp.HapticFeedback.impactOccurred('medium');
-                    }
-                }, { passive: true });
+                document.querySelectorAll(selector).forEach(el => {
+                    el.addEventListener('touchstart', () => TelegramWebApp.HapticFeedback.impactOccurred('medium'), { passive: true });
+                });
             });
         }
 
         function applyTelegramTheme() {
             if (!TelegramWebApp?.themeParams) return;
-
             const theme = TelegramWebApp.themeParams;
-            const bgColor = theme.bg_color || '#0a0a0a';
-            const secondaryBg = theme.secondary_bg_color || '#1a1a1a';
-            const buttonColor = theme.button_color || '#ff3333';
-
-            document.documentElement.style.setProperty('--bg-primary', bgColor);
-            document.documentElement.style.setProperty('--bg-secondary', secondaryBg);
-            document.documentElement.style.setProperty('--primary-color', buttonColor);
-            document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${buttonColor}, #ff0066)`);
-            document.documentElement.style.setProperty('--referral-gradient', `linear-gradient(135deg, ${buttonColor}, #ff6b6b, #ff8e8e)`);
-
-            document.body.style.background = bgColor;
+            document.documentElement.style.setProperty('--bg-primary', theme.bg_color || '#0a0a0a');
+            document.documentElement.style.setProperty('--bg-secondary', theme.secondary_bg_color || '#1a1a1a');
+            document.documentElement.style.setProperty('--primary-color', theme.button_color || '#ff3333');
+            document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${theme.button_color || '#ff3333'}, #ff0066)`);
+            document.documentElement.style.setProperty('--referral-gradient', `linear-gradient(135deg, ${theme.button_color || '#ff3333'}, #ff0066)`);
+            document.body.style.background = theme.bg_color || '#0a0a0a';
         }
 
-        // USER INTERFACE
         function updateUserInterface() {
             const userDisplay = document.getElementById('userDisplay');
             const userName = document.getElementById('userName');
             const userAvatar = document.getElementById('userAvatar');
             const balanceDisplay = document.getElementById('balanceDisplay');
-
             if (isLoggedIn && currentUser) {
                 userName.textContent = currentUser.username;
                 userName.classList.remove('guest-text');
-                
-                if (currentUser.avatar) {
-                    userAvatar.innerHTML = `<img src="${currentUser.avatar}" alt="${currentUser.username}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
-                } else {
-                    userAvatar.textContent = currentUser.username.charAt(0).toUpperCase();
-                }
-                
+                userAvatar.innerHTML = currentUser.avatar ? `<img src="${currentUser.avatar}" alt="${currentUser.username}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : currentUser.username.charAt(0).toUpperCase();
                 balanceDisplay.textContent = `$${balance.toFixed(2)}`;
-                
                 TelegramWebApp?.MainButton?.show();
             } else {
                 userName.textContent = 'Гость';
                 userName.classList.add('guest-text');
                 userAvatar.textContent = '👤';
                 balanceDisplay.textContent = '$0.00';
-                
                 TelegramWebApp?.MainButton?.hide();
             }
-
             updateNotificationBadge();
         }
 
-        // REFERRAL DATA INITIALIZATION
         function initializeReferralData() {
             if (!referralData.code) {
                 referralData.code = 'EVIL' + Math.random().toString(36).substr(2, 6).toUpperCase();
             }
-            
             referralData.link = `https://t.me/EvilBetBot?start=ref_${referralData.code}`;
-            
             if (referralHistory.length === 0) {
                 generateDemoHistory();
             }
-            
             localStorage.setItem('referralData', JSON.stringify(referralData));
             localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
         }
@@ -2103,7 +1937,6 @@
         function generateDemoHistory() {
             const actions = ['Регистрация', 'Первая ставка', 'Депозит $50', 'Выигрыш $100', 'Активная неделя'];
             const statuses = ['completed', 'completed', 'completed', 'completed', 'pending'];
-            
             referralHistory = Array.from({length: 8}, (_, i) => ({
                 id: i + 1,
                 user: `Игрок_${100 + i * 23}`,
@@ -2112,22 +1945,18 @@
                 date: new Date(Date.now() - (i + 1) * 86400000).toISOString(),
                 status: statuses[i % statuses.length]
             }));
-            
             localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
         }
 
-        // RENDER LEVELS
         function renderLevels() {
             const container = document.getElementById('levelsGrid');
             const currentReferrals = referralData.totalReferrals || 0;
-            
             container.innerHTML = referralLevels.map((level, index) => {
                 const isUnlocked = currentReferrals >= level.minReferrals;
                 const isCurrent = isUnlocked && currentReferrals < (level.maxReferrals || Infinity);
                 const progress = Math.min(currentReferrals - level.minReferrals, level.maxReferrals - level.minReferrals);
                 const maxProgress = level.maxReferrals === Infinity ? 100 : level.maxReferrals - level.minReferrals;
                 const percentage = Math.min((progress / maxProgress) * 100, 100);
-                
                 return `
                     <div class="level-card ${isCurrent ? 'current' : ''} ${isUnlocked ? 'unlocked' : 'locked'} stagger-in" 
                          style="animation-delay: ${0.1 + index * 0.1}s;" data-level="${level.level}" onclick="showLevelDetails(${level.level})">
@@ -2153,11 +1982,11 @@
                         </div>
                         <div class="level-rewards">
                             <div class="reward-item">
-                                <div class="reward-desc">Доход с рефералов</div>
+                                <div class="reward-desc">Доход</div>
                                 <div class="reward-value">${level.rate}%</div>
                             </div>
                             <div class="reward-item">
-                                <div class="reward-desc">Бонус за регистрацию</div>
+                                <div class="reward-desc">Бонус</div>
                                 <div class="reward-value">$${level.registrationBonus}</div>
                             </div>
                             <div class="reward-item">
@@ -2170,30 +1999,26 @@
             }).join('');
         }
 
-        // RENDER REFERRAL HISTORY
         function renderReferralHistory() {
             const container = document.getElementById('referralHistory');
             const recentHistory = referralHistory.slice(0, 8);
-            
             if (recentHistory.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-users-slash"></i>
                         <h3>Пока нет рефералов</h3>
-                        <p>Приглашайте друзей через свою реферальную ссылку<br>и начинайте зарабатывать!</p>
-                        <button class="quick-btn" onclick="shareReferral()" style="margin-top: 16px;">
-                            <i class="fas fa-share-alt"></i> Пригласить друга
+                        <p>Приглашайте друзей<br>и зарабатывайте!</p>
+                        <button class="quick-btn" onclick="shareReferral()" style="margin-top: 12px;">
+                            <i class="fas fa-share-alt"></i> Пригласить
                         </button>
                     </div>
                 `;
                 return;
             }
-            
             container.innerHTML = recentHistory.map((referral, index) => {
                 const statusClass = referral.status;
                 const statusIcon = referral.status === 'completed' ? '✅' : '⏳';
                 const statusText = referral.status === 'completed' ? 'Завершено' : 'Ожидает';
-                
                 return `
                     <div class="history-item stagger-in" style="animation-delay: ${index * 0.1}s;">
                         <div class="history-header">
@@ -2212,630 +2037,424 @@
             }).join('');
         }
 
-        // UPDATE REFERRAL STATS
-        function updateReferralStats() {
-            document.getElementById('totalReferrals').textContent = referralData.totalReferrals || 0;
-            document.getElementById('activeReferrals').textContent = referralData.activeReferrals || 0;
-            document.getElementById('totalIncome').textContent = `$${referralData.totalEarnings || 0}`;
-            document.getElementById('currentLevel').textContent = referralData.currentLevel || 1;
-            document.getElementById('referralCode').textContent = referralData.code || 'EVIL123456';
-            document.getElementById('referralLink').textContent = referralData.link || `https://t.me/EvilBetBot?start=ref_${referralData.code}`;
-            document.getElementById('levelNumber').textContent = referralData.currentLevel || 1;
-            document.getElementById('totalIncome').textContent = `$${(referralData.totalEarnings || 0).toFixed(2)}`;
-            document.getElementById('withdrawableAmount').textContent = `$${(referralData.bonuses?.withdrawable || 0).toFixed(2)}`;
-            document.getElementById('referralBonusAmount').textContent = `$${(referralData.bonuses?.referralBonus || 0).toFixed(2)}`;
-            
-            if (referralHistory.length > 0) {
-                const lastReferral = referralHistory[0];
-                document.getElementById('lastReferral').textContent = lastReferral.user;
-                document.getElementById('lastReferralDate').textContent = new Date(lastReferral.date).toLocaleDateString('ru-RU');
-            }
+        
+function updateReferralStats() {
+    document.getElementById('totalReferrals').textContent = referralData.totalReferrals || 0;
+    document.getElementById('activeReferrals').textContent = referralData.activeReferrals || 0;
+    document.getElementById('totalIncome').textContent = `$${parseFloat(referralData.totalEarnings || 0).toFixed(2)}`;
+    document.getElementById('currentLevel').textContent = referralData.currentLevel || 1;
+    document.getElementById('referralCode').textContent = referralData.code || 'EVIL123456';
+    document.getElementById('referralLink').textContent = referralData.link || 'https://t.me/EvilBetBot?start=ref_' + referralData.code;
+    document.getElementById('levelNumber').textContent = referralData.currentLevel || 1;
+    document.getElementById('totalEarnings').textContent = `$${parseFloat(referralData.totalEarnings || 0).toFixed(2)}`;
+    document.getElementById('lastReferral').textContent = referralHistory.length > 0 ? referralHistory[0].user : '—';
+    document.getElementById('lastReferralDate').textContent = referralHistory.length > 0 ? new Date(referralHistory[0].date).toLocaleDateString('ru-RU') : '—';
+    document.getElementById('withdrawableAmount').textContent = `$${parseFloat(referralData.bonuses.withdrawable || 0).toFixed(2)}`;
+    document.getElementById('referralBonusAmount').textContent = `$${parseFloat(referralData.bonuses.referralBonus || 0).toFixed(2)}`;
+    document.getElementById('withdrawAvailable').textContent = `$${parseFloat(referralData.bonuses.withdrawable || 0).toFixed(2)}`;
+}
 
-            updateLevelProgress();
-            updateWithdrawModal();
-        }
+function updateNotificationBadge() {
+    const badge = document.getElementById('notificationBadge');
+    const pendingNotifications = referralHistory.filter(item => item.status === 'pending').length;
+    badge.textContent = pendingNotifications;
+    badge.style.display = pendingNotifications > 0 ? 'flex' : 'none';
+}
 
-        function updateLevelProgress() {
-            const currentReferrals = referralData.totalReferrals || 0;
-            let currentLevel = 1;
-            
-            for (let i = 0; i < referralLevels.length; i++) {
-                const level = referralLevels[i];
-                if (currentReferrals >= level.minReferrals) {
-                    currentLevel = level.level;
-                } else {
-                    break;
-                }
+function setupEventListeners() {
+    document.getElementById('withdrawAmountInput')?.addEventListener('input', validateWithdrawInput);
+    document.querySelectorAll('.stat-card, .level-card, .bonus-card, .link-item, .quick-btn, .action-btn, .banner-main-btn, .nav-item').forEach(el => {
+        el.addEventListener('click', () => {
+            TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
+        });
+    });
+}
+
+function setupSwipeEvents() {
+    const swipeAreas = ['stats-grid', 'levels-grid', 'history-grid', 'bonus-grid'];
+    swipeAreas.forEach(area => {
+        const container = document.querySelector(`.${area}`);
+        if (!container) return;
+        let startX, startY;
+        container.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+        container.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                const scrollAmount = container.clientWidth * 0.8;
+                container.scrollBy({
+                    left: deltaX < 0 ? scrollAmount : -scrollAmount,
+                    behavior: 'smooth'
+                });
+                TelegramWebApp?.HapticFeedback?.selectionChanged();
             }
-            
-            referralData.currentLevel = currentLevel;
-            document.getElementById('levelNumber').textContent = currentLevel;
-            document.getElementById('currentLevel').textContent = currentLevel;
-            
+        }, { passive: true });
+    });
+}
+
+function startLiveUpdates() {
+    setInterval(() => {
+        if (Math.random() < 0.1) {
+            referralData.activeReferrals = Math.min(referralData.activeReferrals + 1, referralData.totalReferrals);
+            referralData.totalEarnings = (parseFloat(referralData.totalEarnings || 0) + Math.random() * 5).toFixed(2);
+            referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable || 0) + Math.random() * 2).toFixed(2);
             localStorage.setItem('referralData', JSON.stringify(referralData));
+            updateReferralStats();
+            renderLevels();
         }
+    }, 60000);
+}
 
-        function updateWithdrawModal() {
-            const available = referralData.bonuses?.withdrawable || 0;
-            document.getElementById('withdrawAvailable').textContent = `$${available.toFixed(2)}`;
-            document.getElementById('withdrawAmountInput').value = available;
-            document.getElementById('confirmWithdrawBtn').disabled = available < 10;
-        }
+function toggleAuth() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+    } else {
+        openProfile();
+    }
+    TelegramWebApp?.HapticFeedback?.impactOccurred('light');
+}
 
-        // FILTER STATS
-        function filterStats(filter) {
-            document.querySelectorAll('.time-icon').forEach(icon => icon.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            currentStatsFilter = filter;
-            // Here you would filter stats based on time period
-            TelegramWebApp?.HapticFeedback.impactOccurred('selection');
-            showNotification(`Статистика: ${filter === 'week' ? 'неделя' : filter === 'month' ? 'месяц' : 'всё время'}`, 'success');
-        }
+function openProfile() {
+    if (isLoggedIn) {
+        showNotification('Переход в профиль...', 'success');
+        setTimeout(() => window.location.href = 'profile.html', 500);
+    } else {
+        openModal('authModal');
+    }
+}
 
-        // REFERRAL ACTIONS
-        function copyReferralCode() {
-            const code = document.getElementById('referralCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                showNotification('✅ Код скопирован в буфер обмена!', 'success');
-                TelegramWebApp?.HapticFeedback.impactOccurred('success');
-                createRipple(event.currentTarget);
-            }).catch(() => {
-                fallbackCopy(code);
-            });
-        }
+function showNotifications() {
+    showNotification('Уведомления: ' + (referralHistory.filter(item => item.status === 'pending').length || 'нет новых'), 'success');
+}
 
-        function copyReferralLink() {
-            const link = document.getElementById('referralLink').textContent;
-            navigator.clipboard.writeText(link).then(() => {
-                showNotification('🔗 Ссылка скопирована!', 'success');
-                TelegramWebApp?.HapticFeedback.impactOccurred('success');
-                createRipple(event.currentTarget);
-                trackShareAction('copy');
-            }).catch(() => {
-                fallbackCopy(link);
-            });
-        }
+function copyReferralLink() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    navigator.clipboard.writeText(referralData.link).then(() => {
+        showNotification('Ссылка скопирована!', 'success');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+    }).catch(() => {
+        showNotification('Ошибка копирования', 'error');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    });
+}
 
-        function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            showNotification('✅ Скопировано!', 'success');
-        }
+function copyReferralCode() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    navigator.clipboard.writeText(referralData.code).then(() => {
+        showNotification('Код скопирован!', 'success');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+    }).catch(() => {
+        showNotification('Ошибка копирования', 'error');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    });
+}
 
-        function shareReferral() {
-            if (!isLoggedIn) {
-                showModal('authModal');
-                return;
-            }
-            
-            const message = `🎯 Присоединяйся к EVILBET через мою реферальную ссылку!\n\n🔗 ${referralData.link}\n\n💰 Получай бонусы и зарабатывай до 30% от ставок!\n\nРегистрация +100$ бонус!`;
-            
-            if (TelegramWebApp) {
-                TelegramWebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralData.link)}&text=${encodeURIComponent(message)}`);
-            } else if (navigator.share) {
-                navigator.share({
-                    title: 'Присоединяйся к EVILBET!',
-                    text: message,
-                    url: referralData.link
-                });
-            } else {
-                navigator.clipboard.writeText(message).then(() => {
-                    showNotification('📋 Сообщение для шаринга скопировано!', 'success');
-                });
-            }
-            
-            TelegramWebApp?.HapticFeedback.impactOccurred('heavy');
-            trackShareAction('telegram');
-        }
+function shareReferral() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Присоединяйтесь к EVILBET и получайте бонусы! Мой код: ${referralData.code}\n${referralData.link}`;
+    if (TelegramWebApp) {
+        TelegramWebApp.shareToUrl(referralData.link, shareText);
+        TelegramWebApp.HapticFeedback.notificationOccurred('success');
+    } else {
+        navigator.share({
+            title: 'EVILBET Рефералы',
+            text: shareText,
+            url: referralData.link
+        }).catch(() => {
+            showNotification('Ошибка шаринга', 'error');
+        });
+    }
+}
 
-        function shareTelegram() {
-            shareReferral(); // Same as main share
-        }
+function shareTelegram() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(referralData.link)}&text=${encodeURIComponent(shareText)}`);
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
 
-        function shareWhatsApp() {
-            const message = encodeURIComponent(`Присоединяйся к EVILBET! Моя рефералка: ${referralData.link} 💰 До 30% дохода + $100 бонус!`);
-            window.open(`https://wa.me/?text=${message}`, '_blank');
-            trackShareAction('whatsapp');
-        }
+function shareWhatsApp() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`);
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
 
-        function shareVK() {
-            const message = encodeURIComponent(`Присоединяйся к EVILBET через мою реферальную ссылку: ${referralData.link}`);
-            window.open(`https://vk.com/share.php?url=${encodeURIComponent(referralData.link)}&title=EVILBET&description=${message}`, '_blank');
-            trackShareAction('vk');
-        }
+function shareVK() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://vk.com/share.php?url=${encodeURIComponent(referralData.link)}&title=${encodeURIComponent('EVILBET Рефералы')}&description=${encodeURIComponent(shareText)}`);
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
 
-        function trackShareAction(platform) {
-            const shareEvent = {
-                type: 'referral_share',
-                platform: platform,
-                timestamp: Date.now(),
-                userId: currentUser?.id || 'guest',
-                referralCode: referralData.code
+function shareCode() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Мой реферальный код для EVILBET: ${referralData.code}`;
+    if (TelegramWebApp) {
+        TelegramWebApp.shareToUrl(referralData.link, shareText);
+    } else {
+        navigator.share({
+            title: 'EVILBET Код',
+            text: shareText
+        }).catch(() => {
+            showNotification('Ошибка шаринга', 'error');
+        });
+    }
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
+
+function shareLink() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const shareText = `Присоединяйтесь к EVILBET! ${referralData.link}`;
+    if (TelegramWebApp) {
+        TelegramWebApp.shareToUrl(referralData.link, shareText);
+    } else {
+        navigator.share({
+            title: 'EVILBET Рефералы',
+            text: shareText,
+            url: referralData.link
+        }).catch(() => {
+            showNotification('Ошибка шаринга', 'error');
+        });
+    }
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
+
+function connectTelegram() {
+    if (TelegramWebApp) {
+        const user = TelegramWebApp.initDataUnsafe.user;
+        if (user) {
+            currentUser = {
+                username: user.username || user.first_name || 'User' + Math.random().toString(36).substr(2, 6),
+                id: user.id,
+                avatar: user.photo_url || null
             };
-            
-            let analytics = JSON.parse(localStorage.getItem('analytics') || '[]');
-            analytics.push(shareEvent);
-            localStorage.setItem('analytics', JSON.stringify(analytics.slice(-100)));
-            
-            // Award activity points
-            showNotification(`📤 Поделено в ${platform.toUpperCase()}! +1 активность`, 'success');
-        }
-
-        // BONUS ACTIONS
-        function claimReferralBonus() {
-            if (!isLoggedIn) {
-                showModal('authModal');
-                return;
-            }
-            
-            const bonus = parseFloat(referralData.bonuses?.referralBonus || 0);
-            if (bonus <= 0) {
-                showNotification('💸 Нет доступных бонусов', 'error');
-                return;
-            }
-            
-            balance += bonus;
-            referralData.bonuses.referralBonus = 0;
-            
-            localStorage.setItem('balance', balance);
-            localStorage.setItem('referralData', JSON.stringify(referralData));
-            
+            isLoggedIn = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
             updateUserInterface();
-            updateReferralStats();
-            
-            showNotification(`💰 Бонус $${bonus.toFixed(2)} зачислен на баланс!`, 'success');
-            TelegramWebApp?.HapticFeedback.notificationOccurred('success');
-            
-            // Success animation
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Получено!';
-            btn.style.background = 'var(--success-color)';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.background = 'var(--gradient-primary)';
-                btn.disabled = false;
-            }, 2000);
+            closeModal('authModal');
+            showNotification('Аккаунт подключен!', 'success');
+            TelegramWebApp.MainButton.show();
+            TelegramWebApp.HapticFeedback.notificationOccurred('success');
+        } else {
+            showNotification('Ошибка авторизации', 'error');
+            TelegramWebApp.HapticFeedback.notificationOccurred('error');
         }
+    }
+}
 
-        function openWithdrawModal() {
-            if (!isLoggedIn) {
-                showModal('authModal');
-                return;
-            }
-            
-            const available = parseFloat(referralData.bonuses?.withdrawable || 0);
-            if (available < 10) {
-                showNotification('💸 Минимальная сумма вывода: $10', 'error');
-                return;
-            }
-            
-            showModal('withdrawModal');
-            updateWithdrawModal();
-            document.getElementById('withdrawAmountInput').focus();
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        TelegramWebApp?.BackButton?.show();
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        if (!document.querySelector('.modal.active')) {
+            TelegramWebApp?.BackButton?.hide();
         }
+        TelegramWebApp?.HapticFeedback?.impactOccurred('light');
+    }
+}
 
-        function processWithdraw() {
-            const amount = parseFloat(document.getElementById('withdrawAmountInput').value);
-            const available = parseFloat(referralData.bonuses?.withdrawable || 0);
-            
-            if (amount < 10 || amount > available) {
-                showNotification('⚠️ Сумма должна быть от $10 до доступного баланса', 'error');
-                return;
-            }
-            
-            const withdrawId = `WD${Date.now()}`;
-            const withdrawRecord = {
-                id: withdrawId,
-                amount: amount,
-                status: 'pending',
-                date: new Date().toISOString(),
-                method: document.getElementById('withdrawMethod').value,
-                userId: currentUser?.id || 'guest'
-            };
-            
-            let withdrawals = JSON.parse(localStorage.getItem('withdrawals') || '[]');
-            withdrawals.unshift(withdrawRecord);
-            localStorage.setItem('withdrawals', JSON.stringify(withdrawals.slice(0, 50)));
-            
-            referralData.bonuses.withdrawable -= amount;
-            localStorage.setItem('referralData', JSON.stringify(referralData));
-            
-            updateReferralStats();
-            closeModal('withdrawModal');
-            
-            showNotification(
-                `📤 Заявка #${withdrawId} на $${amount.toFixed(2)} отправлена!\n` +
-                `⏱️ Обработка: 1-24 часа\n` +
-                `💳 Метод: ${withdrawRecord.method.toUpperCase()}`,
-                'success'
-            );
-            
-            TelegramWebApp?.HapticFeedback.notificationOccurred('success');
-        }
+function closeActiveModal() {
+    document.querySelectorAll('.modal.active').forEach(modal => {
+        modal.classList.remove('active');
+    });
+    TelegramWebApp?.BackButton?.hide();
+}
 
-        // LEVEL DETAILS
-        function showLevelDetails(level) {
-            const levelData = referralLevels.find(l => l.level === level);
-            if (!levelData) return;
-            
-            const currentReferrals = referralData.totalReferrals || 0;
-            const progress = Math.max(0, currentReferrals - levelData.minReferrals);
-            const needed = levelData.maxReferrals === Infinity ? '∞' : levelData.maxReferrals - levelData.minReferrals;
-            
-            const message = `🏆 УРОВЕНЬ ${levelData.name.toUpperCase()}\n\n` +
-                           `📊 Прогресс: ${progress}/${needed} рефералов\n` +
-                           `💰 Доход: ${levelData.rate}%\n` +
-                           `🎁 Бонус регистрации: $${levelData.registrationBonus}\n` +
-                           `🔄 Кэшбэк: ${levelData.cashback}%\n\n` +
-                           `${currentReferrals >= levelData.minReferrals ? '✅ Уровень открыт!' : '🔒 Заблокировано'}`;
-            
-            TelegramWebApp?.showAlert(message);
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-        }
+function showNotification(message, type) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.className = `notification ${type} show`;
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
 
-        function showReferralDetails(type) {
-            let message = '';
-            switch(type) {
-                case 'active':
-                    message = `👥 АКТИВНЫХ РЕФЕРАЛОВ\n\n` +
-                             `Количество: ${referralData.activeReferrals || 0}\n` +
-                             `Средний доход: $${((referralData.totalEarnings || 0) / Math.max(1, referralData.activeReferrals)).toFixed(2)}\n\n` +
-                             `💡 Активный реферал = сделал хотя бы 1 ставку за 30 дней`;
-                    break;
-                case 'income':
-                    message = `💰 СТАТИСТИКА ДОХОДА\n\n` +
-                             `Общий: $${(referralData.totalEarnings || 0).toFixed(2)}\n` +
-                             `За месяц: $${(referralData.totalEarnings * 0.3).toFixed(2)}\n` +
-                             `Текущий уровень: ${referralData.currentLevel || 1}%\n\n` +
-                             `📈 Доход растёт с каждым новым рефералом!`;
-                    break;
-                case 'level':
-                    message = `🏆 ТЕКУЩИЙ УРОВЕНЬ\n\n` +
-                             `Уровень: ${referralData.currentLevel || 1}\n` +
-                             `Доход: ${(referralLevels[referralData.currentLevel - 1]?.rate || 1)}%\n` +
-                             `До следующего: ${referralLevels[referralData.currentLevel]?.minReferrals - (referralData.totalReferrals || 0)} рефералов\n\n` +
-                             `⭐ Больше рефералов = больше доход!`;
-                    break;
-                case 'last':
-                    if (referralHistory.length > 0) {
-                        const last = referralHistory[0];
-                        message = `⏰ ПОСЛЕДНИЙ РЕФЕРАЛ\n\n` +
-                                 `👤 ${last.user}\n` +
-                                 `📅 ${new Date(last.date).toLocaleString('ru-RU')}\n` +
-                                 `💰 +$${last.amount}\n` +
-                                 `📝 ${last.action}\n\n` +
-                                 `✅ Статус: ${last.status === 'completed' ? 'Завершено' : 'Ожидает'}`;
-                    } else {
-                        message = '⏰ ПОСЛЕДНИЙ РЕФЕРАЛ\n\nПока нет рефералов\n\nПриглашайте друзей и получайте доход!';
-                    }
-                    break;
-            }
-            
-            TelegramWebApp?.showAlert(message);
-            TelegramWebApp?.HapticFeedback.impactOccurred('light');
-        }
+function validateWithdrawInput() {
+    const input = document.getElementById('withdrawAmountInput');
+    const button = document.getElementById('confirmWithdrawBtn');
+    const amount = parseFloat(input.value);
+    const available = parseFloat(referralData.bonuses.withdrawable || 0);
+    if (amount >= 10 && amount <= available) {
+        button.disabled = false;
+    } else {
+        button.disabled = true;
+    }
+}
 
-        // LOAD MORE REFERRALS
-        function loadMoreReferrals() {
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Загрузка...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                // Simulate loading more
-                const newReferrals = Array.from({length: 4}, (_, i) => ({
-                    id: referralHistory.length + i + 1,
-                    user: `Игрок_${200 + referralHistory.length * 10 + i}`,
-                    action: 'Регистрация',
-                    amount: (Math.random() * 8 + 1).toFixed(2),
-                    date: new Date(Date.now() - (referralHistory.length + i + 1) * 3600000).toISOString(),
-                    status: 'completed'
-                }));
-                
-                referralHistory.unshift(...newReferrals);
-                referralData.totalReferrals += newReferrals.length;
-                referralData.activeReferrals = Math.min(referralData.activeReferrals + Math.floor(newReferrals.length / 2), 50);
-                
-                localStorage.setItem('referralHistory', JSON.stringify(referralHistory.slice(0, 50)));
-                localStorage.setItem('referralData', JSON.stringify(referralData));
-                
-                renderReferralHistory();
-                updateReferralStats();
-                
-                btn.innerHTML = '<i class="fas fa-check"></i> Загружено!';
-                btn.style.background = 'var(--success-color)';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.style.background = 'var(--gradient-primary)';
-                    btn.disabled = false;
-                }, 1500);
-                
-                showNotification(`+${newReferrals.length} новых рефералов загружено!`, 'success');
-                TelegramWebApp?.HapticFeedback.impactOccurred('success');
-            }, 1200);
-        }
+function processWithdraw() {
+    const amount = parseFloat(document.getElementById('withdrawAmountInput').value);
+    const method = document.getElementById('withdrawMethod').value;
+    if (amount >= 10 && amount <= parseFloat(referralData.bonuses.withdrawable || 0)) {
+        referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable) - amount).toFixed(2);
+        balance += amount;
+        localStorage.setItem('referralData', JSON.stringify(referralData));
+        localStorage.setItem('balance', balance.toFixed(2));
+        updateReferralStats();
+        updateUserInterface();
+        closeModal('withdrawModal');
+        showNotification(`Вывод $${amount} (${method}) успешно запрошен!`, 'success');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+        referralHistory.unshift({
+            id: referralHistory.length + 1,
+            user: currentUser.username,
+            action: `Вывод ${method.toUpperCase()}`,
+            amount: amount.toFixed(2),
+            date: new Date().toISOString(),
+            status: 'pending'
+        });
+        localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
+        renderReferralHistory();
+    } else {
+        showNotification('Недостаточно средств или неверная сумма', 'error');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    }
+}
 
-        // AUTHENTICATION
-        function connectTelegram() {
-            if (TelegramWebApp?.initDataUnsafe?.user) {
-                const user = TelegramWebApp.initDataUnsafe.user;
-                isLoggedIn = true;
-                currentUser = {
-                    id: user.id,
-                    username: user.username || user.first_name || 'User_' + user.id,
-                    firstName: user.first_name || '',
-                    lastName: user.last_name || '',
-                    avatar: user.photo_url || null
-                };
-                
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                // Initialize referral if new user
-                if (!referralData.code) {
-                    initializeReferralData();
-                }
-                
-                updateUserInterface();
-                updateReferralStats();
-                
-                showNotification(`🎉 ${currentUser.username}, добро пожаловать в реферальную систему!`, 'success');
-                TelegramWebApp.MainButton.show();
-                
-                closeModal('authModal');
-                
-                // Welcome bonus
-                setTimeout(() => {
-                    if (!localStorage.getItem('referralWelcomeBonus')) {
-                        const welcomeBonus = 10;
-                        balance += welcomeBonus;
-                        referralData.bonuses.referralBonus += welcomeBonus;
-                        localStorage.setItem('balance', balance);
-                        localStorage.setItem('referralData', JSON.stringify(referralData));
-                        localStorage.setItem('referralWelcomeBonus', 'true');
-                        
-                        updateUserInterface();
-                        updateReferralStats();
-                        showNotification(`🎁 Приветственный бонус $${welcomeBonus} зачислен!`, 'success');
-                    }
-                }, 1000);
-                
-            } else {
-                showNotification('❌ Ошибка подключения. Попробуйте снова.', 'error');
-            }
-        }
+function claimReferralBonus() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    const bonus = parseFloat(referralData.bonuses.referralBonus || 0);
+    if (bonus > 0) {
+        referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable || 0) + bonus).toFixed(2);
+        referralData.bonuses.referralBonus = 0;
+        localStorage.setItem('referralData', JSON.stringify(referralData));
+        updateReferralStats();
+        showNotification(`Бонус $${bonus} зачислен!`, 'success');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+        referralHistory.unshift({
+            id: referralHistory.length + 1,
+            user: currentUser.username,
+            action: 'Бонус за рефералов',
+            amount: bonus.toFixed(2),
+            date: new Date().toISOString(),
+            status: 'completed'
+        });
+        localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
+        renderReferralHistory();
+    } else {
+        showNotification('Нет доступных бонусов', 'error');
+        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    }
+}
 
-        function toggleAuth() {
-            if (isLoggedIn) {
-                openProfile();
-            } else {
-                showModal('authModal');
-            }
-        }
+function openWithdrawModal() {
+    if (!isLoggedIn) {
+        openModal('authModal');
+        return;
+    }
+    openModal('withdrawModal');
+}
 
-        // MODALS
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            }
-        }
+function openSupport() {
+    if (TelegramWebApp) {
+        TelegramWebApp.openTelegramLink('https://t.me/EvilBetSupport');
+        TelegramWebApp.HapticFeedback.notificationOccurred('success');
+    } else {
+        window.open('https://t.me/EvilBetSupport', '_blank');
+    }
+}
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-                TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            }
-        }
+function showLevelDetails(level) {
+    const levelData = referralLevels.find(l => l.level === level);
+    if (!levelData) return;
+    showNotification(`Уровень ${levelData.name}\nДоход: ${levelData.rate}%\nБонус: $${levelData.registrationBonus}\nКэшбэк: ${levelData.cashback}%`, 'success');
+    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
+}
 
-        function closeActiveModal() {
-            const activeModal = document.querySelector('.modal.active');
-            if (activeModal) {
-                closeModal(activeModal.id);
-            }
-        }
+function showReferralDetails(type) {
+    let message = '';
+    switch (type) {
+        case 'active':
+            message = `Активные рефералы: ${referralData.activeReferrals || 0}\nЗарабатывайте больше, приглашая друзей!`;
+            break;
+        case 'income':
+            message = `Доход: $${parseFloat(referralData.totalEarnings || 0).toFixed(2)}\nПродолжайте приглашать!`;
+            break;
+        case 'level':
+            message = `Текущий уровень: ${referralData.currentLevel}\nДо следующего: ${referralLevels[referralData.currentLevel]?.minReferrals - referralData.totalReferrals || 0} рефералов`;
+            break;
+        case 'last':
+            message = referralHistory.length > 0 ? `Последний реферал: ${referralHistory[0].user}\n${new Date(referralHistory[0].date).toLocaleDateString('ru-RU')}` : 'Пока нет рефералов';
+            break;
+    }
+    showNotification(message, 'success');
+    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
+}
 
-        function openProfile() {
-            showModal('profileModal'); // Assuming profile modal exists
-        }
+function filterStats(filter) {
+    currentStatsFilter = filter;
+    document.querySelectorAll('.time-icon').forEach(icon => {
+        icon.classList.toggle('active', icon.dataset.filter === filter);
+    });
+    TelegramWebApp?.HapticFeedback?.selectionChanged();
+    let filteredReferrals = referralHistory;
+    const now = new Date();
+    if (filter === 'week') {
+        filteredReferrals = referralHistory.filter(item => new Date(item.date) > new Date(now - 7 * 86400000));
+    } else if (filter === 'month') {
+        filteredReferrals = referralHistory.filter(item => new Date(item.date) > new Date(now - 30 * 86400000));
+    }
+    const total = filteredReferrals.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0).toFixed(2);
+    document.getElementById('totalIncome').textContent = `$${total}`;
+    document.getElementById('activeReferrals').textContent = filteredReferrals.length;
+}
 
-        // NOTIFICATIONS
-        function showNotification(message, type = 'success', duration = 3500) {
-            const notification = document.getElementById('notification');
-            notification.innerHTML = message.replace(/\n/g, '<br>');
-            notification.className = `notification ${type} show`;
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, duration);
-        }
+function loadMoreReferrals() {
+    const newReferrals = Array.from({length: 4}, (_, i) => ({
+        id: referralHistory.length + i + 1,
+        user: `Игрок_${100 + (referralHistory.length + i) * 23}`,
+        action: ['Регистрация', 'Первая ставка', 'Депозит $50', 'Выигрыш $100'][Math.floor(Math.random() * 4)],
+        amount: (Math.random() * 15 + 2).toFixed(2),
+        date: new Date(Date.now() - (referralHistory.length + i + 1) * 86400000).toISOString(),
+        status: Math.random() > 0.3 ? 'completed' : 'pending'
+    }));
+    referralHistory.push(...newReferrals);
+    localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
+    renderReferralHistory();
+    showNotification('Загружено ещё рефералов!', 'success');
+    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+}
 
-        function updateNotificationBadge() {
-            const badge = document.getElementById('notificationBadge');
-            const unreadCount = Math.floor(Math.random() * 3); // Simulate
-            badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
-            badge.style.display = unreadCount > 0 ? 'flex' : 'none';
-        }
-
-        function showNotifications() {
-            const notifications = [
-                `👥 Активных рефералов: ${referralData.activeReferrals || 0}`,
-                `💰 Доступно для вывода: $${(referralData.bonuses?.withdrawable || 0).toFixed(2)}`,
-                `📊 Общий доход: $${(referralData.totalEarnings || 0).toFixed(2)}`,
-                `🏆 Ваш уровень: ${referralData.currentLevel || 1}`,
-                `🎁 Доступный бонус: $${(referralData.bonuses?.referralBonus || 0).toFixed(2)}`
-            ];
-
-            TelegramWebApp?.showAlert(`🔔 РЕФЕРАЛЬНЫЕ УВЕДОМЛЕНИЯ:\n\n${notifications.join('\n\n')}`);
-        }
-
-        // EVENT LISTENERS
-        function setupEventListeners() {
-            // Overlay click
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal')) {
-                    closeActiveModal();
-                }
-            });
-
-            // Search/keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeActiveModal();
-                }
-                if (e.key === 'Enter' && document.activeElement.id === 'withdrawAmountInput') {
-                    processWithdraw();
-                }
-            });
-
-            // Navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const page = this.dataset.page;
-                    if (page && page !== 'referral' && page !== 'profile') {
-                        window.location.href = `${page}.html`;
-                    } else if (page === 'profile') {
-                        openProfile();
-                    }
-                });
-            });
-
-            // Withdraw input validation
-            const withdrawInput = document.getElementById('withdrawAmountInput');
-            if (withdrawInput) {
-                withdrawInput.addEventListener('input', function() {
-                    const value = parseFloat(this.value);
-                    const available = parseFloat(referralData.bonuses?.withdrawable || 0);
-                    const btn = document.getElementById('confirmWithdrawBtn');
-                    
-                    if (value >= 10 && value <= available) {
-                        this.style.borderColor = 'var(--success-color)';
-                        btn.disabled = false;
-                        btn.innerHTML = `<i class="fas fa-paper-plane"></i> Вывести $${value.toFixed(2)}`;
-                    } else {
-                        this.style.borderColor = '#ff4444';
-                        btn.disabled = true;
-                        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить заявку';
-                    }
-                });
-            }
-
-            // Mobile navigation
-            let resizeTimeout;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    const isMobile = window.innerWidth <= 768;
-                    document.querySelector('.bottom-nav').classList.toggle('active', isMobile);
-                }, 150);
-            });
-
-            // Initial mobile check
-            setTimeout(() => {
-                const isMobile = window.innerWidth <= 768;
-                document.querySelector('.bottom-nav').classList.toggle('active', isMobile);
-            }, 100);
-        }
-
-        // RIPPLE EFFECT
-        function createRipple(element, duration = 600, color = 'rgba(0, 255, 136, 0.4)') {
-            const ripple = document.createElement('span');
-            const rect = element.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: ${color};
-                border-radius: 50%;
-                transform: scale(0);
-                pointer-events: none;
-                z-index: 1000;
-            `;
-
-            element.style.position = 'relative';
-            element.appendChild(ripple);
-
-            ripple.animate([
-                { transform: 'scale(0)', opacity: 1 },
-                { transform: 'scale(4)', opacity: 0 }
-            ], {
-                duration: duration,
-                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-            }).onfinish = () => ripple.remove();
-        }
-
-        // LIVE UPDATES
-        function startLiveUpdates() {
-            setInterval(() => {
-                // Simulate new referral activity
-                if (Math.random() < 0.15 && isLoggedIn) {
-                    const newActivity = Math.random() < 0.7 ? 1 : Math.floor(Math.random() * 3) + 1;
-                    referralData.activeReferrals = Math.min((referralData.activeReferrals || 0) + newActivity, 100);
-                    referralData.totalEarnings = ((referralData.totalEarnings || 0) + newActivity * 0.5).toFixed(2);
-                    
-                    localStorage.setItem('referralData', JSON.stringify(referralData));
-                    updateReferralStats();
-                    
-                    if (newActivity > 0) {
-                        showNotification(`🎉 +${newActivity} активных рефералов!\n💰 +$${(newActivity * 0.5).toFixed(2)} к доходу`, 'success');
-                        
-                        // Animate counters
-                        ['activeReferrals', 'totalIncome'].forEach(id => {
-                            const el = document.getElementById(id);
-                            if (el) {
-                                el.style.transition = 'all 0.5s ease';
-                                el.style.transform = 'scale(1.2)';
-                                setTimeout(() => el.style.transform = 'scale(1)', 200);
-                            }
-                        });
-                    }
-                }
-
-                // Update notification badge
-                updateNotificationBadge();
-            }, 15000); // Every 15 seconds
-        }
-
-        // UTILITY FUNCTIONS
-        function openSupport() {
-            TelegramWebApp?.showAlert(
-                '🆘 ПОДДЕРЖКА РЕФЕРАЛОВ 24/7\n\n' +
-                '💬 Telegram: @EvilBetSupport\n' +
-                '📧 Email: support@evilbet.com\n\n' +
-                '🔍 Частые вопросы:\n' +
-                '• Как работает реферальная система?\n' +
-                '• Когда начисляется доход?\n' +
-                '• Как вывести заработанные средства?\n\n' +
-                '⏱️ Ответ в течение 15 минут'
-            );
-            TelegramWebApp?.HapticFeedback.impactOccurred('medium');
-        }
-
-        // Initialize app
-        initReferralApp();
-    </script>
+</script>
 </body>
 </html>
