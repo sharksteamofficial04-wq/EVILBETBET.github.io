@@ -2845,24 +2845,7 @@
             });
         }
 
-        function applyTelegramTheme() {
-            if (!TelegramWebApp?.themeParams) return;
-
-            const theme = TelegramWebApp.themeParams;
-            const bgColor = theme.bg_color || '#0a0a0a';
-            const secondaryBg = theme.secondary_bg_color || '#1a1a1a';
-            const buttonColor = theme.button_color || '#ff3333';
-
-            document.documentElement.style.setProperty('--bg-primary', bgColor);
-            document.documentElement.style.setProperty('--bg-secondary', secondaryBg);
-            document.documentElement.style.setProperty('--primary-color', buttonColor);
-            document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${buttonColor}, #ff0066)`);
-
-            document.body.style.background = bgColor;
-            document.querySelectorAll('.matches-section, .bet-coupon, .modal-content, .search-container, .stats-row .stat-card').forEach(el => {
-                el.style.background = secondaryBg;
-            });
-        }
+        
 
         // USER INTERFACE
         function updateUserInterface() {
