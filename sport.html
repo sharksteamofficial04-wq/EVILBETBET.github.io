@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СПОРТ - EVILBET</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EVILBET - Спорт</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2" as="font" type="font/woff2" crossorigin>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -69,7 +69,7 @@
             padding-top: 80px;
         }
 
-        /* **HEADER - ТОЧНО КАК В INDEX** */
+        /* **SIMPLE HEADER** */
         header {
             position: fixed;
             top: 0;
@@ -248,141 +248,8 @@
             padding: 20px;
         }
 
-        /* **SPORT TABS - FIXED, CS POSITIVE STYLE** */
-        .sport-tabs {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .sport-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .sport-tabs-container {
-            display: flex;
-            gap: 8px;
-            justify-content: flex-start;
-            padding: 0 20px;
-            white-space: nowrap;
-        }
-
-        .sport-tab {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            min-width: auto;
-            touch-action: manipulation;
-        }
-
-        .sport-tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .sport-tab:hover::before,
-        .sport-tab.active::before {
-            left: 100%;
-        }
-
-        .sport-tab:hover {
-            background: rgba(255, 51, 51, 0.1);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: translateY(-1px);
-        }
-
-        .sport-tab.active {
-            background: var(--gradient-primary);
-            color: #000;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
-        }
-
-        .sport-tab i {
-            font-size: 1rem;
-            width: 16px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        /* **STATUS FILTERS** */
-        .status-filters {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-            gap: 12px;
-            flex-wrap: wrap;
-            background: var(--card-bg);
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-        }
-
-        .status-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            touch-action: manipulation;
-        }
-
-        .status-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .status-btn:hover::before {
-            left: 100%;
-        }
-
-        .status-btn:hover,
-        .status-btn.active {
-            background: var(--gradient-primary);
-            color: #000;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
-        }
-
-        /* **SEARCH SECTION** */
-        .search-section {
+        /* **SEARCH BAR** */
+        .search-container {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -395,7 +262,7 @@
             transition: all 0.2s ease;
         }
 
-        .search-section:focus-within {
+        .search-container:focus-within {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
         }
@@ -417,90 +284,53 @@
         .search-icon {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.2s ease;
-            touch-action: manipulation;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .search-icon:hover {
-            background: rgba(255, 51, 51, 0.1);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        /* **DATE NAVIGATION** */
-        .date-navigation {
+        /* **STATS ROW** */
+        .stats-row {
             display: flex;
-            justify-content: center;
-            gap: 8px;
+            gap: 12px;
             margin-bottom: 24px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
         }
 
-        .date-navigation::-webkit-scrollbar {
-            display: none;
-        }
-
-        .date-btn {
-            background: var(--bg-secondary);
+        .stat-card {
+            flex: 1;
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 16px;
-            border-radius: 20px;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            white-space: nowrap;
             touch-action: manipulation;
-            min-width: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
         }
 
-        .date-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
+        .stat-card:active {
+            transform: scale(0.98);
         }
 
-        .date-btn:hover::before {
-            left: 100%;
-        }
-
-        .date-btn:hover {
-            background: rgba(255, 51, 51, 0.1);
+        .stat-card:hover {
             border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.1);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
             color: var(--primary-color);
-            transform: translateY(-1px);
         }
 
-        .date-btn.active {
-            background: var(--gradient-primary);
-            color: #000;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
-        }
-
-        /* **MATCHES SECTION** */
+        /* **MATCHES SECTION WITH SPORTS CATEGORIES** */
         .matches-section {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -510,16 +340,164 @@
             overflow: hidden;
         }
 
-        /* **MATCHES GRID** */
-        .matches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
             gap: 16px;
         }
 
-        /* **MATCH CARDS - ENHANCED** */
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* **SPORTS CATEGORIES - BEAUTIFUL GRID** */
+        .sports-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sport-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            min-height: 80px;
+            justify-content: center;
+        }
+
+        .sport-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .sport-category:hover::before,
+        .sport-category.active::before {
+            opacity: 1;
+        }
+
+        .sport-category:hover,
+        .sport-category.active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.15);
+            border: 1px solid var(--primary-color);
+        }
+
+        .sport-category:active {
+            transform: scale(0.98);
+        }
+
+        .sport-icon {
+            font-size: 1.8rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .sport-category:hover .sport-icon,
+        .sport-category.active .sport-icon {
+            transform: scale(1.1);
+        }
+
+        .sport-name {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .sport-count {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--primary-color);
+            color: #000;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* **TIME FILTER - CLOCK ICONS** */
+        .time-filter {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            min-width: 200px;
+        }
+
+        .time-icon {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .time-icon:hover,
+        .time-icon.active {
+            color: var(--primary-color);
+            background: rgba(255, 51, 51, 0.1);
+            transform: scale(1.1);
+        }
+
+        .time-icon:active {
+            transform: scale(0.95);
+        }
+
+        /* **MATCHES GRID** */
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 16px;
+        }
+
+        /* **MATCH CARDS - PERFECTLY ALIGNED** */
         .match-card {
-            background: var(--bg-secondary);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             overflow: hidden;
@@ -566,6 +544,7 @@
             border-radius: 6px;
             font-size: 0.7rem;
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
@@ -707,14 +686,12 @@
             transition: all 0.2s ease;
             z-index: 2;
             touch-action: manipulation;
-            border: 2px solid transparent;
         }
 
         .team-wrapper:hover .team-logo,
         .team-wrapper:active .team-logo {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
-            border-color: var(--primary-color);
         }
 
         .team-name {
@@ -833,6 +810,7 @@
             font-size: 0.7rem;
             color: var(--text-secondary);
             margin-bottom: 2px;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
@@ -851,7 +829,7 @@
             font-weight: bold;
         }
 
-        /* **ODDS SECTION - ENHANCED** */
+        /* **HORIZONTAL ODDS SECTION** */
         .odds-section {
             padding: 20px;
             background: var(--bg-secondary);
@@ -876,14 +854,14 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .odds-container {
             display: flex;
             gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: space-between; /* Made even spacing */
         }
 
         .odds-item {
@@ -903,6 +881,7 @@
             min-height: 70px;
             justify-content: center;
             touch-action: manipulation;
+            flex: 1; /* Equal width */
         }
 
         .odds-item::before {
@@ -945,15 +924,16 @@
         }
 
         .odds-type {
-            font-size: 0.75rem;
+            font-size: 0.9rem; /* Slightly larger */
             color: var(--text-secondary);
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
             order: 3;
         }
 
         .odds-value {
-            font-size: 1.4rem;
+            font-size: 1.7rem; /* Larger odds value */
             font-weight: bold;
             margin: 0;
             order: 2;
@@ -961,7 +941,7 @@
         }
 
         .odds-prob {
-            font-size: 0.7rem;
+            font-size: 0.8rem; /* Slightly larger */
             color: var(--success-color);
             font-weight: bold;
             order: 1;
@@ -975,56 +955,60 @@
             color: #000;
         }
 
-        /* **NO MATCHES** */
-        .no-matches {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        .no-matches i {
-            font-size: 4rem;
-            opacity: 0.3;
-            margin-bottom: 20px;
-        }
-
-        /* **BET COUPON - SLIDE UP MOBILE** */
+        /* **BET COUPON - REDESIGNED FOR MOBILE** */
         .bet-coupon {
             position: fixed;
             top: 0;
-            right: 0;
-            width: 100%;
-            max-width: 380px;
+            right: -380px;
+            width: 380px;
             height: 100vh;
             background: var(--bg-primary);
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 999;
             padding: 24px;
             overflow-y: auto;
             border-left: 1px solid var(--border-color);
             box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
         .bet-coupon.open {
-            transform: translateX(0);
+            right: 0;
         }
 
         @media (max-width: 768px) {
             .bet-coupon {
                 width: 100%;
-                right: 0;
-                padding: 20px 16px;
+                right: -100%;
+                padding: 16px;
                 bottom: 0;
                 top: auto;
                 height: auto;
-                max-height: 80vh;
+                max-height: 70vh; /* Reduced height for better visibility */
                 transform: translateY(100%);
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
             }
             
             .bet-coupon.open {
+                right: 0;
                 transform: translateY(0);
+            }
+
+            #couponItems {
+                overflow-y: auto;
+                flex: 1;
+                display: block !important;
+                visibility: visible !important;
+                height: auto;
+                margin-bottom: 16px;
+            }
+
+            #betHistorySection {
+                overflow-y: auto;
+                max-height: 150px;
             }
         }
 
@@ -1032,8 +1016,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
+            margin-bottom: 16px; /* Reduced margin */
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -1042,7 +1026,7 @@
         }
 
         .coupon-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem; /* Smaller title for mobile */
             color: var(--primary-color);
             font-weight: bold;
             display: flex;
@@ -1081,8 +1065,8 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 12px; /* Reduced padding */
+            margin-bottom: 8px; /* Reduced margin */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1090,6 +1074,7 @@
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
+            font-size: 0.9rem; /* Smaller text */
         }
 
         .coupon-item::before {
@@ -1118,14 +1103,14 @@
         }
 
         .coupon-event {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
             font-weight: bold;
             max-width: 180px;
         }
 
         .coupon-details {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             margin-top: 2px;
             font-weight: 500;
@@ -1139,7 +1124,7 @@
         }
 
         .coupon-odds-value {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--primary-color);
             font-weight: bold;
             text-align: right;
@@ -1191,8 +1176,8 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 16px; /* Reduced padding */
+            margin-top: 12px; /* Reduced margin */
             position: sticky;
             bottom: 0;
             backdrop-filter: blur(10px);
@@ -1204,10 +1189,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding: 8px 0;
+            margin-bottom: 8px; /* Reduced */
+            padding: 6px 0; /* Reduced */
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Smaller */
         }
 
         .total-row:last-child {
@@ -1235,14 +1220,15 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 14px 12px;
+            padding: 10px 12px; /* Reduced padding */
             color: var(--text-primary);
             font-family: inherit;
             font-size: 1rem;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px; /* Reduced */
             transition: all 0.2s ease;
             touch-action: manipulation;
+            height: 40px; /* Fixed smaller height */
         }
 
         .stake-input:focus {
@@ -1260,7 +1246,7 @@
             background: var(--gradient-primary);
             color: #000;
             border: none;
-            padding: 16px;
+            padding: 12px; /* Reduced */
             border-radius: 8px;
             font-family: inherit;
             font-size: 1rem;
@@ -1426,8 +1412,8 @@
             transition: transform 0.2s ease;
         }
 
-        .nav-item:hover i,
-        .nav-item.active i {
+        .nav-item:hover .nav-item i,
+        .nav-item.active .nav-item i {
             transform: translateY(-2px);
         }
 
@@ -1569,7 +1555,129 @@
             background: #ff4444;
         }
 
-        /* **NOTIFICATION** */
+        /* **SUPPORT CHAT** */
+        .support-chat {
+            height: 280px;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scrollbar-width: thin;
+        }
+
+        .support-chat::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .support-chat::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .support-chat::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            position: relative;
+            animation: messageSlide 0.3s ease;
+            word-wrap: break-word;
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            background: var(--gradient-primary);
+            color: #000;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.bot {
+            align-self: flex-start;
+            background: var(--success-color);
+            color: #000;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 4px;
+            text-align: right;
+            font-weight: 300;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 50px;
+            max-height: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
+        }
+
+        .chat-send {
+            background: var(--gradient-primary);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            min-width: 100px;
+            touch-action: manipulation;
+        }
+
+        .chat-send:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .chat-send:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.3);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* **NOTIFICATIONS** */
         .notification {
             position: fixed;
             top: 100px;
@@ -1625,6 +1733,11 @@
                 grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
                 gap: 14px;
             }
+            
+            .sports-categories {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1632,23 +1745,41 @@
                 padding: 12px;
             }
 
-            .sport-tabs-container {
-                padding: 0 16px;
-                gap: 6px;
+            .header {
+                padding: 12px 16px;
+                height: 70px;
             }
 
-            .sport-tab {
-                padding: 8px 12px;
-                font-size: 0.8rem;
+            .logo-section {
+                gap: 12px;
             }
 
-            .status-filters {
-                padding: 10px;
+            #logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .user-section {
+                min-width: 120px;
                 gap: 8px;
             }
 
-            .status-btn {
-                padding: 6px 12px;
+            .balance-display {
+                min-width: 60px;
+                padding: 6px 10px;
+            }
+
+            .balance-value {
+                font-size: 0.9rem;
+            }
+
+            .user-display {
+                max-width: 100px;
+                padding: 6px 10px;
+            }
+
+            .user-name {
+                max-width: 50px;
                 font-size: 0.8rem;
             }
 
@@ -1665,6 +1796,11 @@
             .league-name {
                 max-width: 100px;
                 font-size: 0.8rem;
+            }
+
+            .teams-section {
+                padding: 16px;
+                gap: 16px;
             }
 
             .teams-section {
@@ -1698,17 +1834,26 @@
 
             .odds-container {
                 gap: 6px;
+                justify-content: space-between; /* Even in mobile */
             }
 
             .odds-item {
-                padding: 10px 6px;
+                padding: 12px 8px; /* Adjusted for mobile */
                 min-height: 60px;
-                gap: 1414px;
-                max-width: 80px;
+                gap: 2px;
+                flex: 1; /* Equal width */
             }
 
             .odds-value {
-                font-size: 1.3rem;
+                font-size: 1.5rem; /* Larger in mobile */
+            }
+
+            .odds-type {
+                font-size: 0.8rem;
+            }
+
+            .odds-prob {
+                font-size: 0.75rem;
             }
 
             .stats-bar {
@@ -1726,6 +1871,10 @@
                 display: flex;
             }
 
+            .bottom-nav.active {
+                display: flex;
+            }
+
             .support-fab {
                 bottom: 85px;
                 right: 16px;
@@ -1734,20 +1883,60 @@
                 font-size: 1.1rem;
             }
 
-            .search-section {
-                padding: 12px 16px;
-                margin-bottom: 20px;
+            .stats-row {
+                gap: 8px;
             }
 
-            .date-navigation {
-                gap: 4px;
-                padding: 8px 0;
+            .stat-card {
+                padding: 12px 8px;
             }
 
-            .date-btn {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-                min-width: 100px;
+            .stat-value {
+                font-size: 1.2rem;
+            }
+
+            .sports-categories {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 12px 0;
+            }
+
+            .sport-category {
+                padding: 10px 6px;
+                min-height: 70px;
+                gap: 6px;
+            }
+
+            .sport-icon {
+                font-size: 1.5rem;
+                width: 36px;
+                height: 36px;
+            }
+
+            .sport-name {
+                font-size: 0.75rem;
+            }
+
+            .time-filter {
+                min-width: 180px;
+                padding: 10px 12px;
+            }
+
+            .time-icon {
+                padding: 4px;
+                font-size: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+                margin-bottom: 16px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                justify-content: center;
             }
         }
 
@@ -1762,7 +1951,7 @@
             }
 
             #logo {
-                width: 50px;
+                width: 36px;
                 height: 36px;
             }
 
@@ -1794,27 +1983,14 @@
                 padding: 8px;
             }
 
-            .sport-tabs {
-                top: 65px;
-                padding: 8px 0;
-            }
-
-            .sport-tabs-container {
-                padding: 0 12px;
-                gap: 4px;
-            }
-
-            .sport-tab {
-                padding: 6px 10px;
-                font-size: 0.75rem;
-            }
-
-            .search-section {
-                padding: 10px 12px;
+            .search-container {
+                padding: 12px 16px;
+                margin-bottom: 20px;
             }
 
             .matches-section {
                 padding: 16px;
+                margin-bottom: 20px;
             }
 
             .match-header {
@@ -1822,6 +1998,7 @@
                 flex-direction: column;
                 gap: 8px;
                 align-items: stretch;
+                min-height: auto;
             }
 
             .match-meta {
@@ -1877,7 +2054,7 @@
             }
 
             .match-score {
-                padding: 8px 13px;
+                padding: 8px 16px;
                 font-size: 1.1rem;
                 min-width: 60px;
             }
@@ -1910,65 +2087,101 @@
                 gap: 6px;
             }
 
+            .odds-container {
+                gap: 6px;
+                justify-content: space-between; /* Even in small screens */
+            }
+
             .odds-item {
-                padding: 8px 60px;
+                padding: 8px 4px;
                 min-height: 55px;
                 gap: 1px;
-                max-width: 70px;
+                flex: 1; /* Equal in small screens */
             }
 
             .odds-type {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
 
             .odds-value {
-                font-size: 1.2rem;
+                font-size: 1.4rem; /* Larger */
             }
 
             .odds-prob {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
             }
 
             .coupon-header {
-                margin-bottom: 20px;
+                margin-bottom: 16px;
             }
 
             .coupon-title {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
 
             .coupon-item {
-                padding: 12px;
-                margin-bottom: 10px;
+                padding: 10px;
+                margin-bottom: 8px;
             }
 
             .coupon-event {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 max-width: 140px;
             }
 
             .coupon-odds-value {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 min-width: 35px;
             }
 
             .total-row {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
 
             .place-bet-btn {
-                padding: 14px;
-                font-size: 0.95rem;
+                padding: 12px;
+                font-size: 0.9rem;
             }
 
-            .date-navigation {
-                gap: 2px;
+            .sports-categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
             }
 
-            .date-btn {
-                padding: 6px 10px;
-                font-size: 0.75rem;
-                min-width: 90px;
+            .sport-category {
+                padding: 8px 4px;
+                min-height: 60px;
+                gap: 4px;
+            }
+
+            .sport-icon {
+                font-size: 1.3rem;
+                width: 32px;
+                height: 32px;
+            }
+
+            .sport-name {
+                font-size: 0.7rem;
+            }
+
+            .time-filter {
+                min-width: 160px;
+                padding: 8px 10px;
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                justify-content: center;
+                order: 2;
             }
         }
 
@@ -1988,6 +2201,16 @@
                 transform: scale(4);
                 opacity: 0;
             }
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes indicatorFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.2); }
         }
 
         .fade-in {
@@ -2025,11 +2248,84 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
         }
+
+        /* New Fichka: Dark Mode Toggle (example, can be triggered) */
+        .dark-mode-toggle {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+
+        .dark-mode-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* New Fichka: Quick Bet Buttons in Coupon */
+        .quick-bet-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .quick-bet-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .quick-bet-btn:hover {
+            background: var(--gradient-primary);
+            color: #000;
+        }
+
+        /* Bet History Section */
+        #betHistorySection {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        #betHistorySection h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item.won {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .history-item.lost {
+            border-left: 4px solid #ff4444;
+        }
+
+        .history-item.pending {
+            border-left: 4px solid var(--text-secondary);
+        }
     </style>
 </head>
 <body>
     <div id="app" class="tg-ready">
-        <!-- HEADER - ТОЧНО КАК В INDEX -->
+        <!-- **HEADER - ТОЧНО КАК В INDEX** -->
         <header class="header">
             <div class="logo-section">
                 <img id="logo" src="/IMG/LOGO.svg" alt="EVILBET" 
@@ -2042,11 +2338,16 @@
                     <div class="balance-value" id="balanceDisplay">$0.00</div>
                 </div>
                 
-                <div class="user-display" id="userDisplay" onclick="toggleAuth()" title="Авторизация">
+                <div class="user-display" id="userDisplay" title="Авторизация">
                     <div class="user-avatar" id="userAvatar">👤</div>
                     <div class="user-name guest-text" id="userName">Гость</div>
                 </div>
                 
+                <button id="openCouponBtn" class="notifications-btn" onclick="toggleCoupon()" title="Купон ставок" style="margin-right: 8px;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="notification-badge" id="couponBadge">0</span>
+                </button>
+
                 <button class="notifications-btn" onclick="showNotifications()" title="Уведомления">
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge" id="notificationBadge">0</span>
@@ -2054,33 +2355,9 @@
             </div>
         </header>
 
-        <!-- SPORT TABS -->
-        <div class="sport-tabs">
-            <div class="sport-tabs-container">
-                <div class="sport-tab active" data-sport="all" onclick="filterBySport('all')">
-                    <i class="fas fa-th-large"></i> Все
-                </div>
-                <div class="sport-tab" data-sport="football" onclick="filterBySport('football')" style="color: var(--football-color);">
-                    <i class="fas fa-futbol"></i> Футбол
-                </div>
-                <div class="sport-tab" data-sport="basketball" onclick="filterBySport('basketball')" style="color: var(--basketball-color);">
-                    <i class="fas fa-basketball-ball"></i> Баскетбол
-                </div>
-                <div class="sport-tab" data-sport="tennis" onclick="filterBySport('tennis')" style="color: var(--tennis-color);">
-                    <i class="fas fa-table-tennis"></i> Теннис
-                </div>
-                <div class="sport-tab" data-sport="esports" onclick="filterBySport('esports')" style="color: var(--esports-color);">
-                    <i class="fas fa-gamepad"></i> Киберспорт
-                </div>
-                <div class="sport-tab" data-sport="mma" onclick="filterBySport('mma')" style="color: var(--mma-color);">
-                    <i class="fas fa-fist-raised"></i> MMA
-                </div>
-            </div>
-        </div>
-
         <div class="main-container">
             <!-- SEARCH -->
-            <div class="search-section">
+            <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" id="searchInput" 
                        placeholder="🔍 Поиск матчей, лиг, команд..." 
@@ -2088,23 +2365,73 @@
                        autocomplete="off">
             </div>
 
-            <!-- STATUS FILTERS -->
-            <div class="status-filters">
-                <button class="status-btn active" onclick="filterByStatus('all')">Все</button>
-                <button class="status-btn" onclick="filterByStatus('live')">Live</button>
-                <button class="status-btn" onclick="filterByStatus('upcoming')">Предстоящие</button>
-                <button class="status-btn" onclick="filterByStatus('finished')">Завершённые</button>
-            </div>
-
-            <!-- DATE NAVIGATION -->
-            <div class="date-navigation" id="dateNavigation">
-                <!-- Dynamic dates -->
+            <!-- STATS ROW -->
+            <div class="stats-row">
+                <div class="stat-card" onclick="setFilter('live')" title="LIVE события">
+                    <div class="stat-label">LIVE</div>
+                    <div class="stat-value" id="liveCount" style="color: var(--live-color);">4</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('favorite')" title="Избранное">
+                    <div class="stat-label">Избранное</div>
+                    <div class="stat-value" id="favoritesCount" style="color: #ffd700;">2</div>
+                </div>
+                <div class="stat-card" onclick="setFilter('today')" title="Сегодня">
+                    <div class="stat-label">Сегодня</div>
+                    <div class="stat-value" id="todayCount" style="color: var(--success-color);">12</div>
+                </div>
             </div>
 
             <!-- MATCHES SECTION -->
             <section class="matches-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire" style="color: var(--live-color);"></i>
+                        Ближайшие события
+                    </h2>
+                    
+                    <div class="time-filter" id="timeFilter">
+                        <i class="fas fa-clock time-icon active" data-time="all" onclick="switchTimeFilter('all')" title="Все время"></i>
+                        <i class="fas fa-hourglass-half time-icon" data-time="today" onclick="switchTimeFilter('today')" title="Сегодня"></i>
+                        <i class="fas fa-calendar-day time-icon" data-time="tomorrow" onclick="switchTimeFilter('tomorrow')" title="Завтра"></i>
+                    </div>
+                </div>
+
+                <!-- SPORTS CATEGORIES - BEAUTIFUL GRID -->
+                <div class="sports-categories" id="sportsCategories">
+                    <div class="sport-category active" data-sport="all" onclick="filterBySport('all')">
+                        <i class="fas fa-th-large sport-icon"></i>
+                        <div class="sport-count" id="allCount">0</div>
+                        <div class="sport-name">Все</div>
+                    </div>
+                    <div class="sport-category" data-sport="football" onclick="filterBySport('football')">
+                        <i class="fas fa-futbol sport-icon" style="color: var(--football-color);"></i>
+                        <div class="sport-count" id="footballCount">0</div>
+                        <div class="sport-name">Футбол</div>
+                    </div>
+                    <div class="sport-category" data-sport="basketball" onclick="filterBySport('basketball')">
+                        <i class="fas fa-basketball-ball sport-icon" style="color: var(--basketball-color);"></i>
+                        <div class="sport-count" id="basketballCount">0</div>
+                        <div class="sport-name">Баскетбол</div>
+                    </div>
+                    <div class="sport-category" data-sport="tennis" onclick="filterBySport('tennis')">
+                        <i class="fas fa-table-tennis sport-icon" style="color: var(--tennis-color);"></i>
+                        <div class="sport-count" id="tennisCount">0</div>
+                        <div class="sport-name">Теннис</div>
+                    </div>
+                    <div class="sport-category" data-sport="esports" onclick="filterBySport('esports')">
+                        <i class="fas fa-gamepad sport-icon" style="color: var(--esports-color);"></i>
+                        <div class="sport-count" id="esportsCount">0</div>
+                        <div class="sport-name">Киберспорт</div>
+                    </div>
+                    <div class="sport-category" data-sport="mma" onclick="filterBySport('mma')">
+                        <i class="fas fa-fist-raised sport-icon" style="color: var(--mma-color);"></i>
+                        <div class="sport-count" id="mmaCount">0</div>
+                        <div class="sport-name">MMA</div>
+                    </div>
+                </div>
+                
                 <div class="matches-grid" id="matchesGrid">
-                    <!-- Dynamic matches -->
+                    <!-- Dynamic matches will be rendered here -->
                 </div>
             </section>
         </div>
@@ -2116,7 +2443,7 @@
                     <i class="fas fa-ticket-alt"></i>
                     Купон ставок (<span id="couponCount">0</span>)
                 </h3>
-                <button class="close-coupon" onclick="closeCoupon()">
+                <button class="close-coupon" onclick="toggleCoupon()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -2129,7 +2456,18 @@
                 </div>
             </div>
 
+            <div id="betHistorySection" style="display: none;">
+                <h4>История ставок</h4>
+                <div id="betHistoryList"></div>
+            </div>
+
             <div class="coupon-total" id="couponTotal" style="display: none;">
+                <div class="quick-bet-buttons"> <!-- New Fichka: Quick Bet Amounts -->
+                    <button class="quick-bet-btn" onclick="setStake(10)">10$</button>
+                    <button class="quick-bet-btn" onclick="setStake(50)">50$</button>
+                    <button class="quick-bet-btn" onclick="setStake(100)">100$</button>
+                    <button class="quick-bet-btn" onclick="setStake(balance)">MAX</button>
+                </div>
                 <div class="total-row">
                     <span class="total-label">Сумма ставки:</span>
                     <div class="total-value">
@@ -2158,7 +2496,7 @@
         </aside>
 
         <!-- OVERLAY -->
-        <div class="overlay" id="overlay" onclick="closeCoupon()"></div>
+        <div class="overlay" id="overlay" onclick="toggleCoupon()"></div>
 
         <!-- SUPPORT BUTTON -->
         <button class="support-fab" onclick="openSupport()" title="Поддержка 24/7">
@@ -2168,7 +2506,7 @@
 
         <!-- BOTTOM NAVIGATION -->
         <nav class="bottom-nav" id="bottomNav">
-            <a href="index.html" class="nav-item" data-page="index">
+            <a href="index.html" class="nav-item" data-page="home">
                 <i class="fas fa-home"></i>
                 <span>Главная</span>
             </a>
@@ -2184,7 +2522,7 @@
                 <i class="fas fa-user"></i>
                 <span>Профиль</span>
             </a>
-            <a href="referal.html" class="nav-item" data-page="referral">
+            <a href="referal.html" class="nav-item" data-page="referal">
                 <i class="fas fa-users"></i>
                 <span>Рефералы</span>
             </a>
@@ -2196,10 +2534,10 @@
                 <button class="modal-close" onclick="closeModal('authModal')">
                     <i class="fas fa-times"></i>
                 </button>
-                <h2 class="modal-title">EVILBET - СПОРТ</h2>
+                <h2 class="modal-title">EVILBET</h2>
                 <div class="modal-text">
-                    Войдите для доступа к ставкам<br>
-                    и лучшим коэффициентам
+                    Присоединяйтесь к лучшей платформе<br>
+                    для ставок на спорт в Telegram
                 </div>
                 <button class="modal-btn" onclick="connectTelegram()">
                     <i class="fab fa-telegram-plane" style="margin-right: 8px;"></i>
@@ -2244,6 +2582,34 @@
             </div>
         </div>
 
+        <!-- SUPPORT MODAL -->
+        <div id="supportModal" class="modal">
+            <div class="modal-content" style="max-width: 480px; max-height: 80vh;">
+                <button class="modal-close" onclick="closeModal('supportModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title">Поддержка 24/7</h2>
+                <div class="support-chat" id="supportChat">
+                    <div class="chat-message bot">
+                        <div>🤖 Привет! Я ИИ-ассистент EVILBET</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">Как могу помочь с вашим вопросом?</div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" class="chat-input" 
+                           placeholder="Опишите вашу проблему..." 
+                           onkeypress="handleChatEnter(event)">
+                    <button class="chat-send" onclick="sendSupportMessage()" disabled id="sendButton">
+                        <i class="fas fa-paper-plane"></i> Отправить
+                    </button>
+                </div>
+                <div style="text-align: center; margin-top: 12px; font-size: 0.8rem; color: var(--text-secondary);">
+                    <i class="fas fa-clock" style="margin-right: 4px;"></i>
+                    Ответ в течение 2 минут
+                </div>
+            </div>
+        </div>
+
         <!-- NOTIFICATION -->
         <div id="notification" class="notification"></div>
     </div>
@@ -2257,17 +2623,92 @@
         let couponItems = JSON.parse(localStorage.getItem('couponItems')) || [];
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
         let currentSportFilter = 'all';
-        let currentStatusFilter = 'all';
-        let currentDateFilter = 'today';
+        let currentTimeFilter = 'all';
         let searchQuery = '';
+        let currentStatusFilter = 'all';
 
         // ENHANCED MATCH DATA
         const matchesData = {
             today: [
+                // Футбол
                 {
                     id: 1,
                     time: '18:45',
-                    league: 'CS2 Major Paris 2025',
+                    league: 'Premier League',
+                    home: 'Manchester City',
+                    away: 'Arsenal',
+                    status: 'live',
+                    score: '1:1',
+                    minute: 45,
+                    odds: { p1: 1.85, x: 3.50, p2: 4.00 },
+                    sport: 'football',
+                    homeForm: ['W', 'W', 'D', 'W', 'W'],
+                    awayForm: ['L', 'W', 'D', 'W', 'L'],
+                    h2h: '4-3',
+                    probabilities: [50, 25, 25],
+                    homeStats: { wins: 4, draws: 1, losses: 0 },
+                    awayStats: { wins: 2, draws: 1, losses: 2 },
+                    categoryColor: 'var(--football-color)'
+                },
+                {
+                    id: 2,
+                    time: '20:00',
+                    league: 'La Liga',
+                    home: 'Real Madrid',
+                    away: 'Barcelona',
+                    status: 'upcoming',
+                    odds: { p1: 1.95, x: 3.60, p2: 3.80 },
+                    sport: 'football',
+                    homeForm: ['W', 'D', 'W', 'L', 'W'],
+                    awayForm: ['W', 'W', 'W', 'D', 'L'],
+                    h2h: '5-4',
+                    probabilities: [48, 28, 24],
+                    homeStats: { wins: 3, draws: 1, losses: 1 },
+                    awayStats: { wins: 4, draws: 1, losses: 0 },
+                    categoryColor: 'var(--football-color)'
+                },
+                // Баскетбол (NBA preseason)
+                {
+                    id: 3,
+                    time: '19:30',
+                    league: 'NBA Preseason',
+                    home: 'Los Angeles Lakers',
+                    away: 'Phoenix Suns',
+                    status: 'upcoming',
+                    odds: { p1: 2.10, p2: 1.70 },
+                    sport: 'basketball',
+                    homeForm: ['W', 'L', 'W', 'W', 'D'],
+                    awayForm: ['L', 'W', 'D', 'W', 'W'],
+                    h2h: '6-5',
+                    probabilities: [45, 55],
+                    homeStats: { wins: 3, losses: 2 },
+                    awayStats: { wins: 3, losses: 2 },
+                    categoryColor: 'var(--basketball-color)'
+                },
+                // Теннис
+                {
+                    id: 4,
+                    time: '15:00',
+                    league: 'US Open Finals',
+                    home: 'Novak Djokovic',
+                    away: 'Carlos Alcaraz',
+                    status: 'finished',
+                    score: '3:2',
+                    odds: { p1: 1.75, p2: 2.05 },
+                    sport: 'tennis',
+                    homeForm: ['W', 'W', 'W', 'W', 'L'],
+                    awayForm: ['L', 'W', 'L', 'W', 'D'],
+                    h2h: '3-2',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 4, losses: 1 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--tennis-color)'
+                },
+                // Esports
+                {
+                    id: 5,
+                    time: '16:00',
+                    league: 'ESL Pro League Season 22',
                     home: 'NAVI',
                     away: 'FaZe Clan',
                     status: 'live',
@@ -2284,65 +2725,29 @@
                     categoryColor: 'var(--esports-color)'
                 },
                 {
-                    id: 2,
-                    time: '19:00',
-                    league: 'Premier League',
-                    home: 'Manchester United',
-                    away: 'Liverpool',
-                    status: 'live',
-                    score: '0:1',
-                    minute: 67,
-                    odds: { p1: 2.50, x: 3.20, p2: 2.80 },
-                    sport: 'football',
-                    homeForm: ['W', 'D', 'W', 'L', 'W'],
-                    awayForm: ['W', 'W', 'W', 'D', 'L'],
-                    h2h: '2-4',
-                    probabilities: [35, 28, 37],
-                    homeStats: { wins: 3, draws: 1, losses: 1 },
-                    awayStats: { wins: 4, draws: 1, losses: 0 },
-                    categoryColor: 'var(--football-color)'
-                },
-                {
-                    id: 3,
-                    time: '20:30',
-                    league: 'NBA Regular Season',
-                    home: 'Los Angeles Lakers',
-                    away: 'Golden State Warriors',
+                    id: 6,
+                    time: '18:00',
+                    league: 'VALORANT Champions 2025',
+                    home: 'T1',
+                    away: 'G2 Esports',
                     status: 'upcoming',
-                    odds: { p1: 1.95, p2: 1.85 },
-                    sport: 'basketball',
-                    homeForm: ['W', 'L', 'W', 'W', 'D'],
-                    awayForm: ['L', 'W', 'D', 'W', 'W'],
-                    h2h: '6-5',
-                    probabilities: [52, 48],
-                    homeStats: { wins: 3, losses: 2 },
-                    awayStats: { wins: 3, losses: 2 },
-                    categoryColor: 'var(--basketball-color)'
+                    odds: { p1: 2.20, p2: 1.60 },
+                    sport: 'esports',
+                    homeForm: ['W', 'L', 'W', 'D', 'W'],
+                    awayForm: ['W', 'W', 'L', 'W', 'D'],
+                    h2h: '2-1',
+                    probabilities: [40, 60],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 3, losses: 1, draws: 1 },
+                    categoryColor: 'var(--esports-color)'
                 },
+                // MMA
                 {
-                    id: 4,
-                    time: '21:00',
-                    league: 'ATP Masters 1000',
-                    home: 'Novak Djokovic',
-                    away: 'Carlos Alcaraz',
-                    status: 'finished',
-                    score: '2:1',
-                    odds: { p1: 1.75, p2: 2.05 },
-                    sport: 'tennis',
-                    homeForm: ['W', 'W', 'W', 'W', 'L'],
-                    awayForm: ['L', 'W', 'L', 'W', 'D'],
-                    h2h: '3-2',
-                    probabilities: [62, 38],
-                    homeStats: { wins: 4, losses: 1 },
-                    awayStats: { wins: 2, losses: 2, draws: 1 },
-                    categoryColor: 'var(--tennis-color)'
-                },
-                {
-                    id: 5,
+                    id: 7,
                     time: '22:00',
                     league: 'UFC 305',
-                    home: 'Conor McGregor',
-                    away: 'Michael Chandler',
+                    home: 'Usman Nurmagomedov',
+                    away: 'Paul Hughes',
                     status: 'upcoming',
                     odds: { p1: 1.60, p2: 2.30 },
                     sport: 'mma',
@@ -2355,27 +2760,26 @@
                     categoryColor: 'var(--mma-color)'
                 },
                 {
-                    id: 6,
-                    time: '15:00',
-                    league: 'La Liga',
-                    home: 'Real Madrid',
-                    away: 'Barcelona',
+                    id: 8,
+                    time: '23:00',
+                    league: 'UFC Fight Night',
+                    home: 'Magomed Ankalaev',
+                    away: 'Alex Pereira',
                     status: 'upcoming',
-                    odds: { p1: 1.85, x: 3.50, p2: 4.00 },
-                    sport: 'football',
-                    homeForm: ['W', 'W', 'D', 'W', 'W'],
-                    awayForm: ['L', 'W', 'D', 'W', 'L'],
-                    h2h: '4-3',
-                    probabilities: [50, 25, 25],
-                    homeStats: { wins: 4, draws: 1, losses: 0 },
-                    awayStats: { wins: 2, draws: 1, losses: 2 },
-                    categoryColor: 'var(--football-color)'
-                }
-            ],
-            tomorrow: [
+                    odds: { p1: 2.50, p2: 1.50 },
+                    sport: 'mma',
+                    homeForm: ['W', 'W', 'D', 'L', 'W'],
+                    awayForm: ['L', 'W', 'W', 'W', 'D', 'L'],
+                    h2h: '1-1',
+                    probabilities: [40, 60],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 4, losses: 1, draws: 0 },
+                    categoryColor: 'var(--mma-color)'
+                },
+                // Ещё футбол
                 {
-                    id: 7,
-                    time: '14:00',
+                    id: 9,
+                    time: '17:30',
                     league: 'Bundesliga',
                     home: 'Bayern Munich',
                     away: 'Borussia Dortmund',
@@ -2390,9 +2794,13 @@
                     awayStats: { wins: 2, draws: 1, losses: 2 },
                     categoryColor: 'var(--football-color)'
                 },
+                // ... (можно добавить ещё, но для примера хватит)
+            ],
+            tomorrow: [
+                // Аналогично, добавил матчи на завтра
                 {
-                    id: 8,
-                    time: '16:00',
+                    id: 10,
+                    time: '14:00',
                     league: 'Serie A',
                     home: 'Juventus',
                     away: 'Inter Milan',
@@ -2407,12 +2815,31 @@
                     awayStats: { wins: 2, draws: 1, losses: 2 },
                     categoryColor: 'var(--football-color)'
                 },
+                // Баскетбол
                 {
-                    id: 9,
+                    id: 11,
+                    time: '20:00',
+                    league: 'NBA Preseason',
+                    home: 'Boston Celtics',
+                    away: 'New York Knicks',
+                    status: 'upcoming',
+                    odds: { p1: 1.80, p2: 2.00 },
+                    sport: 'basketball',
+                    homeForm: ['W', 'W', 'L', 'W', 'D'],
+                    awayForm: ['L', 'D', 'W', 'L', 'W'],
+                    h2h: '4-3',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 3, losses: 1 },
+                    awayStats: { wins: 2, losses: 2 },
+                    categoryColor: 'var(--basketball-color)'
+                },
+                // Теннис
+                {
+                    id: 12,
                     time: '18:00',
-                    league: 'WTA Tour',
-                    home: 'Iga Swiatek',
-                    away: 'Aryna Sabalenka',
+                    league: 'Laver Cup',
+                    home: 'Team Europe',
+                    away: 'Team World',
                     status: 'upcoming',
                     odds: { p1: 1.55, p2: 2.45 },
                     sport: 'tennis',
@@ -2423,20 +2850,48 @@
                     homeStats: { wins: 4, draws: 1, losses: 0 },
                     awayStats: { wins: 2, draws: 1, losses: 2 },
                     categoryColor: 'var(--tennis-color)'
-                }
-            ]
+                },
+                // Esports
+                {
+                    id: 13,
+                    time: '19:00',
+                    league: 'The International 2025',
+                    home: 'Team Liquid',
+                    away: 'Team Spirit',
+                    status: 'upcoming',
+                    odds: { p1: 1.90, p2: 1.90 },
+                    sport: 'esports',
+                    homeForm: ['W', 'D', 'L', 'W', 'W'],
+                    awayForm: ['L', 'W', 'D', 'L', 'W'],
+                    h2h: '3-3',
+                    probabilities: [50, 50],
+                    homeStats: { wins: 3, losses: 1, draws: 1 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--esports-color)'
+                },
+                // MMA
+                {
+                    id: 14,
+                    time: '21:00',
+                    league: 'UFC Fight Night',
+                    home: 'Merab Dvalishvili',
+                    away: 'Cory Sandhagen',
+                    status: 'upcoming',
+                    odds: { p1: 1.70, p2: 2.10 },
+                    sport: 'mma',
+                    homeForm: ['W', 'W', 'W', 'D', 'L'],
+                    awayForm: ['L', 'D', 'W', 'L', 'W'],
+                    h2h: '1-0',
+                    probabilities: [55, 45],
+                    homeStats: { wins: 4, losses: 1, draws: 0 },
+                    awayStats: { wins: 2, losses: 2, draws: 1 },
+                    categoryColor: 'var(--mma-color)'
+                },
+                ]
         };
-
-        // DATES FOR NAVIGATION
-        const dates = [
-            { id: 'today', label: '📅 Сегодня', date: new Date() },
-            { id: 'tomorrow', label: '📅 Завтра', date: new Date(Date.now() + 86400000) },
-            { id: 'dayafter', label: '📅 Послезавтра', date: new Date(Date.now() + 2 * 86400000) }
-        ];
-
         // INIT APP
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 EVILBET - Enhanced Sports Page v3.0');
+            console.log('🎯 EVILBET - - Enhanced Sports Categories v3.0');
             initApp();
         });
 
@@ -2449,21 +2904,23 @@
             }
 
             updateUserInterface();
-            setupSportsTabs();
-            setupDateNavigation();
+            setupSportsCategories();
+            renderTimeFilter();
             renderMatches();
             setupEventListeners();
             startLiveUpdates();
             
             // Welcome animation
-            if (!localStorage.getItem('sportWelcomeShown')) {
+            if (!localStorage.getItem('welcomeShown') && !isLoggedIn) {
                 setTimeout(() => {
-                    showNotification('🎉 Добро пожаловать на спортивную страницу!\n📊 24+ вида спорта • Live коэффициенты • Быстрые ставки', 'success');
-                    localStorage.setItem('sportWelcomeShown', 'true');
+                    showNotification('🎉 Добро пожаловать в EVILBET!\n📱 Лучшие коэффициенты в Telegram', 'success');
+                    localStorage.setItem('welcomeShown', 'true');
                 }, 1500);
             }
 
-            updateFavoritesCount();
+            // Initial stats update
+            updateSportsCounts();
+            updateStatsDisplay();
         }
 
         // TELEGRAM INTEGRATION
@@ -2478,7 +2935,7 @@
 
             TelegramWebApp.BackButton.onClick(function() {
                 if (document.getElementById('betCoupon').classList.contains('open')) {
-                    closeCoupon();
+                    toggleCoupon();
                     TelegramWebApp.HapticFeedback.impactOccurred('light');
                 } else if (document.querySelector('.modal.active')) {
                     closeActiveModal();
@@ -2487,12 +2944,12 @@
                 }
             });
 
-            // Haptic feedback for interactive elements
+            // Haptic feedback for all interactive elements
             const hapticSelectors = [
-                '.sport-tab', '.status-btn', '.date-btn', 
+                '.sport-category', '.time-icon', '.stat-card', 
                 '.odds-item', '.favorite-btn', '.nav-item',
                 '.modal-btn', '.close-coupon', '.remove-bet',
-                '.balance-display', '.user-display', '.search-icon'
+                '.balance-display', '.user-display'
             ];
             
             hapticSelectors.forEach(selector => {
@@ -2502,26 +2959,41 @@
                     }
                 }, { passive: true });
             });
-        }
 
-        function applyTelegramTheme() {
-            if (!TelegramWebApp?.themeParams) return;
-
-            const theme = TelegramWebApp.themeParams;
-            const bgColor = theme.bg_color || '#0a0a0a';
-            const secondaryBg = theme.secondary_bg_color || '#1a1a1a';
-            const buttonColor = theme.button_color || '#ff3333';
-
-            document.documentElement.style.setProperty('--bg-primary', bgColor);
-            document.documentElement.style.setProperty('--bg-secondary', secondaryBg);
-            document.documentElement.style.setProperty('--primary-color', buttonColor);
-            document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${buttonColor}, #ff0066)`);
-
-            document.body.style.background = bgColor;
-            document.querySelectorAll('.matches-section, .bet-coupon, .modal-content, .search-section').forEach(el => {
-                el.style.background = secondaryBg;
+            // Prevent double bets on same event
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.odds-item')) {
+                    const oddsItem = e.target.closest('.odds-item');
+                    const matchId = parseInt(oddsItem.dataset.matchId);
+                    const betType = oddsItem.dataset.betType;
+                    
+                    const existingBets = couponItems.filter(item => 
+                        item.matchId === matchId
+                    );
+                    
+                    if (existingBets.length >= 1) {
+                        e.preventDefault();
+                        TelegramWebApp?.HapticFeedback.notificationOccurred('error');
+                        showNotification('⚠️ Нельзя ставить на несколько исходов одного события!', 'error');
+                        return false;
+                    }
+                }
             });
+
+            // Real Telegram Auth
+            if (TelegramWebApp.initDataUnsafe.user) {
+                currentUser = {
+                    id: TelegramWebApp.initDataUnsafe.user.id,
+                    username: TelegramWebApp.initDataUnsafe.user.username || TelegramWebApp.initDataUnsafe.user.first_name,
+                    avatar: TelegramWebApp.initDataUnsafe.user.photo_url || null
+                };
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUserInterface();
+            }
         }
+
+        
 
         // USER INTERFACE
         function updateUserInterface() {
@@ -2551,6 +3023,7 @@
                 if (logoutBtn) logoutBtn.style.display = 'block';
                 
                 userDisplay.title = `Профиль: ${currentUser.username}`;
+                userDisplay.onclick = openProfile;
             } else {
                 userName.textContent = 'Гость';
                 userName.classList.add('guest-text');
@@ -2563,32 +3036,26 @@
                 if (logoutBtn) logoutBtn.style.display = 'none';
                 
                 userDisplay.title = 'Авторизация через Telegram';
+                userDisplay.onclick = toggleAuth;
             }
 
             updateCouponDisplay();
-            updateFavoritesCount();
+            updateSportsCounts();
+            updateStatsDisplay();
             updateNotificationBadge();
         }
 
-        // SPORTS TABS SETUP
-        function setupSportsTabs() {
-            const container = document.querySelector('.sport-tabs-container');
-            const sports = [
-                { id: 'all', name: 'Все', icon: 'fas fa-th-large', color: 'var(--primary-color)' },
-                { id: 'football', name: 'Футбол', icon: 'fas fa-futbol', color: 'var(--football-color)' },
-                { id: 'basketball', name: 'Баскетбол', icon: 'fas fa-basketball-ball', color: 'var(--basketball-color)' },
-                { id: 'tennis', name: 'Теннис', icon: 'fas fa-table-tennis', color: 'var(--tennis-color)' },
-                { id: 'esports', name: 'Киберспорт', icon: 'fas fa-gamepad', color: 'var(--esports-color)' },
-                { id: 'mma', name: 'MMA', icon: 'fas fa-fist-raised', color: 'var(--mma-color)' }
-            ];
-
+        // SPORTS CATEGORIES SETUP
+        function setupSportsCategories() {
+            const container = document.getElementById('sportsCategories');
             container.innerHTML = sports.map(sport => `
-                <div class="sport-tab ${currentSportFilter === sport.id ? 'active' : ''}" 
+                <div class="sport-category ${currentSportFilter === sport.id ? 'active' : ''}" 
                      data-sport="${sport.id}" 
                      onclick="filterBySport('${sport.id}')"
                      style="--sport-color: ${sport.color};">
-                    <i class="${sport.icon}" style="color: ${sport.color};"></i>
-                    <span>${sport.name}</span>
+                    <i class="${sport.icon} sport-icon" style="color: ${sport.color};"></i>
+                    <div class="sport-count" id="${sport.id}Count">0</div>
+                    <div class="sport-name">${sport.name}</div>
                 </div>
             `).join('');
 
@@ -2596,239 +3063,243 @@
             document.querySelector(`[data-sport="${currentSportFilter}"]`).classList.add('active');
         }
 
-        // DATE NAVIGATION
-        function setupDateNavigation() {
-            const container = document.getElementById('dateNavigation');
-            const today = new Date();
-            const dates = [
-                { id: 'today', label: '📅 Сегодня', date: today },
-                { id: 'tomorrow', label: '📅 Завтра', date: new Date(today.getTime() + 86400000) },
-                { id: 'dayafter', label: '📅 Послезавтра', date: new Date(today.getTime() + 2 * 86400000) }
-            ];
+        function updateSportsCounts() {
+            const sports = ['all', 'football', 'basketball', 'tennis', 'esports', 'mma'];
+            const allMatches = [...matchesData.today, ...matchesData.tomorrow];
+            
+            sports.forEach(sportId => {
+                const countEl = document.getElementById(`${sportId}Count`);
+                if (!countEl) return;
 
-            container.innerHTML = dates.map(date => {
-                const count = Object.keys(matchesData).includes(date.id) ? matchesData[date.id].length : 0;
-                return `
-                    <button class="date-btn ${currentDateFilter === date.id ? 'active' : ''}" 
-                            data-date="${date.id}" onclick="switchDate('${date.id}')">
-                        ${date.label} 
-                        <span style="font-size: 0.75rem; opacity: 0.6;">(${count})</span>
-                    </button>
-                `;
-            }).join('');
-
-            // Set active date
-            document.querySelector(`[data-date="${currentDateFilter}"]`).classList.add('active');
+                if (sportId === 'all') {
+                    countEl.textContent = allMatches.length;
+                } else {
+                    const count = allMatches.filter(match => match.sport === sportId).length;
+                    countEl.textContent = count;
+                    countEl.style.display = count > 0 ? 'flex' : 'none';
+                }
+            });
         }
 
-        function switchDate(dateId) {
-            document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            currentDateFilter = dateId;
-            renderMatches();
-            
-            TelegramWebApp?.HapticFeedback.impactOccurred('selection');
-            showNotification(`Дата: ${dateId}`, 'success');
-        }
-
-        // FILTER FUNCTIONS
         function filterBySport(sportId) {
-            document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
+            // Update active state
+            document.querySelectorAll('.sport-category').forEach(category => {
+                category.classList.remove('active');
+            });
             event.currentTarget.classList.add('active');
             
             currentSportFilter = sportId;
-            renderMatches();
+            renderMatches(currentStatusFilter);
             
             TelegramWebApp?.HapticFeedback.impactOccurred('selection');
             showNotification(`Фильтр: ${sportId === 'all' ? 'Все виды спорта' : sportId.toUpperCase()}`, 'success');
         }
 
-        function filterByStatus(statusId) {
-            document.querySelectorAll('.status-btn').forEach(btn => btn.classList.remove('active'));
+        // TIME FILTER
+        function renderTimeFilter() {
+            const container = document.getElementById('timeFilter');
+            const times = [
+                { id: 'all', icon: 'fas fa-clock', title: 'Все время', count: '18' },
+                { id: 'today', icon: 'fas fa-hourglass-half', title: 'Сегодня', count: '12' },
+                { id: 'tomorrow', icon: 'fas fa-calendar-day', title: 'Завтра', count: '6' }
+            ];
+
+            container.innerHTML = times.map(time => `
+                <i class="${time.icon} time-icon ${currentTimeFilter === time.id ? 'active' : ''}" 
+                   data-time="${time.id}" 
+                   onclick="switchTimeFilter('${time.id}')" 
+                   title="${time.title} (${time.count})">
+                </i>
+            `).join('');
+        }
+
+        function switchTimeFilter(timeId) {
+            // Update active state
+            document.querySelectorAll('.time-icon').forEach(icon => {
+                icon.classList.remove('active');
+            });
             event.currentTarget.classList.add('active');
             
-            currentStatusFilter = statusId;
-            renderMatches();
+            currentTimeFilter = timeId;
+            renderMatches(currentStatusFilter);
             
             TelegramWebApp?.HapticFeedback.impactOccurred('selection');
-            showNotification(`Статус: ${statusId}`, 'success');
         }
 
-        function filterMatches(query) {
-            searchQuery = query.toLowerCase().trim();
-            renderMatches();
+        // MATCH RENDERING WITH FILTERS
+        function renderMatches(statusFilter = 'all') {
+            currentStatusFilter = statusFilter;
             
-            if (query) {
-                TelegramWebApp?.HapticFeedback.impactOccurred('light');
-            }
-        }
-
-        // RENDER MATCHES
-        function renderMatches() {
-            const container = document.getElementById('matchesGrid');
-            const allMatches = matchesData[currentDateFilter] || [];
+            let filteredMatches = [];
             
-            let filteredMatches = allMatches.filter(match => {
-                // Sport filter
-                if (currentSportFilter !== 'all' && match.sport !== currentSportFilter) {
-                    return false;
-                }
-                
-                // Status filter
-                if (currentStatusFilter !== 'all' && match.status !== currentStatusFilter) {
-                    return false;
-                }
-                
-                // Search filter
-                if (searchQuery) {
-                    const query = searchQuery.toLowerCase();
-                    return match.home.toLowerCase().includes(query) ||
-                           match.away.toLowerCase().includes(query) ||
-                           match.league.toLowerCase().includes(query);
-                }
-                
-                return true;
-            });
-
-            // Sort by time for today, random for future
-            if (currentDateFilter === 'today') {
-                filteredMatches.sort((a, b) => {
-                    const timeA = a.time.split(':').reduce((acc, val, i) => acc + parseInt(val) * Math.pow(60, 1-i), 0);
-                    const timeB = b.time.split(':').reduce((acc, val, i) => acc + parseInt(val) * Math.pow(60, 1-i), 0);
-                    return timeA - timeB;
-                });
+            // Apply time filter
+            if (currentTimeFilter === 'today') {
+                filteredMatches = matchesData.today;
+            } else if (currentTimeFilter === 'tomorrow') {
+                filteredMatches = matchesData.tomorrow;
             } else {
-                // Shuffle future matches for realism
-                filteredMatches.sort(() => Math.random() - 0.5);
+                filteredMatches = [...matchesData.today, ...matchesData.tomorrow];
             }
 
+            // Apply sport filter
+            if (currentSportFilter !== 'all') {
+                filteredMatches = filteredMatches.filter(match => match.sport === currentSportFilter);
+            }
+
+            // Apply status filter
+            if (statusFilter !== 'all') {
+                filteredMatches = filteredMatches.filter(match => match.status === statusFilter);
+            }
+
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filteredMatches = filteredMatches.filter(match => 
+                    match.home.toLowerCase().includes(query) ||
+                    match.away.toLowerCase().includes(query) ||
+                    match.league.toLowerCase().includes(query)
+                );
+            }
+
+            // Apply favorites filter
+            if (statusFilter === 'favorite') {
+                filteredMatches = filteredMatches.filter(match => favorites.includes(match.id));
+            }
+
+            const container = document.getElementById('matchesGrid');
+            
             if (filteredMatches.length === 0) {
                 container.innerHTML = `
-                    <div class="no-matches" style="grid-column: 1/-1;">
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-secondary);">
                         <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
                         <div style="font-size: 1.3rem; margin-bottom: 8px;">События не найдены</div>
                         <div style="font-size: 0.9rem; opacity: 0.7;">${getEmptyMessage()}</div>
-                        ${searchQuery ? `<button onclick="clearSearch()" style="margin-top: 16px; background: var(--gradient-primary); color: #000; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">Очистить поиск</button>` : ''}
+                        ${searchQuery ? `<button onclick="clearSearch()" style="margin-top: 16px; background: var(--gradient-primary); color: #000; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Очистить поиск</button>` : ''}
                     </div>
                 `;
                 return;
             }
 
+            // Render with stagger animation
             container.innerHTML = filteredMatches.map((match, index) => 
                 createMatchCard(match, index)
             ).join('');
 
+            // Setup interactions
             setTimeout(() => {
-                setupMatchInteractions();
+                setupMatchCardInteractions();
                 highlightSelectedBets();
             }, 100);
 
+            // Update stats
             updateStatsDisplay();
         }
 
-        function getEmptyMessage() {
-            if (searchQuery) return 'Попробуйте изменить запрос поиска';
-            if (currentSportFilter !== 'all') return `Нет событий по ${currentSportFilter}`;
-            if (currentStatusFilter !== 'all') return `Нет ${currentStatusFilter} событий`;
-            if (currentDateFilter !== 'today') return `Нет событий на ${currentDateFilter}`;
-            return 'Загрузка событий...';
-        }
-
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            searchQuery = '';
-            renderMatches();
-            document.getElementById('searchInput').blur();
-        }
-
-        // CREATE MATCH CARD
         function createMatchCard(match, index) {
             const isFavorite = favorites.includes(match.id);
-            const statusBadge = match.status === 'live' ? 
-                `<div class="match-status status-live"><span class="status-dot"></span>LIVE ${match.minute || Math.floor(Math.random() * 90)}'</div>` :
-                match.status === 'finished' ? 
-                `<div class="match-status status-finished">FT ${match.score}</div>` : '';
+            const isLive = match.status === 'live';
+            const isFinished = match.status === 'finished';
+            const delay = index * 50;
 
-            const scoreDisplay = (match.status === 'live' || match.status === 'finished') ? 
-                `<div class="match-score">${match.score}</div>` : '';
-
-            const homeForm = match.homeForm.slice(-5).map(result => 
-                `<div class="form-badge form-${result.toLowerCase()}" title="${result}">${result}</div>`
-            ).join('');
-            
-            const awayForm = match.awayForm.slice(-5).map(result => 
-                `<div class="form-badge form-${result.toLowerCase()}" title="${result}">${result}</div>`
-            ).join('');
-
-            const oddsHTML = Object.entries(match.odds).map(([key, value]) => {
-                const betType = key === 'p1' ? 'П1' : key === 'x' ? 'X' : 'П2';
-                const prob = match.probabilities ? match.probabilities[key === 'p1' ? 0 : key === 'x' ? 1 : 2] : 33;
-                const isSelected = couponItems.some(item => item.matchId === match.id && item.betType === betType);
-                
-                return `
-                    <div class="odds-item ${isSelected ? 'selected' : ''}" 
-                         data-match-id="${match.id}" data-bet-type="${betType}" data-odds="${value}"
-                         onclick="toggleBetInCoupon(event, ${match.id}, '${betType}', ${value})">
-                        <div class="odds-prob">${prob}%</div>
-                        <div class="odds-value">${value.toFixed(2)}</div>
-                        <div class="odds-type">${betType}</div>
+            let oddsHTML = '';
+            if (match.odds.x) { // football etc with draw
+                oddsHTML = `
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P1" data-odds="${match.odds.p1}" onclick="toggleBetInCoupon(event, ${match.id}, 'P1', ${match.odds.p1})">
+                        <span class="odds-prob">${match.probabilities[0]}%</span>
+                        <span class="odds-value">${match.odds.p1.toFixed(2)}</span>
+                        <span class="odds-type">P1</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="X" data-odds="${match.odds.x}" onclick="toggleBetInCoupon(event, ${match.id}, 'X', ${match.odds.x})">
+                        <span class="odds-prob">${match.probabilities[1]}%</span>
+                        <span class="odds-value">${match.odds.x.toFixed(2)}</span>
+                        <span class="odds-type">X</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P2" data-odds="${match.odds.p2}" onclick="toggleBetInCoupon(event, ${match.id}, 'P2', ${match.odds.p2})">
+                        <span class="odds-prob">${match.probabilities[2]}%</span>
+                        <span class="odds-value">${match.odds.p2.toFixed(2)}</span>
+                        <span class="odds-type">P2</span>
                     </div>
                 `;
-            }).join('');
+            } else { // no draw
+                oddsHTML = `
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P1" data-odds="${match.odds.p1}" onclick="toggleBetInCoupon(event, ${match.id}, 'P1', ${match.odds.p1})">
+                        <span class="odds-prob">${match.probabilities[0]}%</span>
+                        <span class="odds-value">${match.odds.p1.toFixed(2)}</span>
+                        <span class="odds-type">P1</span>
+                    </div>
+                    <div class="odds-item" data-match-id="${match.id}" data-bet-type="P2" data-odds="${match.odds.p2}" onclick="toggleBetInCoupon(event, ${match.id}, 'P2', ${match.odds.p2})">
+                        <span class="odds-prob">${match.probabilities[1]}%</span>
+                        <span class="odds-value">${match.odds.p2.toFixed(2)}</span>
+                        <span class="odds-type">P2</span>
+                    </div>
+                `;
+            }
+
+            let statusHTML = '';
+            if (isLive) {
+                statusHTML = `<div class="match-status status-live"><span class="status-dot"></span>LIVE ${match.minute}'</div>`;
+            } else if (isFinished) {
+                statusHTML = `<div class="match-status status-finished"><i class="fas fa-check"></i> FT</div>`;
+            }
+
+            let scoreHTML = '';
+            if (match.score) {
+                scoreHTML = `<div class="match-score">${match.score}</div>`;
+            }
+
+            const homeLogo = match.home.charAt(0);
+            const awayLogo = match.away.charAt(0);
+
+            const homeFormHTML = match.homeForm.map(f => `<div class="form-badge form-${f.toLowerCase()}">${f}</div>`).join('');
+            const awayFormHTML = match.awayForm.map(f => `<div class="form-badge form-${f.toLowerCase()}">${f}</div>`).join('');
 
             return `
-                <div class="match-card stagger-in" style="animation-delay: ${index * 0.1}s;" data-match-id="${match.id}">
-                    ${statusBadge}
-                    <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(event, ${match.id})">
-                        <i class="fas fa-star ${isFavorite ? '' : 'far'}"></i>
+                <div class="match-card stagger-in" data-match-id="${match.id}" onclick="openMatchDetail(${match.id})" style="animation-delay: ${delay}ms;">
+                    ${statusHTML}
+                    <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(event, ${match.id})" title="${isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'}">
+                        <i class="fas fa-star"></i>
                     </button>
-                    
                     <div class="match-header">
                         <div class="match-meta">
-                            <div class="sport-badge" style="background: ${match.categoryColor};">${match.sport}</div>
-                            <div class="match-time">${match.time}</div>
+                            <span class="sport-badge">${match.league}</span>
+                            <span class="match-time">${match.time}</span>
                         </div>
-                        <div class="league-name">${match.league}</div>
+                        <span class="league-name">${match.league}</span>
                     </div>
-                    
-                    ${scoreDisplay}
-                    
                     <div class="teams-section">
                         <div class="team-wrapper">
-                            <div class="team-logo">${match.home.charAt(0)}</div>
+                            <div class="team-logo">${homeLogo}</div>
                             <div class="team-name">${match.home}</div>
-                            <div class="team-form">${homeForm}</div>
+                            <div class="team-form">${homeFormHTML}</div>
                         </div>
                         <div class="vs-separator">
                             <div class="vs-text">VS</div>
                             <div class="vs-line"></div>
                         </div>
                         <div class="team-wrapper">
-                            <div class="team-logo">${match.away.charAt(0)}</div>
+                            <div class="team-logo">${awayLogo}</div>
                             <div class="team-name">${match.away}</div>
-                            <div class="team-form">${awayForm}</div>
+                            <div class="team-form">${awayFormHTML}</div>
                         </div>
+                        ${scoreHTML}
                     </div>
-                    
                     <div class="stats-bar">
                         <div class="stat-item">
                             <div class="stat-label">H2H</div>
-                            <div class="stat-value"><span class="h2h-badge">${match.h2h}</span></div>
+                            <div class="stat-value h2h-badge">${match.h2h}</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Дом</div>
-                            <div class="stat-value">${match.homeStats.wins}-${match.homeStats.draws}-${match.homeStats.losses}</div>
+                            <div class="stat-label">Home W/D/L</div>
+                            <div class="stat-value">${match.homeStats.wins}/${match.homeStats.draws || 0}/${match.homeStats.losses}</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-label">Гости</div>
-                            <div class="stat-value">${match.awayStats.wins}-${match.awayStats.draws}-${match.awayStats.losses}</div>
+                            <div class="stat-label">Away W/D/L</div>
+                            <div class="stat-value">${match.awayStats.wins}/${match.awayStats.draws || 0}/${match.awayStats.losses}</div>
                         </div>
                     </div>
-                    
                     <div class="odds-section">
                         <div class="odds-header">
-                            <div class="odds-title">Основные</div>
+                            <span class="odds-title">Основные исходы</span>
                         </div>
                         <div class="odds-container">
                             ${oddsHTML}
@@ -2838,23 +3309,51 @@
             `;
         }
 
-        // BETTING SYSTEM
+        function getEmptyMessage() {
+            if (searchQuery) return 'Попробуйте изменить запрос поиска';
+            if (currentSportFilter !== 'all') return `Нет событий по ${currentSportFilter}`;
+            if (currentStatusFilter !== 'all') return `Нет ${currentStatusFilter} событий`;
+            if (currentTimeFilter !== 'all') return `Нет событий на ${currentTimeFilter}`;
+            return 'Попробуйте изменить фильтры';
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            renderMatches(currentStatusFilter);
+            document.getElementById('searchInput').blur();
+        }
+
+        function setFilter(filterType) {
+            let statusFilter = 'all';
+            switch(filterType) {
+                case 'live': statusFilter = 'live'; break;
+                case 'favorite': statusFilter = 'favorite'; break;
+                case 'today': 
+                    switchTimeFilter('today');
+                    statusFilter = 'all'; 
+                    break;
+            }
+            renderMatches(statusFilter);
+            showNotification(`Фильтр: ${filterType.toUpperCase()}`, 'success');
+        }
+
+        // BETTING SYSTEM - FIXED SINGLE EVENT LIMIT
         function toggleBetInCoupon(event, matchId, betType, odds) {
             event.stopPropagation();
             
             // Check existing bets for this match
             const existingBetsForMatch = couponItems.filter(item => item.matchId === matchId);
-            if (existingBetsForMatch.length >= 3) {
+            
+            if (existingBetsForMatch.length >= 1) {
                 TelegramWebApp?.HapticFeedback.notificationOccurred('error');
-                showNotification('⚠️ Максимум 3 ставки на одно событие!', 'error');
+                showNotification('⚠️ Нельзя ставить на несколько исходов одного события!', 'error');
                 createRipple(event.currentTarget, 400, '#ff4444');
                 return;
             }
 
             // Find if this specific bet exists
-            const existingIndex = couponItems.findIndex(item => 
-                item.matchId === matchId && item.betType === betType
-            );
+            const existingIndex = couponItems.findIndex(item => item.matchId === matchId && item.betType === betType);
 
             const oddsElement = event.currentTarget;
             
@@ -2870,11 +3369,6 @@
                 TelegramWebApp?.HapticFeedback.impactOccurred('light');
                 createRipple(oddsElement, 400, '#ff4444');
             } else {
-                // Add bet
-                if (existingBetsForMatch.length >= 2) {
-                    showNotification('⚠️ Внимание: 3-я ставка на это событие', 'warning');
-                }
-
                 couponItems.push({
                     matchId,
                     betType,
@@ -2949,7 +3443,7 @@
             TelegramWebApp?.HapticFeedback.impactOccurred('light');
             
             if (couponItems.length === 0) {
-                setTimeout(closeCoupon, 1000);
+                setTimeout(toggleCoupon, 1000);
             }
         }
 
@@ -2978,10 +3472,20 @@
             const totalOddsEl = document.getElementById('totalOdds');
             const placeBetBtn = document.getElementById('placeBetButton');
             const mainButton = TelegramWebApp?.MainButton;
-            const couponCount = document.getElementById('couponCount');
+            const couponTitle = document.querySelector('.coupon-title');
+            const couponBadge = document.getElementById('couponBadge');
+            const historySection = document.getElementById('betHistorySection');
+            const historyList = document.getElementById('betHistoryList');
 
             // Update title count
-            couponCount.textContent = couponItems.length;
+            if (couponTitle) {
+                couponTitle.innerHTML = `<i class="fas fa-ticket-alt"></i> Купон ставок (${couponItems.length})`;
+            }
+
+            if (couponBadge) {
+                couponBadge.textContent = couponItems.length;
+                couponBadge.style.display = couponItems.length > 0 ? 'flex' : 'none';
+            }
 
             if (couponItems.length === 0) {
                 container.innerHTML = `
@@ -2998,67 +3502,94 @@
                 if (mainButton) {
                     mainButton.hide();
                 }
-                return;
-            }
+            } else {
+                // Render coupon items
+                container.innerHTML = couponItems.map((item, index) => {
+                    const match = Object.values(matchesData).flat().find(m => m.id === item.matchId);
+                    if (!match) return '';
 
-            // Render coupon items
-            container.innerHTML = couponItems.map((item, index) => {
-                const match = Object.values(matchesData).flat().find(m => m.id === item.matchId);
-                if (!match) return '';
-
-                return `
-                    <div class="coupon-item" data-bet-index="${index}">
-                        <div>
-                            <div class="coupon-event">${match.home} vs ${match.away}</div>
-                            <div class="coupon-details">
-                                <span style="color: var(--text-secondary);">${item.betType}</span> 
-                                <span style="color: var(--primary-color); font-weight: bold;">@${item.odds.toFixed(2)}</span>
+                    return `
+                        <div class="coupon-item" data-bet-index="${index}">
+                            <div>
+                                <div class="coupon-event">${match.home} vs ${match.away}</div>
+                                <div class="coupon-details">
+                                    <span style="color: var(--text-secondary);">${item.betType}</span> 
+                                    <span style="color: var(--primary-color); font-weight: bold;">@${item.odds.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <div class="coupon-odds-section">
+                                <span class="coupon-odds-value">${item.odds.toFixed(2)}</span>
+                                <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить ставку">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="coupon-odds-section">
-                            <span class="coupon-odds-value">${item.odds.toFixed(2)}</span>
-                            <button class="remove-bet" onclick="removeBetFromCoupon(${index})" title="Удалить ставку">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
 
-            // Calculate totals
-            const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
-            const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
-            const potentialWin = (stakeAmount * totalOdds).toFixed(2);
+                // Calculate totals
+                const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
+                const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
+                const potentialWin = (stakeAmount * totalOdds).toFixed(2);
 
-            totalOddsEl.textContent = totalOdds.toFixed(2);
-            totalSection.style.display = 'block';
+                totalOddsEl.textContent = totalOdds.toFixed(2);
+                totalSection.style.display = 'block';
 
-            // Update button state
-            const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0;
-            placeBetBtn.disabled = !canPlaceBet;
-            
-            if (canPlaceBet) {
-                placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stakeAmount.toFixed(2)}`;
-                placeBetBtn.classList.add('success');
+                // Update button state
+                const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
+                placeBetBtn.disabled = !canPlaceBet;
                 
-                if (mainButton) {
-                    mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
-                    mainButton.setParams({ is_visible: true });
+                if (canPlaceBet) {
+                    placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stakeAmount.toFixed(2)}`;
+                    placeBetBtn.classList.add('success');
+                    
+                    if (mainButton) {
+                        mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
+                        mainButton.setParams({ is_visible: true });
+                    }
+                } else {
+                    placeBetBtn.innerHTML = '<i class="fas fa-play"></i> Сделать ставку';
+                    placeBetBtn.classList.remove('success');
+                    
+                    if (mainButton) {
+                        mainButton.hide();
+                    }
+                    
+                    if (couponItems.length > 10) {
+                        showNotification('⚠️ Максимум 10 событий в купоне', 'error');
+                    }
                 }
+
+                // Auto-calculate on input
+                const stakeInput = document.getElementById('stakeInput');
+                if (stakeInput && !stakeInput.oninput) {
+                    stakeInput.oninput = updateBetTotal;
+                }
+            }
+
+            // Render history
+            const history = JSON.parse(localStorage.getItem('betHistory') || '[]');
+            if (history.length > 0) {
+                historySection.style.display = 'block';
+                historyList.innerHTML = history.slice(0, 5).map(bet => {
+                    const statusClass = bet.status === 'won' ? 'won' : bet.status === 'lost' ? 'lost' : 'pending';
+                    const statusText = bet.status === 'won' ? '✅ Выиграно' : bet.status === 'lost' ? '❌ Проиграно' : '⏳ Ожидание';
+                    return `<div class="history-item ${statusClass}">
+                        <span>${statusText} - $${bet.stake}</span>
+                        <span>${new Date(bet.timestamp).toLocaleDateString()}</span>
+                    </div>`;
+                }).join('');
             } else {
-                placeBetBtn.innerHTML = '<i class="fas fa-play"></i> Сделать ставку';
-                placeBetBtn.classList.remove('success');
-                
-                if (mainButton) {
-                    mainButton.hide();
-                }
+                historySection.style.display = 'none';
             }
+        }
 
-            // Auto-calculate on input
+        // New Fichka: Quick Stake Setter
+        function setStake(amount) {
             const stakeInput = document.getElementById('stakeInput');
-            if (stakeInput && !stakeInput.oninput) {
-                stakeInput.oninput = updateBetTotal;
-            }
+            stakeInput.value = Math.min(amount, balance);
+            updateBetTotal();
+            TelegramWebApp?.HapticFeedback.impactOccurred('light');
         }
 
         function confirmBet() {
@@ -3080,11 +3611,16 @@
                 return;
             }
 
+            if (couponItems.length > 10) {
+                showNotification('⚠️ Максимум 10 событий в купоне', 'error');
+                return;
+            }
+
             // Calculate bet details
             const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
             const potentialWin = (stake * totalOdds).toFixed(2);
 
-            // Create bet record
+            // Create comprehensive bet record
             const betRecord = {
                 id: `bet_${Date.now()}`,
                 timestamp: new Date().toISOString(),
@@ -3108,7 +3644,7 @@
                 currency: 'USD'
             };
 
-            // Save to history
+            // Save to bet history
             let betHistory = JSON.parse(localStorage.getItem('betHistory') || '[]');
             betHistory.unshift(betRecord);
             localStorage.setItem('betHistory', JSON.stringify(betHistory.slice(0, 100)));
@@ -3123,9 +3659,9 @@
 
             // Update UI
             updateUserInterface();
-            closeCoupon();
+            toggleCoupon();
             
-            // Success feedback
+            // Success feedback with details
             const eventsSummary = betRecord.events.length > 1 
                 ? `${betRecord.events.length} событий` 
                 : `${betRecord.events[0].betType} (${betRecord.events[0].match})`;
@@ -3140,77 +3676,186 @@
             );
             
             TelegramWebApp?.HapticFeedback.notificationOccurred('success');
+            
+            // Animate success
+            const btn = document.getElementById('placeBetButton');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Ставка принята!';
+            btn.style.background = 'var(--success-color)';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = 'var(--gradient-primary)';
+                btn.disabled = false;
+            }, 2000);
         }
 
         // MATCH INTERACTIONS
-        function setupMatchInteractions() {
-            document.querySelectorAll('.match-card').forEach(card => {
-                // Main card click - open match details
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.odds-item, .favorite-btn, .remove-bet')) return;
-                    
-                    const matchId = card.dataset.matchId;
-                    const match = Object.values(matchesData).flat().find(m => m.id == matchId);
-                    
-                    if (match) {
-                        // Save match data for detail page
-                        sessionStorage.setItem('currentMatch', JSON.stringify({
-                            ...match,
-                            returnUrl: window.location.pathname
-                        }));
-                        
-                        // Navigate
-                        window.location.href = `match-events.html?id=${matchId}`;
-                    }
+        function setupMatchCardInteractions() {
+            // Team logos animation
+            document.querySelectorAll('.team-wrapper').forEach(wrapper => {
+                const logo = wrapper.querySelector('.team-logo');
+                wrapper.addEventListener('mouseenter', () => {
+                    logo.style.transform = 'scale(1.1)';
                 });
+                wrapper.addEventListener('mouseleave', () => {
+                    logo.style.transform = 'scale(1)';
+                });
+                wrapper.addEventListener('touchstart', (e) => {
+                    logo.style.transform = 'scale(1.05)';
+                }, { passive: true });
+                wrapper.addEventListener('touchend', () => {
+                    setTimeout(() => logo.style.transform = 'scale(1)', 200);
+                }, { passive: true });
+            });
 
-                // Team hover effects
-                const teamWrappers = card.querySelectorAll('.team-wrapper');
-                teamWrappers.forEach(wrapper => {
-                    const logo = wrapper.querySelector('.team-logo');
-                    wrapper.addEventListener('mouseenter', () => {
-                        logo.style.transform = 'scale(1.1)';
-                    });
-                    wrapper.addEventListener('mouseleave', () => {
-                        logo.style.transform = 'scale(1)';
-                    });
+            // Stats cards filter
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const label = card.querySelector('.stat-label').textContent.toLowerCase();
+                    setFilter(label);
+                });
+            });
+
+            // Sports categories
+            document.querySelectorAll('.sport-category').forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const sportId = category.dataset.sport;
+                    filterBySport(sportId);
+                });
+            });
+
+            // Time filter icons
+            document.querySelectorAll('.time-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const timeId = icon.dataset.time;
+                    switchTimeFilter(timeId);
                 });
             });
         }
 
-        // FAVORITES
+        function openMatchDetail(matchId) {
+            const match = Object.values(matchesData).flat().find(m => m.id === matchId);
+            if (!match) {
+                showNotification('❌ Событие не найдено', 'error');
+                return;
+            }
+
+            // Prepare comprehensive match data for detail page
+            const matchData = {
+                id: match.id,
+                timestamp: Date.now(),
+                league: match.league,
+                home: match.home,
+                away: match.away,
+                sport: match.sport,
+                status: match.status,
+                time: match.time,
+                score: match.score,
+                minute: match.minute,
+                odds: { ...match.odds },
+                probabilities: [...match.probabilities],
+                h2h: match.h2h,
+                homeForm: [...match.homeForm],
+                awayForm: [...match.awayForm],
+                homeStats: { ...match.homeStats },
+                awayStats: { ...match.awayStats },
+                categoryColor: match.categoryColor,
+                // Enhanced data for detail page
+                venue: getVenueForSport(match.sport),
+                weather: getWeatherForSport(match.sport),
+                referee: 'John Smith',
+                broadcast: getBroadcastForSport(match.sport),
+                // Live stats if applicable
+                liveStats: match.status === 'live' ? generateLiveStats() : null,
+                // Predictions
+                prediction: {
+                    recommended: match.probabilities[0] > 50 ? 'p1' : 'p2',
+                    confidence: Math.max(...match.probabilities)
+                }
+            };
+
+            // Save to sessionStorage for match-events.html
+            sessionStorage.setItem('currentMatch', JSON.stringify(matchData));
+            sessionStorage.setItem('returnUrl', window.location.pathname);
+            
+            // Smooth page transition
+            document.body.style.transition = 'opacity 0.2s ease';
+            document.body.style.opacity = '0.3';
+            
+            // Delay for animation
+            setTimeout(() => {
+                window.location.href = `match-events.html?id=${matchId}`;
+            }, 150);
+        }
+
+        function getVenueForSport(sport) {
+            const venues = {
+                football: 'Allianz Arena',
+                basketball: 'Staples Center',
+                tennis: 'Wimbledon Centre Court',
+                esports: 'LAN Arena',
+                mma: 'T-Mobile Arena'
+            };
+            return venues[sport] || 'Stadium';
+        }
+
+        function getWeatherForSport(sport) {
+            if (sport === 'esports' || sport === 'basketball' || sport === 'mma') return 'Indoor';
+            const weathers = ['☀️ 18°C', '🌤️ 20°C', '⛅ 16°C', '🌦️ 22°C'];
+            return weathers[Math.floor(Math.random() * weathers.length)];
+        }
+
+        function getBroadcastForSport(sport) {
+            const broadcasts = {
+                football: 'ESPN, Sky Sports',
+                basketball: 'NBA TV, TNT',
+                tennis: 'Tennis Channel',
+                esports: 'Twitch, YouTube Gaming',
+                mma: 'UFC Fight Pass, ESPN+'
+            };
+            return broadcasts[sport] || 'Live Stream';
+        }
+
+        function generateLiveStats() {
+            return {
+                possession: { home: Math.round(30 + Math.random() * 40), away: 100 - (30 + Math.random() * 40) },
+                shots: { home: Math.floor(Math.random() * 15), away: Math.floor(Math.random() * 15) },
+                shotsOnTarget: { home: Math.floor(Math.random() * 6), away: Math.floor(Math.random() * 6) },
+                corners: { home: Math.floor(Math.random() * 8), away: Math.floor(Math.random() * 8) },
+                fouls: { home: Math.floor(Math.random() * 10), away: Math.floor(Math.random() * 10) },
+                yellowCards: { home: Math.floor(Math.random() * 3), away: Math.floor(Math.random() * 3) },
+                attacks: { home: Math.floor(50 + Math.random() * 30), away: Math.floor(50 + Math.random() * 30) }
+            };
+        }
+
+        // FAVORITES SYSTEM
         function toggleFavorite(event, matchId) {
             event.stopPropagation();
             const index = favorites.indexOf(matchId);
             const button = event.currentTarget;
-            const icon = button.querySelector('i');
             
             if (index > -1) {
                 favorites.splice(index, 1);
                 button.classList.remove('active');
-                icon.classList.replace('fas', 'far');
+                button.title = 'Добавить в избранное';
                 showNotification('⭐ Событие убрано из избранного', 'error');
             } else {
                 favorites.push(matchId);
                 button.classList.add('active');
-                icon.classList.replace('far', 'fas');
+                button.title = 'Убрать из избранного';
                 showNotification('❤️ Событие добавлено в избранное', 'success');
             }
             
             localStorage.setItem('favorites', JSON.stringify(favorites));
-            updateFavoritesCount();
+            updateStatsDisplay();
             highlightSelectedBets();
             
             TelegramWebApp?.HapticFeedback.impactOccurred('success');
-        }
-
-        function updateFavoritesCount() {
-            const favoriteMatches = Object.values(matchesData).flat().filter(m => favorites.includes(m.id));
-            const count = favoriteMatches.length;
-            
-            const badge = document.getElementById('notificationBadge');
-            badge.textContent = count > 99 ? '99+' : count;
-            badge.style.display = count > 0 ? 'flex' : 'none';
         }
 
         function highlightSelectedBets() {
@@ -3225,19 +3870,18 @@
             });
         }
 
-        // STATS DISPLAY
+        // STATS & COUNTERS
         function updateStatsDisplay() {
-            const allMatches = Object.values(matchesData).flat();
-            const liveCount = allMatches.filter(m => m.status === 'live').length;
-            const favoritesCount = favorites.filter(id => allMatches.some(m => m.id === id)).length;
-            const todayCount = matchesData.today ? matchesData.today.length : 0;
+            const liveCount = Object.values(matchesData).flat().filter(m => m.status === 'live').length;
+            const favoritesCount = favorites.length;
+            const todayCount = matchesData.today.length;
             
-            // Update status buttons if exist
-            const liveBtn = document.querySelector('.status-btn[onclick*="live"]');
-            if (liveBtn) liveBtn.textContent = `Live (${liveCount})`;
+            document.getElementById('liveCount').textContent = liveCount;
+            document.getElementById('favoritesCount').textContent = favoritesCount;
+            document.getElementById('todayCount').textContent = todayCount;
         }
 
-        // LIVE UPDATES
+        // LIVE UPDATES SYSTEM
         function startLiveUpdates() {
             setInterval(() => {
                 // Update live match timers
@@ -3248,27 +3892,29 @@
                         if (currentMinute < 90) {
                             status.innerHTML = `<span class="status-dot"></span>LIVE ${currentMinute + 1}'`;
                         } else {
+                            // Match finished
                             status.innerHTML = '<i class="fas fa-check"></i> FT';
                             status.className = 'match-status status-finished';
                         }
                     }
                 });
 
-                // Fluctuate odds for live matches
+                // Fluctuate odds for live matches (more realistic)
                 document.querySelectorAll('.match-card').forEach(card => {
                     const status = card.querySelector('.match-status');
                     if (status && status.classList.contains('status-live')) {
                         const oddsItems = card.querySelectorAll('.odds-item');
-                        oddsItems.forEach(item => {
-                            if (Math.random() < 0.3) {
+                        oddsItems.forEach((item, index) => {
+                            if (Math.random() < 0.3) { // 30% chance per update
                                 const currentOdds = parseFloat(item.dataset.odds);
-                                const change = (Math.random() - 0.5) * 0.05;
+                                const volatility = currentOdds > 2 ? 0.03 : 0.05; // Higher volatility for underdogs
+                                const change = (Math.random() - 0.5) * volatility * 2;
                                 const newOdds = Math.max(1.01, currentOdds + change);
                                 
                                 item.dataset.odds = newOdds.toFixed(2);
                                 item.querySelector('.odds-value').textContent = newOdds.toFixed(2);
                                 
-                                // Visual indicator
+                                // Visual change indicator
                                 const indicator = document.createElement('span');
                                 indicator.textContent = change > 0 ? '+' : '';
                                 indicator.style.cssText = `
@@ -3289,11 +3935,22 @@
                                 setTimeout(() => indicator.remove(), 800);
                             }
                         });
+                        
+                        // Update coupon if this match is in it
+                        couponItems.forEach((couponItem, index) => {
+                            if (couponItem.matchId === parseInt(card.dataset.matchId)) {
+                                const newOdds = parseFloat(card.querySelector('.odds-item').dataset.odds);
+                                couponItems[index].odds = newOdds;
+                            }
+                        });
+                        localStorage.setItem('couponItems', JSON.stringify(couponItems));
+                        updateCouponDisplay();
                     }
                 });
 
-                updateFavoritesCount();
-            }, 5000);
+                updateSportsCounts();
+                updateStatsDisplay();
+            }, 7000); // Update every 7 seconds for realism
         }
 
         // MODALS & UI
@@ -3324,6 +3981,26 @@
 
         function openProfile() {
             showModal('profileModal');
+        }
+
+        function toggleAuth() {
+            showModal('authModal');
+        }
+
+        function connectTelegram() {
+            // Simulate Telegram login
+            currentUser = { username: 'TestUser', avatar: null, id: Date.now() };
+            isLoggedIn = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Bonus for registration
+            balance += 100;
+            localStorage.setItem('balance', balance.toString());
+
+            updateUserInterface();
+            closeModal('authModal');
+            showNotification('✅ Вход выполнен! +100$ бонус добавлен', 'success');
         }
 
         function openHistory() {
@@ -3377,7 +4054,7 @@
             }
 
             const depositAmount = Math.max(10, parseFloat(amount));
-            const bonusPercent = depositAmount >= 100 ? 0.15 : 0.10;
+            const bonusPercent = depositAmount >= 100 ? 0.15 : 0.10; // 15% for 100$+, 10% otherwise
             const bonus = Math.min(depositAmount * bonusPercent, 150);
             const total = depositAmount + bonus;
 
@@ -3422,7 +4099,7 @@
             }
         }
 
-        // NOTIFICATIONS
+        // NOTIFICATIONS SYSTEM
         function showNotification(message, type = 'success', duration = 3500) {
             const notification = document.getElementById('notification');
             notification.innerHTML = message.replace(/\n/g, '<br>');
@@ -3441,9 +4118,11 @@
         }
 
         // UTILITY FUNCTIONS
-        function closeCoupon() {
-            document.getElementById('betCoupon').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
+        function toggleCoupon() {
+            const betCoupon = document.getElementById('betCoupon');
+            const overlay = document.getElementById('overlay');
+            betCoupon.classList.toggle('open');
+            overlay.classList.toggle('active');
             TelegramWebApp?.HapticFeedback.impactOccurred('light');
         }
 
@@ -3453,19 +4132,20 @@
                 `🔥 Активных LIVE: ${Object.values(matchesData).flat().filter(m => m.status === 'live').length}`,
                 `💰 Текущий баланс: $${balance.toFixed(2)}`,
                 `🎁 Доступный бонус: $${Math.min(balance * 0.15, 150).toFixed(2)}`,
-                `📅 Сегодня: ${matchesData.today ? matchesData.today.length : 0} событий`
+                `📅 Сегодня: ${matchesData.today.length} событий | Завтра: ${matchesData.tomorrow.length}`
             ];
 
             TelegramWebApp?.showAlert(`🔔 Уведомления EVILBET:\n\n${notifications.join('\n\n')}`);
             TelegramWebApp?.HapticFeedback.impactOccurred('medium');
         }
 
-        // EVENT LISTENERS
+        // EVENT LISTENERS SETUP
         function setupEventListeners() {
             // Overlay interactions
             document.getElementById('overlay').addEventListener('click', function(e) {
                 if (e.target === this) {
-                    closeCoupon();
+                    toggleCoupon();
+                    closeActiveModal();
                 }
             });
 
@@ -3487,17 +4167,17 @@
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     
+                    // Update active state
                     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
                     
                     const page = this.dataset.page;
-                    if (page === 'referral') {
-                        window.location.href = 'referal.html';
+                    if (page === 'home' || page === 'sport' || page === 'live' || page === 'referal') {
+                        window.location.href = `${page}.html`;
                     } else if (page === 'profile') {
                         openProfile();
-                    } else if (page) {
-                        window.location.href = `${page}.html`;
                     }
+                    // home does nothing - already on home page
                 });
             });
 
@@ -3520,7 +4200,7 @@
             // Keyboard shortcuts
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
-                    closeCoupon();
+                    toggleCoupon();
                     closeActiveModal();
                 }
                 if (e.key === 'Enter' && document.activeElement.id === 'stakeInput' && !e.shiftKey) {
@@ -3539,13 +4219,13 @@
                 const touchY = e.touches[0].clientY;
                 const deltaY = touchY - touchStartY;
                 
+                // Close coupon on downward swipe
                 if (deltaY > 100 && document.getElementById('betCoupon').classList.contains('open')) {
-                    closeCoupon();
+                    toggleCoupon();
                 }
             }, { passive: true });
         }
 
-        // UTILITY FUNCTIONS
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
