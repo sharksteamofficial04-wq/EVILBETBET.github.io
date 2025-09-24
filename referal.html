@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVILBET - Рефералы</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.min.css">
     <link rel="preload" href="https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2" as="font" type="font/woff2" crossorigin>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         @font-face {
             font-family: 'Bebas Neue Cyrillic';
@@ -36,14 +39,9 @@
             --text-secondary: #b0b0b0;
             --success-color: #00ff88;
             --live-color: #ff6b35;
-            --football-color: #00b140;
-            --basketball-color: #ff4444;
-            --tennis-color: #ffc107;
-            --esports-color: #9c27b0;
-            --mma-color: #607d8b;
             --border-color: rgba(255, 51, 51, 0.2);
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066)!important;
-            --referral-gradient: linear-gradient(135deg, var(--primary-color), #ff0066)!important;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), #ff0066);
+            --referral-gradient: linear-gradient(135deg, var(--primary-color), #ff0066);
             --live-gradient: linear-gradient(135deg, var(--live-color), #ff8e53);
         }
 
@@ -122,11 +120,6 @@
             min-width: 70px;
             cursor: pointer;
             transition: all 0.2s ease;
-            touch-action: manipulation;
-        }
-
-        .balance-display:active {
-            transform: scale(0.98);
         }
 
         .balance-display:hover {
@@ -154,11 +147,6 @@
             white-space: nowrap;
             max-width: 120px;
             overflow: hidden;
-            touch-action: manipulation;
-        }
-
-        .user-display:active {
-            transform: scale(0.98);
         }
 
         .user-display:hover {
@@ -212,11 +200,6 @@
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
-            touch-action: manipulation;
-        }
-
-        .notifications-btn:active {
-            transform: scale(0.95);
         }
 
         .notifications-btn:hover {
@@ -239,7 +222,6 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            min-width: 16px;
         }
 
         /* MAIN CONTAINER */
@@ -251,12 +233,11 @@
 
         /* REFERRAL BANNER */
         .referral-banner {
-            background: var(--gradient-primary);
+            background: var(--referral-gradient);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 24px 16px;
             margin-bottom: 16px;
-            overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -264,7 +245,6 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(255, 51, 51, 0.15);
             animation: bannerPulse 3s ease-in-out infinite alternate;
-            touch-action: pan-x;
         }
 
         @keyframes bannerPulse {
@@ -317,16 +297,11 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             min-width: 180px;
-            touch-action: manipulation;
         }
 
         .banner-main-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .banner-main-btn:active {
-            transform: scale(0.98);
         }
 
         .banner-referral-stats {
@@ -346,7 +321,6 @@
             min-width: 100px;
             transition: all 0.2s ease;
             backdrop-filter: blur(10px);
-            touch-action: manipulation;
         }
 
         .stat-item:hover {
@@ -424,9 +398,9 @@
             text-align: center;
             transition: all 0.2s ease;
             cursor: pointer;
-            touch-action: pan-y;
             scroll-snap-align: center;
             min-width: 260px;
+            position: relative;
         }
 
         .stat-card::before {
@@ -437,10 +411,6 @@
             right: 0;
             height: 2px;
             background: var(--gradient-primary);
-        }
-
-        .stat-card:active {
-            transform: scale(0.98);
         }
 
         .stat-card:hover {
@@ -490,6 +460,16 @@
             gap: 4px;
         }
 
+        /* CHART */
+        .chart-container {
+            max-width: 100%;
+            margin: 16px auto;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
         /* REFERRAL LINKS */
         .referral-links {
             display: flex;
@@ -508,7 +488,6 @@
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
-            touch-action: manipulation;
         }
 
         .link-item::before {
@@ -531,10 +510,6 @@
             border-color: var(--primary-color);
             box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
             transform: translateY(-2px);
-        }
-
-        .link-item:active {
-            transform: scale(0.98);
         }
 
         .link-type {
@@ -570,17 +545,12 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            touch-action: manipulation;
             min-width: 70px;
         }
 
         .action-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
-        }
-
-        .action-btn:active {
-            transform: scale(0.98);
         }
 
         .share-btn {
@@ -607,7 +577,6 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            touch-action: pan-y;
             scroll-snap-align: center;
             min-width: 240px;
         }
@@ -631,10 +600,6 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
             border-color: var(--primary-color);
-        }
-
-        .level-card:active {
-            transform: scale(0.98);
         }
 
         .level-header {
@@ -767,7 +732,6 @@
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
-            touch-action: pan-y;
             scroll-snap-align: center;
             min-width: 280px;
         }
@@ -786,10 +750,6 @@
             transform: translateY(-2px);
             border-color: var(--primary-color);
             box-shadow: 0 6px 15px rgba(255, 51, 51, 0.15);
-        }
-
-        .history-item:active {
-            transform: scale(0.98);
         }
 
         .history-header {
@@ -872,7 +832,6 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            touch-action: manipulation;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -881,10 +840,6 @@
         .quick-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(255, 51, 51, 0.3);
-        }
-
-        .quick-btn:active {
-            transform: scale(0.98);
         }
 
         /* BONUS CARDS */
@@ -908,7 +863,6 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            touch-action: pan-y;
             scroll-snap-align: center;
             min-width: 240px;
         }
@@ -927,10 +881,6 @@
             transform: translateY(-2px);
             border-color: var(--success-color);
             box-shadow: 0 6px 15px rgba(0, 255, 136, 0.15);
-        }
-
-        .bonus-card:active {
-            transform: scale(0.98);
         }
 
         .bonus-icon {
@@ -981,7 +931,6 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            touch-action: manipulation;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -993,10 +942,6 @@
         .load-more-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(255, 51, 51, 0.3);
-        }
-
-        .load-more-btn:active {
-            transform: scale(0.98);
         }
 
         .load-more-btn:disabled {
@@ -1088,11 +1033,6 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
-            touch-action: manipulation;
-        }
-
-        .modal-close:active {
-            transform: scale(0.95);
         }
 
         .modal-close:hover {
@@ -1132,11 +1072,6 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            touch-action: manipulation;
-        }
-
-        .modal-btn:active {
-            transform: scale(0.98);
         }
 
         .modal-btn:hover {
@@ -1203,33 +1138,12 @@
             z-index: 100;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 2px solid transparent;
-            touch-action: manipulation;
         }
 
         .support-fab:hover {
             transform: scale(1.1) translateY(-4px);
             box-shadow: 0 10px 25px rgba(255, 51, 51, 0.4);
             border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .support-fab:active {
-            transform: scale(0.95);
-        }
-
-        .support-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 14px;
-            height: 14px;
-            background: var(--success-color);
-            border-radius: 50%;
-            font-size: 0.55rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-weight: bold;
         }
 
         /* BOTTOM NAVIGATION */
@@ -1246,7 +1160,6 @@
             padding: 10px 0;
             z-index: 100;
             backdrop-filter: blur(20px);
-            touch-action: manipulation;
         }
 
         .bottom-nav.active {
@@ -1265,11 +1178,13 @@
             padding: 6px 4px;
             border-radius: 10px;
             min-width: 56px;
-            touch-action: manipulation;
         }
 
-        .nav-item:active {
-            transform: scale(0.95);
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--primary-color);
+            background: rgba(255, 51, 51, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-item i {
@@ -1279,13 +1194,6 @@
 
         .nav-item:hover i,
         .nav-item.active i {
-            transform: translateY(-2px);
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--primary-color);
-            background: rgba(255, 51, 51, 0.1);
             transform: translateY(-2px);
         }
 
@@ -1536,8 +1444,8 @@
                         </h1>
                         <p class="banner-subtitle">ДО 30% СТАВОК ДРУЗЕЙ</p>
                     </div>
-                    <button class="banner-main-btn" id="copyReferralBtn" onclick="copyReferralLink()">
-                        <i class="fas fa-copy"></i> КОПИРОВАТЬ ССЫЛКУ
+                    <button class="banner-main-btn" onclick="openQRModal()">
+                        <i class="fas fa-qrcode"></i> ПОЛУЧИТЬ QR-КОД
                     </button>
                     <div class="banner-referral-stats">
                         <div class="stat-item">
@@ -1576,6 +1484,9 @@
                         <i class="fas fa-calendar-month time-icon" data-filter="month" onclick="filterStats('month')" title="За месяц"></i>
                         <i class="fas fa-calendar-alt time-icon" data-filter="all" onclick="filterStats('all')" title="За всё время"></i>
                     </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="referralChart"></canvas>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card stagger-in" style="animation-delay: 0.1s;" onclick="showReferralDetails('active')">
@@ -1649,7 +1560,7 @@
                     <div class="link-item">
                         <div>
                             <div class="link-type">ССЫЛКА</div>
-                            <div class="link-value" id="referralLink">https://evilbet.com/ref/EVIL123456</div>
+                        <div class="link-value" id="referralLink">https://evilbet.com/ref/EVIL123456</div>
                         </div>
                         <div class="link-actions">
                             <button class="action-btn" onclick="copyReferralLink()">
@@ -1807,6 +1718,23 @@
             </div>
         </div>
 
+        <div id="qrModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('qrModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title">ВАШ QR-КОД</h2>
+                <div class="modal-text">
+                    Отсканируйте для приглашения друзей
+                </div>
+                <div id="qrCode" style="text-align: center; margin-bottom: 20px;"></div>
+                <button class="modal-btn" onclick="copyReferralLink()">
+                    <i class="fas fa-copy"></i> Копировать ссылку
+                </button>
+                <button class="modal-btn secondary" onclick="closeModal('qrModal')">Закрыть</button>
+            </div>
+        </div>
+
         <div id="notification" class="notification"></div>
     </div>
 
@@ -1823,7 +1751,6 @@
             totalEarnings: (Math.random() * 250).toFixed(2),
             currentLevel: 1,
             levelProgress: {1: 0, 2: 0, 3: 0, 4: 0},
-            history: [],
             bonuses: {
                 withdrawable: (Math.random() * 50).toFixed(2),
                 referralBonus: (Math.random() * 25).toFixed(2)
@@ -1831,6 +1758,7 @@
         };
         let referralHistory = JSON.parse(localStorage.getItem('referralHistory')) || [];
         let currentStatsFilter = 'week';
+        let referralChart = null;
 
         const referralLevels = [
             { level: 1, name: 'Бронза', minReferrals: 0, maxReferrals: 5, rate: 1.0, registrationBonus: 5, cashback: 2, icon: 'fas fa-medal', color: '#cd7f32' },
@@ -1840,6 +1768,7 @@
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 EVILBET - Referral System v3.0');
             initReferralApp();
         });
 
@@ -1856,6 +1785,7 @@
             renderReferralHistory();
             setupEventListeners();
             setupSwipeEvents();
+            initChart();
             startLiveUpdates();
             if (!localStorage.getItem('referralWelcomeShown') && isLoggedIn) {
                 setTimeout(() => {
@@ -1885,7 +1815,7 @@
             const hapticSelectors = ['.stat-card', '.level-card', '.bonus-card', '.link-item', '.quick-btn', '.action-btn', '.banner-main-btn', '.nav-item'];
             hapticSelectors.forEach(selector => {
                 document.querySelectorAll(selector).forEach(el => {
-                    el.addEventListener('touchstart', () => TelegramWebApp.HapticFeedback.impactOccurred('medium'), { passive: true });
+                    el.addEventListener('touchstart', () => TelegramWebApp?.HapticFeedback?.impactOccurred('medium'), { passive: true });
                 });
             });
         }
@@ -1948,6 +1878,81 @@
             localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
         }
 
+        function initChart() {
+            const ctx = document.getElementById('referralChart').getContext('2d');
+            referralChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+                    datasets: [{
+                        label: 'Доход ($)',
+                        data: Array(7).fill(0).map(() => Math.random() * 50),
+                        borderColor: 'rgba(255, 51, 51, 1)',
+                        backgroundColor: 'rgba(255, 51, 51, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Рефералы',
+                        data: Array(7).fill(0).map(() => Math.floor(Math.random() * 5)),
+                        borderColor: 'rgba(0, 255, 136, 1)',
+                        backgroundColor: 'rgba(0, 255, 136, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.8)',
+                                font: { size: 12, family: 'Bebas Neue' }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: 'rgba(255, 255, 255, 0.8)' }
+                        },
+                        y: {
+                            ticks: { color: 'rgba(255, 255, 255, 0.8)' },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if (!referralChart) return;
+            const now = new Date();
+            let filteredHistory = referralHistory;
+            if (currentStatsFilter === 'week') {
+                filteredHistory = referralHistory.filter(item => new Date(item.date) > new Date(now - 7 * 86400000));
+            } else if (currentStatsFilter === 'month') {
+                filteredHistory = referralHistory.filter(item => new Date(item.date) > new Date(now - 30 * 86400000));
+            }
+            const days = Array(7).fill(0).map((_, i) => {
+                const date = new Date(now - (6 - i) * 86400000);
+                return date.toLocaleDateString('ru-RU', { weekday: 'short' });
+            });
+            const earnings = Array(7).fill(0);
+            const referrals = Array(7).fill(0);
+            filteredHistory.forEach(item => {
+                const date = new Date(item.date);
+                const dayIndex = Math.floor((now - date) / 86400000);
+                if (dayIndex >= 0 && dayIndex < 7) {
+                    earnings[6 - dayIndex] += parseFloat(item.amount || 0);
+                    referrals[6 - dayIndex] += 1;
+                }
+            });
+            referralChart.data.labels = days;
+            referralChart.data.datasets[0].data = earnings;
+            referralChart.data.datasets[1].data = referrals;
+            referralChart.update();
+        }
+
         function renderLevels() {
             const container = document.getElementById('levelsGrid');
             const currentReferrals = referralData.totalReferrals || 0;
@@ -2000,123 +2005,91 @@
         }
 
         function renderReferralHistory() {
-            const container = document.getElementById('referralHistory');
-            const recentHistory = referralHistory.slice(0, 8);
-            if (recentHistory.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-users-slash"></i>
-                        <h3>Пока нет рефералов</h3>
-                        <p>Приглашайте друзей<br>и зарабатывайте!</p>
-                        <button class="quick-btn" onclick="shareReferral()" style="margin-top: 12px;">
-                            <i class="fas fa-share-alt"></i> Пригласить
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            container.innerHTML = recentHistory.map((referral, index) => {
-                const statusClass = referral.status;
-                const statusIcon = referral.status === 'completed' ? '✅' : '⏳';
-                const statusText = referral.status === 'completed' ? 'Завершено' : 'Ожидает';
-                return `
-                    <div class="history-item stagger-in" style="animation-delay: ${index * 0.1}s;">
-                        <div class="history-header">
-                            <div class="history-user">${referral.user}</div>
-                            <div class="history-date">${new Date(referral.date).toLocaleDateString('ru-RU')}</div>
-                        </div>
-                        <div class="history-action">${referral.action}</div>
-                        <div class="history-amount">+$${referral.amount}</div>
-                        <div class="history-status">
-                            <span class="status-badge status-${statusClass}">
-                                ${statusIcon} ${statusText}
-                            </span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
+    const container = document.getElementById('referralHistory');
+    const recentHistory = referralHistory.slice(0, 8);
+    if (recentHistory.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-users-slash"></i>
+                <h3>Пока нет рефералов</h3>
+                <p>Приглашайте друзей<br>и зарабатывайте!</p>
+                <button class="quick-btn" onclick="shareReferral()" style="margin-top: 12px;">
+                    <i class="fas fa-share-alt"></i> Пригласить
+                </button>
+            </div>
+        `;
+        return;
+    }
+    container.innerHTML = recentHistory.map((item, index) => `
+        <div class="history-item stagger-in" style="animation-delay: ${0.1 + index * 0.1}s;" onclick="showHistoryDetails(${item.id})">
+            <div class="history-header">
+                <div class="history-user">${item.user}</div>
+                <div class="history-date">${new Date(item.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })}</div>
+            </div>
+            <div class="history-action">${item.action}</div>
+            <div class="history-amount">+$${item.amount}</div>
+            <div class="history-status">
+                <span class="status-badge status-${item.status}">
+                    ${item.status === 'completed' ? 'ВЫПЛАЧЕНО' : 'ОЖИДАНИЕ'}
+                </span>
+            </div>
+        </div>
+    `).join('');
+}
 
-        
 function updateReferralStats() {
-    document.getElementById('totalReferrals').textContent = referralData.totalReferrals || 0;
-    document.getElementById('activeReferrals').textContent = referralData.activeReferrals || 0;
-    document.getElementById('totalIncome').textContent = `$${parseFloat(referralData.totalEarnings || 0).toFixed(2)}`;
-    document.getElementById('currentLevel').textContent = referralData.currentLevel || 1;
-    document.getElementById('referralCode').textContent = referralData.code || 'EVIL123456';
-    document.getElementById('referralLink').textContent = referralData.link || 'https://t.me/EvilBetBot?start=ref_' + referralData.code;
-    document.getElementById('levelNumber').textContent = referralData.currentLevel || 1;
-    document.getElementById('totalEarnings').textContent = `$${parseFloat(referralData.totalEarnings || 0).toFixed(2)}`;
-    document.getElementById('lastReferral').textContent = referralHistory.length > 0 ? referralHistory[0].user : '—';
-    document.getElementById('lastReferralDate').textContent = referralHistory.length > 0 ? new Date(referralHistory[0].date).toLocaleDateString('ru-RU') : '—';
-    document.getElementById('withdrawableAmount').textContent = `$${parseFloat(referralData.bonuses.withdrawable || 0).toFixed(2)}`;
-    document.getElementById('referralBonusAmount').textContent = `$${parseFloat(referralData.bonuses.referralBonus || 0).toFixed(2)}`;
-    document.getElementById('withdrawAvailable').textContent = `$${parseFloat(referralData.bonuses.withdrawable || 0).toFixed(2)}`;
-}
-
-function updateNotificationBadge() {
-    const badge = document.getElementById('notificationBadge');
-    const pendingNotifications = referralHistory.filter(item => item.status === 'pending').length;
-    badge.textContent = pendingNotifications;
-    badge.style.display = pendingNotifications > 0 ? 'flex' : 'none';
-}
-
-function setupEventListeners() {
-    document.getElementById('withdrawAmountInput')?.addEventListener('input', validateWithdrawInput);
-    document.querySelectorAll('.stat-card, .level-card, .bonus-card, .link-item, .quick-btn, .action-btn, .banner-main-btn, .nav-item').forEach(el => {
-        el.addEventListener('click', () => {
-            TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
-        });
-    });
-}
-
-function setupSwipeEvents() {
-    const swipeAreas = ['stats-grid', 'levels-grid', 'history-grid', 'bonus-grid'];
-    swipeAreas.forEach(area => {
-        const container = document.querySelector(`.${area}`);
-        if (!container) return;
-        let startX, startY;
-        container.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }, { passive: true });
-        container.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-            const deltaX = endX - startX;
-            const deltaY = endY - startY;
-            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-                const scrollAmount = container.clientWidth * 0.8;
-                container.scrollBy({
-                    left: deltaX < 0 ? scrollAmount : -scrollAmount,
-                    behavior: 'smooth'
-                });
-                TelegramWebApp?.HapticFeedback?.selectionChanged();
-            }
-        }, { passive: true });
-    });
-}
-
-function startLiveUpdates() {
-    setInterval(() => {
-        if (Math.random() < 0.1) {
-            referralData.activeReferrals = Math.min(referralData.activeReferrals + 1, referralData.totalReferrals);
-            referralData.totalEarnings = (parseFloat(referralData.totalEarnings || 0) + Math.random() * 5).toFixed(2);
-            referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable || 0) + Math.random() * 2).toFixed(2);
-            localStorage.setItem('referralData', JSON.stringify(referralData));
-            updateReferralStats();
-            renderLevels();
-        }
-    }, 60000);
+    document.getElementById('totalReferrals').textContent = referralData.totalReferrals;
+    document.getElementById('totalEarnings').textContent = `$${parseFloat(referralData.totalEarnings).toFixed(2)}`;
+    document.getElementById('currentLevel').textContent = referralData.currentLevel;
+    document.getElementById('activeReferrals').textContent = referralData.activeReferrals;
+    document.getElementById('totalIncome').textContent = `$${parseFloat(referralData.totalEarnings).toFixed(2)}`;
+    document.getElementById('levelNumber').textContent = referralData.currentLevel;
+    const lastReferral = referralHistory[0];
+    if (lastReferral) {
+        document.getElementById('lastReferral').textContent = lastReferral.user;
+        document.getElementById('lastReferralDate').textContent = new Date(lastReferral.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    }
+    document.getElementById('withdrawableAmount').textContent = `$${parseFloat(referralData.bonuses.withdrawable).toFixed(2)}`;
+    document.getElementById('referralBonusAmount').textContent = `$${parseFloat(referralData.bonuses.referralBonus).toFixed(2)}`;
+    document.getElementById('withdrawAvailable').textContent = `$${parseFloat(referralData.bonuses.withdrawable).toFixed(2)}`;
+    document.getElementById('referralCode').textContent = referralData.code;
+    document.getElementById('referralLink').textContent = referralData.link;
 }
 
 function toggleAuth() {
     if (!isLoggedIn) {
         openModal('authModal');
+        TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
     } else {
         openProfile();
     }
-    TelegramWebApp?.HapticFeedback?.impactOccurred('light');
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        TelegramWebApp?.MainButton?.hide();
+        TelegramWebApp?.BackButton?.show();
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        TelegramWebApp?.MainButton?.show();
+        if (!document.querySelector('.modal.active')) {
+            TelegramWebApp?.BackButton?.hide();
+        }
+        TelegramWebApp?.HapticFeedback?.impactOccurred('light');
+    }
+}
+
+function closeActiveModal() {
+    document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+    TelegramWebApp?.MainButton?.show();
+    TelegramWebApp?.BackButton?.hide();
 }
 
 function openProfile() {
@@ -2129,34 +2102,80 @@ function openProfile() {
 }
 
 function showNotifications() {
-    showNotification('Уведомления: ' + (referralHistory.filter(item => item.status === 'pending').length || 'нет новых'), 'success');
+    showNotification('📬 Уведомления: Пусто', 'success');
 }
 
-function copyReferralLink() {
+function updateNotificationBadge() {
+    const badge = document.getElementById('notificationBadge');
+    badge.textContent = referralHistory.filter(item => item.status === 'pending').length;
+}
+
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.className = `notification show ${type}`;
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+    TelegramWebApp?.HapticFeedback?.notificationOccurred(type);
+}
+
+function connectTelegram() {
+    if (TelegramWebApp) {
+        const user = TelegramWebApp.initDataUnsafe?.user;
+        if (user) {
+            currentUser = {
+                username: user.username || user.first_name || 'User' + Math.floor(Math.random() * 1000),
+                id: user.id,
+                avatar: user.photo_url || null
+            };
+            isLoggedIn = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateUserInterface();
+            closeModal('authModal');
+            showNotification('🎉 Успешно подключено!', 'success');
+            referralData.bonuses.referralBonus = (parseFloat(referralData.bonuses.referralBonus) + 50).toFixed(2);
+            localStorage.setItem('referralData', JSON.stringify(referralData));
+            updateReferralStats();
+        } else {
+            showNotification('Ошибка авторизации', 'error');
+        }
+    }
+}
+
+function openQRModal() {
     if (!isLoggedIn) {
         openModal('authModal');
         return;
     }
-    navigator.clipboard.writeText(referralData.link).then(() => {
-        showNotification('Ссылка скопирована!', 'success');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
-    }).catch(() => {
-        showNotification('Ошибка копирования', 'error');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    openModal('qrModal');
+    const qrCodeDiv = document.getElementById('qrCode');
+    qrCodeDiv.innerHTML = '';
+    QRCode.toCanvas(referralData.link, { width: 200, color: { dark: '#ff3333', light: '#ffffff' } }, (err, canvas) => {
+        if (err) {
+            showNotification('Ошибка генерации QR-кода', 'error');
+            return;
+        }
+        qrCodeDiv.appendChild(canvas);
     });
+    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
 }
 
 function copyReferralCode() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
     navigator.clipboard.writeText(referralData.code).then(() => {
         showNotification('Код скопирован!', 'success');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+        TelegramWebApp?.HapticFeedback?.selectionChanged();
     }).catch(() => {
         showNotification('Ошибка копирования', 'error');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+    });
+}
+
+function copyReferralLink() {
+    navigator.clipboard.writeText(referralData.link).then(() => {
+        showNotification('Ссылка скопирована!', 'success');
+        TelegramWebApp?.HapticFeedback?.selectionChanged();
+    }).catch(() => {
+        showNotification('Ошибка копирования', 'error');
     });
 }
 
@@ -2165,173 +2184,148 @@ function shareReferral() {
         openModal('authModal');
         return;
     }
-    const shareText = `Присоединяйтесь к EVILBET и получайте бонусы! Мой код: ${referralData.code}\n${referralData.link}`;
-    if (TelegramWebApp) {
-        TelegramWebApp.shareToUrl(referralData.link, shareText);
-        TelegramWebApp.HapticFeedback.notificationOccurred('success');
-    } else {
+    const shareText = `Присоединяйтесь к EVILBET с моим кодом: ${referralData.code}\n${referralData.link}`;
+    if (navigator.share) {
         navigator.share({
             title: 'EVILBET Рефералы',
-            text: shareText,
-            url: referralData.link
+            text: shareText
+        }).then(() => {
+            showNotification('Ссылка отправлена!', 'success');
         }).catch(() => {
-            showNotification('Ошибка шаринга', 'error');
+            showNotification('Ошибка отправки', 'error');
         });
+    } else {
+        copyReferralLink();
     }
 }
 
 function shareTelegram() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
-    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
-    window.open(`https://t.me/share/url?url=${encodeURIComponent(referralData.link)}&text=${encodeURIComponent(shareText)}`);
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+    const shareText = `Присоединяйтесь к EVILBET с моим кодом: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(referralData.link)}&text=${encodeURIComponent(shareText)}`, '_blank');
+    showNotification('Открыто в Telegram!', 'success');
 }
 
 function shareWhatsApp() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
-    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`);
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+    const shareText = `Присоединяйтесь к EVILBET с моим кодом: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+    showNotification('Открыто в WhatsApp!', 'success');
 }
 
 function shareVK() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
-    const shareText = `Присоединяйтесь к EVILBET! Мой код: ${referralData.code}\n${referralData.link}`;
-    window.open(`https://vk.com/share.php?url=${encodeURIComponent(referralData.link)}&title=${encodeURIComponent('EVILBET Рефералы')}&description=${encodeURIComponent(shareText)}`);
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+    const shareText = `Присоединяйтесь к EVILBET с моим кодом: ${referralData.code}\n${referralData.link}`;
+    window.open(`https://vk.com/share.php?url=${encodeURIComponent(referralData.link)}&title=${encodeURIComponent('EVILBET Рефералы')}&description=${encodeURIComponent(shareText)}`, '_blank');
+    showNotification('Открыто в ВКонтакте!', 'success');
 }
 
 function shareCode() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
-    const shareText = `Мой реферальный код для EVILBET: ${referralData.code}`;
-    if (TelegramWebApp) {
-        TelegramWebApp.shareToUrl(referralData.link, shareText);
-    } else {
+    const shareText = `Мой реферальный код EVILBET: ${referralData.code}`;
+    if (navigator.share) {
         navigator.share({
             title: 'EVILBET Код',
             text: shareText
+        }).then(() => {
+            showNotification('Код отправлен!', 'success');
         }).catch(() => {
-            showNotification('Ошибка шаринга', 'error');
+            showNotification('Ошибка отправки', 'error');
         });
+    } else {
+        copyReferralCode();
     }
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
 }
 
 function shareLink() {
+    shareReferral();
+}
+
+function filterStats(period) {
+    currentStatsFilter = period;
+    document.querySelectorAll('.time-icon').forEach(icon => {
+        icon.classList.toggle('active', icon.dataset.filter === period);
+    });
+    updateChart();
+    TelegramWebApp?.HapticFeedback?.selectionChanged();
+}
+
+function showReferralDetails(type) {
+    let message = '';
+    switch (type) {
+        case 'active':
+            message = `Активных рефералов: ${referralData.activeReferrals}\nЗаработок: $${(referralData.activeReferrals * 2).toFixed(2)}`;
+            break;
+        case 'income':
+            message = `Общий доход: $${referralData.totalEarnings}\nПериод: ${currentStatsFilter}`;
+            break;
+        case 'level':
+            const currentLevel = referralLevels.find(l => l.level === referralData.currentLevel);
+            message = `Уровень: ${currentLevel.name}\nДоход: ${currentLevel.rate}%`;
+            break;
+        case 'last':
+            const last = referralHistory[0];
+            message = last ? `Последний реферал: ${last.user}\nДата: ${new Date(last.date).toLocaleDateString('ru-RU')}` : 'Нет рефералов';
+            break;
+    }
+    showNotification(message, 'success');
+}
+
+function showLevelDetails(level) {
+    const levelData = referralLevels.find(l => l.level === level);
+    showNotification(`Уровень ${levelData.name}\nДоход: ${levelData.rate}%\nБонус: $${levelData.registrationBonus}\nКэшбэк: ${levelData.cashback}%`, 'success');
+}
+
+function showHistoryDetails(id) {
+    const item = referralHistory.find(h => h.id === id);
+    if (item) {
+        showNotification(`Реферал: ${item.user}\nДействие: ${item.action}\nСумма: $${item.amount}\nСтатус: ${item.status === 'completed' ? 'ВЫПЛАЧЕНО' : 'ОЖИДАНИЕ'}`, 'success');
+    }
+}
+
+function loadMoreReferrals() {
+    const container = document.getElementById('referralHistory');
+    const currentLength = document.querySelectorAll('.history-item').length;
+    const moreHistory = referralHistory.slice(currentLength, currentLength + 4);
+    if (moreHistory.length === 0) {
+        showNotification('Больше нет записей', 'error');
+        return;
+    }
+    container.insertAdjacentHTML('beforeend', moreHistory.map((item, index) => `
+        <div class="history-item stagger-in" style="animation-delay: ${0.1 + index * 0.1}s;" onclick="showHistoryDetails(${item.id})">
+            <div class="history-header">
+                <div class="history-user">${item.user}</div>
+                <div class="history-date">${new Date(item.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })}</div>
+            </div>
+            <div class="history-action">${item.action}</div>
+            <div class="history-amount">+$${item.amount}</div>
+            <div class="history-status">
+                <span class="status-badge status-${item.status}">
+                    ${item.status === 'completed' ? 'ВЫПЛАЧЕНО' : 'ОЖИДАНИЕ'}
+                </span>
+            </div>
+        </div>
+    `).join(''));
+    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
+}
+
+function openWithdrawModal() {
     if (!isLoggedIn) {
         openModal('authModal');
         return;
     }
-    const shareText = `Присоединяйтесь к EVILBET! ${referralData.link}`;
-    if (TelegramWebApp) {
-        TelegramWebApp.shareToUrl(referralData.link, shareText);
-    } else {
-        navigator.share({
-            title: 'EVILBET Рефералы',
-            text: shareText,
-            url: referralData.link
-        }).catch(() => {
-            showNotification('Ошибка шаринга', 'error');
-        });
-    }
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
-}
-
-function connectTelegram() {
-    if (TelegramWebApp) {
-        const user = TelegramWebApp.initDataUnsafe.user;
-        if (user) {
-            currentUser = {
-                username: user.username || user.first_name || 'User' + Math.random().toString(36).substr(2, 6),
-                id: user.id,
-                avatar: user.photo_url || null
-            };
-            isLoggedIn = true;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            updateUserInterface();
-            closeModal('authModal');
-            showNotification('Аккаунт подключен!', 'success');
-            TelegramWebApp.MainButton.show();
-            TelegramWebApp.HapticFeedback.notificationOccurred('success');
-        } else {
-            showNotification('Ошибка авторизации', 'error');
-            TelegramWebApp.HapticFeedback.notificationOccurred('error');
-        }
-    }
-}
-
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('active');
-        TelegramWebApp?.BackButton?.show();
-    }
-}
-
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-        if (!document.querySelector('.modal.active')) {
-            TelegramWebApp?.BackButton?.hide();
-        }
-        TelegramWebApp?.HapticFeedback?.impactOccurred('light');
-    }
-}
-
-function closeActiveModal() {
-    document.querySelectorAll('.modal.active').forEach(modal => {
-        modal.classList.remove('active');
-    });
-    TelegramWebApp?.BackButton?.hide();
-}
-
-function showNotification(message, type) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.className = `notification ${type} show`;
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
-
-function validateWithdrawInput() {
+    openModal('withdrawModal');
     const input = document.getElementById('withdrawAmountInput');
-    const button = document.getElementById('confirmWithdrawBtn');
-    const amount = parseFloat(input.value);
-    const available = parseFloat(referralData.bonuses.withdrawable || 0);
-    if (amount >= 10 && amount <= available) {
-        button.disabled = false;
-    } else {
-        button.disabled = true;
-    }
+    const confirmBtn = document.getElementById('confirmWithdrawBtn');
+    input.addEventListener('input', () => {
+        confirmBtn.disabled = !input.value || parseFloat(input.value) < 10 || parseFloat(input.value) > parseFloat(referralData.bonuses.withdrawable);
+    });
 }
 
 function processWithdraw() {
     const amount = parseFloat(document.getElementById('withdrawAmountInput').value);
     const method = document.getElementById('withdrawMethod').value;
-    if (amount >= 10 && amount <= parseFloat(referralData.bonuses.withdrawable || 0)) {
+    if (amount >= 10 && amount <= parseFloat(referralData.bonuses.withdrawable)) {
         referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable) - amount).toFixed(2);
         balance += amount;
         localStorage.setItem('referralData', JSON.stringify(referralData));
         localStorage.setItem('balance', balance.toFixed(2));
-        updateReferralStats();
-        updateUserInterface();
-        closeModal('withdrawModal');
-        showNotification(`Вывод $${amount} (${method}) успешно запрошен!`, 'success');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
         referralHistory.unshift({
             id: referralHistory.length + 1,
             user: currentUser.username,
@@ -2341,10 +2335,13 @@ function processWithdraw() {
             status: 'pending'
         });
         localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
+        updateReferralStats();
         renderReferralHistory();
+        updateNotificationBadge();
+        closeModal('withdrawModal');
+        showNotification(`Заявка на вывод $${amount} (${method}) отправлена!`, 'success');
     } else {
-        showNotification('Недостаточно средств или неверная сумма', 'error');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
+        showNotification('Недопустимая сумма', 'error');
     }
 }
 
@@ -2353,109 +2350,91 @@ function claimReferralBonus() {
         openModal('authModal');
         return;
     }
-    const bonus = parseFloat(referralData.bonuses.referralBonus || 0);
-    if (bonus > 0) {
-        referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable || 0) + bonus).toFixed(2);
-        referralData.bonuses.referralBonus = 0;
+    if (parseFloat(referralData.bonuses.referralBonus) > 0) {
+        balance += parseFloat(referralData.bonuses.referralBonus);
+        referralData.bonuses.withdrawable = (parseFloat(referralData.bonuses.withdrawable) + parseFloat(referralData.bonuses.referralBonus)).toFixed(2);
+        referralData.bonuses.referralBonus = '0.00';
         localStorage.setItem('referralData', JSON.stringify(referralData));
+        localStorage.setItem('balance', balance.toFixed(2));
         updateReferralStats();
-        showNotification(`Бонус $${bonus} зачислен!`, 'success');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
-        referralHistory.unshift({
-            id: referralHistory.length + 1,
-            user: currentUser.username,
-            action: 'Бонус за рефералов',
-            amount: bonus.toFixed(2),
-            date: new Date().toISOString(),
-            status: 'completed'
-        });
-        localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
-        renderReferralHistory();
+        showNotification('Бонус успешно получен!', 'success');
     } else {
         showNotification('Нет доступных бонусов', 'error');
-        TelegramWebApp?.HapticFeedback?.notificationOccurred('error');
     }
-}
-
-function openWithdrawModal() {
-    if (!isLoggedIn) {
-        openModal('authModal');
-        return;
-    }
-    openModal('withdrawModal');
 }
 
 function openSupport() {
-    if (TelegramWebApp) {
-        TelegramWebApp.openTelegramLink('https://t.me/EvilBetSupport');
-        TelegramWebApp.HapticFeedback.notificationOccurred('success');
-    } else {
-        window.open('https://t.me/EvilBetSupport', '_blank');
-    }
+    showNotification('Связь с поддержкой...\n📩 support@evilbet.com', 'success');
+    setTimeout(() => {
+        window.open('mailto:support@evilbet.com', '_blank');
+    }, 1000);
 }
 
-function showLevelDetails(level) {
-    const levelData = referralLevels.find(l => l.level === level);
-    if (!levelData) return;
-    showNotification(`Уровень ${levelData.name}\nДоход: ${levelData.rate}%\nБонус: $${levelData.registrationBonus}\nКэшбэк: ${levelData.cashback}%`, 'success');
-    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
-}
-
-function showReferralDetails(type) {
-    let message = '';
-    switch (type) {
-        case 'active':
-            message = `Активные рефералы: ${referralData.activeReferrals || 0}\nЗарабатывайте больше, приглашая друзей!`;
-            break;
-        case 'income':
-            message = `Доход: $${parseFloat(referralData.totalEarnings || 0).toFixed(2)}\nПродолжайте приглашать!`;
-            break;
-        case 'level':
-            message = `Текущий уровень: ${referralData.currentLevel}\nДо следующего: ${referralLevels[referralData.currentLevel]?.minReferrals - referralData.totalReferrals || 0} рефералов`;
-            break;
-        case 'last':
-            message = referralHistory.length > 0 ? `Последний реферал: ${referralHistory[0].user}\n${new Date(referralHistory[0].date).toLocaleDateString('ru-RU')}` : 'Пока нет рефералов';
-            break;
-    }
-    showNotification(message, 'success');
-    TelegramWebApp?.HapticFeedback?.impactOccurred('medium');
-}
-
-function filterStats(filter) {
-    currentStatsFilter = filter;
-    document.querySelectorAll('.time-icon').forEach(icon => {
-        icon.classList.toggle('active', icon.dataset.filter === filter);
+function setupEventListeners() {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            TelegramWebApp?.HapticFeedback?.impactOccurred('light');
+        });
     });
-    TelegramWebApp?.HapticFeedback?.selectionChanged();
-    let filteredReferrals = referralHistory;
-    const now = new Date();
-    if (filter === 'week') {
-        filteredReferrals = referralHistory.filter(item => new Date(item.date) > new Date(now - 7 * 86400000));
-    } else if (filter === 'month') {
-        filteredReferrals = referralHistory.filter(item => new Date(item.date) > new Date(now - 30 * 86400000));
-    }
-    const total = filteredReferrals.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0).toFixed(2);
-    document.getElementById('totalIncome').textContent = `$${total}`;
-    document.getElementById('activeReferrals').textContent = filteredReferrals.length;
+    document.getElementById('withdrawAmountInput')?.addEventListener('input', () => {
+        const input = document.getElementById('withdrawAmountInput');
+        const confirmBtn = document.getElementById('confirmWithdrawBtn');
+        confirmBtn.disabled = !input.value || parseFloat(input.value) < 10 || parseFloat(input.value) > parseFloat(referralData.bonuses.withdrawable);
+    });
 }
 
-function loadMoreReferrals() {
-    const newReferrals = Array.from({length: 4}, (_, i) => ({
-        id: referralHistory.length + i + 1,
-        user: `Игрок_${100 + (referralHistory.length + i) * 23}`,
-        action: ['Регистрация', 'Первая ставка', 'Депозит $50', 'Выигрыш $100'][Math.floor(Math.random() * 4)],
-        amount: (Math.random() * 15 + 2).toFixed(2),
-        date: new Date(Date.now() - (referralHistory.length + i + 1) * 86400000).toISOString(),
-        status: Math.random() > 0.3 ? 'completed' : 'pending'
-    }));
-    referralHistory.push(...newReferrals);
-    localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
-    renderReferralHistory();
-    showNotification('Загружено ещё рефералов!', 'success');
-    TelegramWebApp?.HapticFeedback?.notificationOccurred('success');
+function setupSwipeEvents() {
+    let startX = 0;
+    let startY = 0;
+    const threshold = 100;
+    document.addEventById('referralHistory').addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    document.getElementById('referralHistory').addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const deltaX = endX - startX;
+        const deltaY = Math.abs(endY - startY);
+        if (deltaY < 50 && Math.abs(deltaX) > threshold) {
+            if (deltaX < 0) {
+                loadMoreReferrals();
+            }
+        }
+    }, { passive: true });
 }
 
-</script>
+function startLiveUpdates() {
+    setInterval(() => {
+        if (Math.random() < 0.1) {
+            const newReferral = {
+                id: referralHistory.length + 1,
+                user: `Игрок_${Math.floor(Math.random() * 1000)}`,
+                action: 'Регистрация',
+                amount: (Math.random() * 5 + 1).toFixed(2),
+                date: new Date().toISOString(),
+                status: 'completed'
+            };
+            referralHistory.unshift(newReferral);
+            referralData.totalReferrals += 1;
+            referralData.activeReferrals += 1;
+            referralData.totalEarnings = (parseFloat(referralData.totalEarnings) + parseFloat(newReferral.amount)).toFixed(2);
+            referralData.bonuses.referralBonus = (parseFloat(referralData.bonuses.referralBonus) + 1).toFixed(2);
+            const currentLevel = referralLevels.find(l => referralData.totalReferrals >= l.minReferrals && referralData.totalReferrals < l.maxReferrals);
+            referralData.currentLevel = currentLevel ? currentLevel.level : 1;
+            localStorage.setItem('referralData', JSON.stringify(referralData));
+            localStorage.setItem('referralHistory', JSON.stringify(referralHistory));
+            updateReferralStats();
+            renderReferralHistory();
+            updateNotificationBadge();
+            renderLevels();
+            updateChart();
+            showNotification(`Новый реферал: ${newReferral.user}\n+$${newReferral.amount}`, 'success');
+        }
+    }, 30000);
+}
+    </script>
 </body>
 </html>
-
