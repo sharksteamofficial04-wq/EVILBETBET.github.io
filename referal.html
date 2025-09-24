@@ -1821,15 +1821,33 @@
         }
 
         function applyTelegramTheme() {
-            if (!TelegramWebApp?.themeParams) return;
-            const theme = TelegramWebApp.themeParams;
-            document.documentElement.style.setProperty('--bg-primary', theme.bg_color || '#0a0a0a');
-            document.documentElement.style.setProperty('--bg-secondary', theme.secondary_bg_color || '#1a1a1a');
-            document.documentElement.style.setProperty('--primary-color', theme.button_color || '#ff3333');
-            document.documentElement.style.setProperty('--gradient-primary', `linear-gradient(135deg, ${theme.button_color || '#ff3333'}, #ff0066)`);
-            document.documentElement.style.setProperty('--referral-gradient', `linear-gradient(135deg, ${theme.button_color || '#ff3333'}, #ff0066)`);
-            document.body.style.background = theme.bg_color || '#0a0a0a';
-        }
+    if (!TelegramWebApp?.themeParams) return;
+    const theme = TelegramWebApp.themeParams;
+    const buttonColor = theme.button_color || '#ff3333';
+    
+    // Принудительное обновление всех ключевых переменных
+    document.documentElement.style.setProperty('--bg-primary', theme.bg_color || '#0a0a0a');
+    document.documentElement.style.setProperty('--bg-secondary', theme.secondary_bg_color || '#1a1a1a');
+    document.documentElement.style.setProperty('--primary-color', buttonColor);
+    const gradient = `linear-gradient(135deg, ${buttonColor}, #ff0066)`;
+    document.documentElement.style.setProperty('--gradient-primary', gradient);
+    document.documentElement.style.setProperty('--referral-gradient', gradient);  // Синхронизируем градиенты!
+    
+    // Обновляем body и все карточки
+    document.body.style.background = theme.bg_color || '#0a0a0a';
+    document.querySelectorAll('.referral-section, .referral-banner, .stat-card, .level-card').forEach(el => {
+        el.style.background = theme.secondary_bg_color || '#1a1a1a';
+    });
+    
+    // Принудительно обновляем график, если есть
+    if (referralChart) {
+        referralChart.options.scales.x.ticks.color = 'rgba(255, 255, 255, 0.8)';
+        referralChart.options.plugins.legend.labels.color = 'rgba(255, 255, 255, 0.8)';
+        referralChart.update();
+    }
+    
+    console.log('Тема применена:', theme);  // Для дебага в консоли TG
+}
 
         function updateUserInterface() {
             const userDisplay = document.getElementById('userDisplay');
