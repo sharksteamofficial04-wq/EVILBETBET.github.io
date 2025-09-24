@@ -985,7 +985,7 @@
                 bottom: 0;
                 top: auto;
                 height: auto;
-                max-height: 70vh; /* Reduced height for better visibility */
+                max-height: 90vh; /* Increased for better visibility */
                 transform: translateY(100%);
                 border-top-left-radius: 16px;
                 border-top-right-radius: 16px;
@@ -1008,7 +1008,9 @@
 
             #betHistorySection {
                 overflow-y: auto;
-                max-height: 150px;
+                max-height: 200px; /* Increased for visibility */
+                display: block !important;
+                visibility: visible !important;
             }
         }
 
@@ -2316,6 +2318,16 @@
         .history-item.pending {
             border-left: 4px solid var(--text-secondary);
         }
+
+        /* Fix sport-badge overlap */
+        .match-header {
+            padding-left: 60px; /* Adjusted to avoid overlap with favorite-btn */
+            padding-right: 60px; /* Symmetry */
+        }
+
+        .sport-badge {
+            z-index: 2; /* Ensure it's above other elements if needed */
+        }
     </style>
 </head>
 <body>
@@ -2577,6 +2589,27 @@
             </div>
         </div>
 
+        <!-- DEPOSIT MODAL -->
+        <div id="depositModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('depositModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title">ПОПОЛНЕНИЕ СЧЁТА</h2>
+                <div class="modal-text">
+                    Выберите метод пополнения:
+                </div>
+                <button class="modal-btn" onclick="depositCrypto()">
+                    <i class="fas fa-coins" style="margin-right: 8px;"></i>
+                    Крипта (CryptoPay)
+                </button>
+                <button class="modal-btn secondary" onclick="depositGifts()">
+                    <i class="fas fa-gift" style="margin-right: 8px;"></i>
+                    Гифты
+                </button>
+            </div>
+        </div>
+
         <!-- SUPPORT MODAL -->
         <div id="supportModal" class="modal">
             <div class="modal-content" style="max-width: 480px; max-height: 80vh;">
@@ -2612,6 +2645,7 @@
     <script>
         // GLOBAL STATE
         const TelegramWebApp = window.Telegram?.WebApp;
+        const CRYPTO_PAY_TOKEN = '464104:AAXqLUc7Sl8cC9sjY9LAe9TL5B6U8dRcJur'; // CryptoPay API token
         let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
         let balance = parseFloat(localStorage.getItem('balance')) || 0;
         let isLoggedIn = !!currentUser;
@@ -3533,22 +3567,23 @@
 
                 // Calculate totals
                 const totalOdds = couponItems.reduce((acc, item) => acc * item.odds, 1);
-                const stakeAmount = parseFloat(document.getElementById('stakeInput').value) || 0;
-                const potentialWin = (stakeAmount * totalOdds).toFixed(2);
+                const stake = parseFloat(document.getElementById('stakeInput').value) || 0;
+                const potentialWin = (stake * totalOdds).toFixed(2);
 
                 totalOddsEl.textContent = totalOdds.toFixed(2);
+                document.getElementById('potentialWin').textContent = `$${potentialWin}`;
                 totalSection.style.display = 'block';
 
                 // Update button state
-                const canPlaceBet = isLoggedIn && stakeAmount >= 1 && stakeAmount <= balance && couponItems.length > 0 && couponItems.length <= 10;
+                const canPlaceBet = isLoggedIn && stake >= 1 && stake <= balance && couponItems.length > 0 && couponItems.length <= 10;
                 placeBetBtn.disabled = !canPlaceBet;
                 
                 if (canPlaceBet) {
-                    placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stakeAmount.toFixed(2)}`;
+                    placeBetBtn.innerHTML = `<i class="fas fa-play"></i> Ставка $${stake.toFixed(2)}`;
                     placeBetBtn.classList.add('success');
                     
                     if (mainButton) {
-                        mainButton.setText(`СТАВКА $${stakeAmount.toFixed(2)} (${couponItems.length})`);
+                        mainButton.setText(`СТАВКА $${stake.toFixed(2)} (${couponItems.length})`);
                         mainButton.setParams({ is_visible: true });
                     }
                 } else {
@@ -4015,7 +4050,7 @@
             }
 
             const recentBets = history.slice(0, 5).reverse().map(bet => {
-                const date = new Date(bet.timestamp).toLocaleString('ru-RU', {
+                const date = new Date(bet.timestamp).toLocaleDateString('ru-RU', {
                     day: 'numeric',
                     month: 'short',
                     hour: '2-digit',
@@ -4046,6 +4081,10 @@
 
         function openDeposit() {
             closeModal('profileModal');
+            showModal('depositModal');
+        }
+
+        async function depositCrypto() {
             if (!isLoggedIn) {
                 showNotification('🔐 Войдите в аккаунт для пополнения', 'error');
                 return;
@@ -4058,37 +4097,62 @@
             }
 
             const depositAmount = Math.max(10, parseFloat(amount));
-            const bonusPercent = depositAmount >= 100 ? 0.15 : 0.10; // 15% for 100$+, 10% otherwise
-            const bonus = Math.min(depositAmount * bonusPercent, 150);
-            const total = depositAmount + bonus;
 
-            balance += total;
+            try {
+                const response = await fetch('https://pay.crypt.bot/api/createInvoice', {
+                    method: 'POST',
+                    headers: {
+                        'Crypto-Pay-Api-Token': CRYPTO_PAY_TOKEN,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        asset: 'USDT',
+                        amount: depositAmount,
+                        description: 'Пополнение баланса EVILBET',
+                        paid_btn_name: 'openBot',
+                        paid_btn_url: TelegramWebApp.initDataUnsafe.start_param ? `https://t.me/${TelegramWebApp.initDataUnsafe.start_param}` : 'https://t.me/yourbot'
+                    })
+                });
+
+                const data = await response.json();
+                if (data.ok) {
+                    const invoiceUrl = data.result.invoice_link;
+                    TelegramWebApp.openLink(invoiceUrl);
+
+                    // Simulate success after payment (in real app, use webhook)
+                    setTimeout(() => {
+                        balance += depositAmount;
+                        localStorage.setItem('balance', balance.toString());
+                        updateUserInterface();
+                        showNotification(`💳 Пополнено на $${depositAmount} через крипту!`, 'success');
+                    }, 5000); // Mock delay
+                } else {
+                    showNotification('❌ Ошибка создания инвойса', 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Ошибка соединения с CryptoPay', 'error');
+            }
+        }
+
+        function depositGifts() {
+            if (!isLoggedIn) {
+                showNotification('🔐 Войдите в аккаунт для пополнения', 'error');
+                return;
+            }
+
+            const code = prompt('🎁 Введите код гифта:');
+            if (!code) {
+                showNotification('❌ Неверный код гифта', 'error');
+                return;
+            }
+
+            // Simulate gift redemption
+            const giftAmount = Math.random() * 100 + 10; // Random for demo
+            balance += giftAmount;
             localStorage.setItem('balance', balance.toString());
 
-            // Log transaction
-            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
-            transactions.unshift({
-                id: Date.now(),
-                type: 'deposit',
-                amount: depositAmount,
-                bonus: bonus,
-                total: total,
-                method: 'telegram',
-                bonusPercent: bonusPercent * 100,
-                date: new Date().toISOString(),
-                status: 'completed'
-            });
-            localStorage.setItem('transactions', JSON.stringify(transactions.slice(0, 50)));
-
             updateUserInterface();
-            showNotification(
-                `💳 Пополнение успешно!\n` +
-                `+$${depositAmount} +${bonusPercent * 100}% бонус ($${bonus})\n` +
-                `Итого: $${total} на счёте`,
-                'success'
-            );
-            
-            TelegramWebApp?.HapticFeedback.notificationOccurred('success');
+            showNotification(`🎁 Гифт активирован! +$${giftAmount.toFixed(2)} на счёт`, 'success');
         }
 
         function logout() {
